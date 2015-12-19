@@ -19,6 +19,6 @@ public class New extends HttpServlet {
         } finally {
             pm.close();
         }
-        resp.sendRedirect("/");
+        resp.sendRedirect("/SubPage");
     }
 }

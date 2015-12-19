@@ -22,7 +22,7 @@ public class Home extends HttpServlet {
 					;
 
 	private static final String gragh =
-			"  <div >"
+			"  <div>"
 					+ "<table border=\"1\"> "
 					+ "<tr><td>気温</td><td>降水量</td><td>日照時間</td>"
 					+ "</table>"
@@ -84,7 +84,7 @@ public class Home extends HttpServlet {
      +  " title: '気温'},"
 
      //+  " subtitle: 'in millions of dollars (USD)'},"
-     +  "width: 900,"
+     +  "width: 800,"
      + "height: 500"
      +"};"
 
@@ -94,13 +94,13 @@ public class Home extends HttpServlet {
      + "}"
      + "</script>"
      //  +"</head>"
-     +"<body>"
+    // +"<body>"
      +  "<div id=\"linechart_material\"></div>"
-     +"</body>"
+    // +"</body>"
      ;
 
 	private static final String syuukaku =
-			"  <div>"
+			"  <div id = \"left\">"
 					+ "<table border=\"3\"> "
 					+ "<tr><td>予測収穫量</td><td>xxxx</td></tr>"
 					+ "<tr><td>最大収穫量</td><td>xxxx</td></tr>"
@@ -109,14 +109,14 @@ public class Home extends HttpServlet {
 					+ "  </div> \n";
 
 	private static final String input_temp =
-			//	"    <div>"
+			//	"    <div id = \"right\">"
 			 "  <form action=\"/temp\" method=\"post\">"
 			+ "    <div><br>本日の農場の気温入力\n"
 			+ "    </div>気温"
 			+ "      <textarea name=\"temp\" rows=\"1\" cols=\"10\" ></textarea>"
 			+ "    <input type=\"submit\" value=\"Submit\" />"
-			+ "  </form>\n"
-			//		+ "</div>";
+			//+ "  </form>\n"
+					+ "</div>"
 			;
 
 	private static final String link =
@@ -125,7 +125,7 @@ public class Home extends HttpServlet {
 			"<table> "
 			+ "        <tr><td>メニュー</td></td> "
 			+ "        <tr><td><a href=\"Graph.html\">設定</a></td></tr> "
-			+ "        <tr><td><a href=\"\">ご要望</a></td></tr> "
+			+ "        <tr><td><a href=\"SubPage\">ご要望</a></td></tr> "
 			+ "        <tr><td><a href=\"\">ログアウト</a></td></tr> "
 			+ "</table>"
 			//	+ "</div>";
