@@ -62,5 +62,13 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/c_login</url-pattern>
 	</servlet-mapping>
 
+<servlet>
+		<servlet-name>C_administer</servlet-name>
+		<servlet-class>administer.C_administerServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>C_administer</servlet-name>
+		<url-pattern>/c_administer</url-pattern>
+	</servlet-mapping>
 
 </web-app>
