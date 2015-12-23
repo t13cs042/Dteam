@@ -3,7 +3,7 @@
 
 	<servlet>
 		<servlet-name>Home</servlet-name>
-		<servlet-class>memo.Home</servlet-class>
+		<servlet-class>home.Home</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Home</servlet-name>
@@ -11,7 +11,7 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>new</servlet-name>
-		<servlet-class>memo.New</servlet-class>
+		<servlet-class>home.New</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>new</servlet-name>
@@ -24,7 +24,7 @@
 	
 		<servlet>
 		<servlet-name>SubPage</servlet-name>
-		<servlet-class>memo.SubPage</servlet-class>
+		<servlet-class>home.SubPage</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>SubPage</servlet-name>
@@ -33,12 +33,22 @@
 	
 		<servlet>
 		<servlet-name>Search</servlet-name>
-		<servlet-class>memo.Search</servlet-class>
+		<servlet-class>home.Search</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Search</servlet-name>
 		<url-pattern>/Search</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>C_login</servlet-name>
+		<servlet-class>clogin.C_loginServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>C_login</servlet-name>
+		<url-pattern>/c_login</url-pattern>
+	</servlet-mapping>
+
+
 	
 </web-app>
