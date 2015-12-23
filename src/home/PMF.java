@@ -1,4 +1,4 @@
-package memo;
+package home;
 
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManagerFactory;
