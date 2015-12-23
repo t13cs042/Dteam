@@ -1,4 +1,4 @@
-package memo;////////////パッケージする名前に変更する
+package home;////////////パッケージする名前に変更する
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
