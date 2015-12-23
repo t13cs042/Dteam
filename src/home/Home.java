@@ -1,6 +1,7 @@
-package memo;
+package home;
 
-import memo.PMF;
+import home.PMF;
+
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import java.text.MessageFormat;

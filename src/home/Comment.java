@@ -1,4 +1,4 @@
-package memo; //必要に応じて変える
+package home; //必要に応じて変える
 
 import java.util.Date;
 import javax.jdo.annotations.IdGeneratorStrategy;

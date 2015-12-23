@@ -1,4 +1,4 @@
-package memo;
+package home;
 
 import java.util.Date;
 import javax.jdo.annotations.IdGeneratorStrategy;
