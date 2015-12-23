@@ -1,6 +1,11 @@
 /META-INF/
+<<<<<<< HEAD
 /home/
 /log4j.properties
 /src/
 /setchange/
 /clogin/
+=======
+/log4j.properties
+/memo/
+>>>>>>> refs/heads/c-passforget
