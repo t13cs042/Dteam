@@ -62,7 +62,7 @@
 
 
 				<td>
-					<form action="/Newtemp" method="post" style="display: inline">
+					<form action="/newtemp" method="post" style="display: inline">
 						<p>本日の農場の気温入力</p>
 						気温
 						<textarea name="temp" rows="1" cols="10"></textarea>
@@ -75,7 +75,7 @@
 						<tr>
 							<td>メニュー</td>
 						<tr>
-							<td><a href="Graph.html">設定</a></td>
+							<td><a href="">設定</a></td>
 						</tr>
 						<tr>
 							<td><a href="/SubPage">ご要望</a></td>

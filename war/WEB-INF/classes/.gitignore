@@ -1,16 +1,2 @@
-/META-INF/
-<<<<<<< HEAD
+/memo/
 /home/
-/log4j.properties
-/src/
-/setchange/
-/clogin/
-<<<<<<< HEAD
-/memo/
-=======
-=======
-/log4j.properties
-/memo/
->>>>>>> refs/heads/c-passforget
->>>>>>> branch 'master' of https://github.com/softeng-cs2015/D
-/administer/

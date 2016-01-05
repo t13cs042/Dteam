@@ -4,6 +4,7 @@ xmlns="http://java.sun.com/xml/ns/javaee"
 xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+
 	<servlet>
 		<servlet-name>Home</servlet-name>
 		<servlet-class>home.Home</servlet-class>
@@ -42,6 +43,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<servlet-mapping>
 		<servlet-name>SubPage</servlet-name>
 		<url-pattern>/SubPage</url-pattern>
+	</servlet-mapping>
+	
+		<servlet>
+		<servlet-name>Newtemp</servlet-name>
+		<servlet-class>home.Newtemp</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Newtemp</servlet-name>
+		<url-pattern>/newtemp</url-pattern>
 	</servlet-mapping>
 	
 		<servlet>
