@@ -11,32 +11,35 @@ import javax.jdo.annotations.PrimaryKey;
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class Tempdata {
 
-	//日付
+	// メンバ id はエンティティ（タプル）のキーである
 	@PrimaryKey
+	// メンバ id の値はシステムが自動的に重複しないようつける
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Date date;
+	private Long id;
 
 	//気温
-	@PrimaryKey
-	private Long temp;
+	@Persistent
+	private double temp;
 
+	@Persistent
+	private Date date;
 
-	public Tempdata(Date date, Long temp) {
+	public Tempdata(Date date, double d) {
 		this.date = date;
-		this.temp = temp;
+		this.temp = d;
 	}
 
 	// ゲッタとセッタ
 	public Date getDate() {
 		return date;
 	}
-	public Long gettemp() {
+	public double gettemp() {
 		return temp;
 	}
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public void setContent(Long temp) {
+	public void setContent(double temp) {
 		this.temp = temp;
 	}
 

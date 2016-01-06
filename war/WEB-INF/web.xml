@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xmlns="http://java.sun.com/xml/ns/javaee"
-xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
-http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
 
 	<servlet>
 		<servlet-name>Home</servlet-name>
@@ -13,7 +13,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>Home</servlet-name>
 		<url-pattern>/Home</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>C_setchange</servlet-name>
 		<servlet-class>setchange.C_setchangeServlet</servlet-class>
@@ -22,7 +22,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>C_setchange</servlet-name>
 		<url-pattern>/c_setchange</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>new</servlet-name>
 		<servlet-class>home.New</servlet-class>
@@ -35,8 +35,8 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
-	
-		<servlet>
+
+	<servlet>
 		<servlet-name>SubPage</servlet-name>
 		<servlet-class>home.SubPage</servlet-class>
 	</servlet>
@@ -44,8 +44,8 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>SubPage</servlet-name>
 		<url-pattern>/SubPage</url-pattern>
 	</servlet-mapping>
-	
-		<servlet>
+
+	<servlet>
 		<servlet-name>Newtemp</servlet-name>
 		<servlet-class>home.Newtemp</servlet-class>
 	</servlet>
@@ -53,8 +53,17 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>Newtemp</servlet-name>
 		<url-pattern>/newtemp</url-pattern>
 	</servlet-mapping>
-	
-		<servlet>
+
+	<servlet>
+		<servlet-name>Tempdata</servlet-name>
+		<servlet-class>home.Tempdata</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Tempdata</servlet-name>
+		<url-pattern>/tempdata</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
 		<servlet-name>Search</servlet-name>
 		<servlet-class>home.Search</servlet-class>
 	</servlet>
@@ -62,7 +71,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>Search</servlet-name>
 		<url-pattern>/Search</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>C_login</servlet-name>
 		<servlet-class>clogin.C_loginServlet</servlet-class>
@@ -72,7 +81,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<url-pattern>/c_login</url-pattern>
 	</servlet-mapping>
 
-<servlet>
+	<servlet>
 		<servlet-name>C_administer</servlet-name>
 		<servlet-class>administer.C_administerServlet</servlet-class>
 	</servlet>
