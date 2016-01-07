@@ -13,11 +13,10 @@ public class Climate {
 
 	//日付
 	@PrimaryKey
-	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Date date;
+	private String date;
 
 	//気温
-	@PrimaryKey
+	@Persistent 
 	private double temp;
 
 	//日照量
@@ -29,7 +28,7 @@ public class Climate {
 	private double prec;
 
 
-	public Climate(Date date, double temp, double laytime, double prec) {
+	public Climate(String date, double temp, double laytime, double prec) {
 		this.date = date;
 		this.temp = temp;
 		this.laytime = laytime;
@@ -37,7 +36,7 @@ public class Climate {
 	}
 
 	// ゲッタとセッタ
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 	public double gettemp() {
@@ -49,7 +48,7 @@ public class Climate {
 	public double getprec() {
 		return prec;
 	}
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	public void setContent(double temp) {
