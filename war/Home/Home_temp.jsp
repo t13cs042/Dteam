@@ -8,8 +8,8 @@
 	<table border="1">
 		<tr>
 			<td><a href="">気温</a></td>
-			<td><a href="">日照量</a></td>
-			<td><a href="">降水量</a></td>
+			<td><a href="Home_lay.jsp">日照量</a></td>
+			<td><a href="Home_prec.jsp">降水量</a></td>
 	</table>
 
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -78,7 +78,7 @@
 							<td><a href="">設定</a></td>
 						</tr>
 						<tr>
-							<td><a href="/SubPage">ご要望</a></td>
+							<td><a href="/CommentPage">ご要望</a></td>
 						</tr>
 						<tr>
 							<td><a href="">ログアウト</a></td>

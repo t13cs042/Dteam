@@ -7,9 +7,9 @@
 	<span style="font-size: 200%">ようこそXXXaa</span>
 	<table border="1">
 		<tr>
-			<td><a href="">気温</a></td>
+			<td><a href="Home_temp.jsp">気温</a></td>
 			<td><a href="">日照量</a></td>
-			<td><a href="">降水量</a></td>
+			<td><a href="Home_prec.jsp">降水量</a></td>
 	</table>
 
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -21,12 +21,12 @@
 		function drawChart() {
 			var data = new google.visualization.DataTable();
 			data.addColumn('number', 'Month');
-			data.addColumn('number', '気温');
+			data.addColumn('number', '日射量');
 			data.addRows([ [ 1, 37.8 ], [ 2, 30.9 ], [ 3, 25.4 ], [ 4, 11.7 ],
 					[ 5, 20.9 ], ]);
 			var options = {
 				chart : {
-					title : '気温'
+					title : '日射量'
 				},
 				width : 800,
 				height : 500
@@ -78,7 +78,7 @@
 							<td><a href="">設定</a></td>
 						</tr>
 						<tr>
-							<td><a href="/SubPage">ご要望</a></td>
+							<td><a href="/CommentPage">ご要望</a></td>
 						</tr>
 						<tr>
 							<td><a href="">ログアウト</a></td>
