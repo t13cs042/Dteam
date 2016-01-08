@@ -1,11 +1,4 @@
-<<<<<<< HEAD
-=======
-/META-INF/
-/administer/
-/clogin/
-/log4j.properties
-/setchange/
-/signup_/
->>>>>>> refs/heads/c-signup
 /home/
 /memo/
+/signup_/
+/manager/
