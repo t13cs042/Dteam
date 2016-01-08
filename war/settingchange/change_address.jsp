@@ -31,28 +31,10 @@
 	}
   %>
   
-  
-  <!--  
-  <BODY leftmargin="500" topmargin="50" rightmargin="400 "bottommargin="0">
-  -->
-  <!-- 
-  <script type="text/javascript">
-      function handan(before, after1, after2){
-        if(before != 0){
-           document.getElementById("kekka").innerHTML = "変更前のメールアドレスが存在しません。<br> 確認の上、もう一度入力してください。";
-        } else if( after1 != after2 ){
-           document.getElementById("kekka").innerHTML = "新しいメールアドレスが一致していません。<br> もう一度入力してください";
-        }
-        else{
-        	document.getElementById("kekka").innerHTML = " <br> ";
-        }
-      }
-   </script>
-  
-   -->
+ 
   メールアドレスの変更をします<br>
   
-  <form action = "/changeAddress" method = "post">
+  <form action = "/change_adderss" method = "post">
   <font color="red">
   <%			if((error & 16) == 16){ %>   ※ 変更前のメールアドレスが未入力です。<br> 
   <%			}if((error & 2) == 2){ %>	※ 半角小文字で再入力して下さい。<br> 
