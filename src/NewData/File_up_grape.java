@@ -1,4 +1,4 @@
-package home;
+package NewData;
 
 
 import java.io.BufferedInputStream;
@@ -10,8 +10,8 @@ import javax.jdo.PersistenceManager;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
-import home.PMF;
-import home.Climate;
+import Dataclass.Grape;
+import Dataclass.PMF;
 
 import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
@@ -29,10 +29,10 @@ public class File_up_grape extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		
+
 		ServletFileUpload fileUpload = new ServletFileUpload();
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
+
 
 
 		try {
@@ -71,7 +71,7 @@ public class File_up_grape extends HttpServlet {
 							// csvから単語の取り出し
 							String date = split[0].trim();
 							String num = split[1].trim();
-							
+
 							if (split != null && split.length != 0) {
 
 								// 登録するモデル

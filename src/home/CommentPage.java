@@ -1,6 +1,5 @@
 package home;
 
-import home.PMF;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -10,6 +9,9 @@ import java.io.IOException;
 import java.util.*;
 
 import javax.servlet.http.*;
+
+import Dataclass.Memo;
+import Dataclass.PMF;
 
 @SuppressWarnings("serial")
 public class CommentPage extends HttpServlet {
