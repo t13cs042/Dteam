@@ -34,7 +34,7 @@
  
   メールアドレスの変更をします<br>
   
-  <form action = "/change_adderss" method = "post">
+  <form action = "/change_address" method = "post">
   <font color="red">
   <%			if((error & 16) == 16){ %>   ※ 変更前のメールアドレスが未入力です。<br> 
   <%			}if((error & 2) == 2){ %>	※ 半角小文字で再入力して下さい。<br> 
