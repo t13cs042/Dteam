@@ -37,6 +37,16 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<url-pattern>/change_address</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>Change_pass</servlet-name>
+		<servlet-class>setchange.Change_pass</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Change_pass</servlet-name>
+		<url-pattern>/change_pass</url-pattern>
+	</servlet-mapping>
+	
+	
 	<!-- Servlet Mapping c_login -->
 		<servlet>
 		<servlet-name>C_login</servlet-name>

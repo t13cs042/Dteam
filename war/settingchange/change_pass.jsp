@@ -5,7 +5,7 @@
 
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>メールアドレス変更</title>
+    <title>パスワード変更</title>
   </head>
 
   <body>
@@ -31,34 +31,34 @@
 	}
   %>
   
- 
-  メールアドレスの変更をします<br>
   
-  <form action = "/change_address" method = "post">
+  パスワードの変更をします<br>
+  
+  <form action = "/change_pass" method = "post">
   <font color="red">
-  <%			if((error & 16) == 16){ %>   ※ 変更前のメールアドレスが未入力です。<br> 
-  <%			}if((error & 2) == 2){ %>	※ 半角小文字で再入力して下さい。<br> 
-  <%			}if((error & 4) == 4){ %> ※このアドレスは登録されていません。<br> 
-  <%		   }if((error & 32) == 32){ %> ※新しいメールアドレスが未入力です。<br>
-  <%		   }if((error & 64) == 64){ %> ※新しいメールアドレス(確認用)が未入力です。<br>
-  <%		   }if((error & 1) == 1){ %> ※新しいメールアドレスが一致していません。 もう一度入力してください。<br>
+  <%			if((error & 16) == 16){ %>   ※ 変更前のパスワードが未入力です。<br> 
+  <%			}if((error & 2) == 2){ %>	※ 半角小文字,12文字以内で再入力して下さい。<br> 
+  <%			}if((error & 4) == 4){ %> ※パスワードが間違っています。<br> 
+  <%		   }if((error & 32) == 32){ %> ※新しいパスワードが未入力です。<br>
+  <%		   }if((error & 64) == 64){ %> ※新しいパスワード(確認用)が未入力です。<br>
+  <%		   }if((error & 1) == 1){ %> ※新しいパスワードが一致していません。 もう一度入力してください。<br>
    <%			} %>
   </font>
   
-  <p>変更前のメールアドレス<br>
+  <p>変更前のパスワード<br>
   <input type="text" name="before"></p>
   
-   <p>新しいメールアドレス<br>
+   <p>新しいパスワード(半角小文字,12文字以内)<br>
   <input type="text" name="after1"></p>
    
-   <p>新しいメールアドレス(再入力)<br>
+   <p>新しいパスワード(再入力)<br>
    <input type="text"name="after2"></p>
    
    
    <br>
    
    <Div Align="center">
-	<input value="登録" type="submit" >
+	<input value="変更" type="submit" >
    </Div>
    </form>
    
