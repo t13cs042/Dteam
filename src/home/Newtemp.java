@@ -20,6 +20,6 @@ public class Newtemp extends HttpServlet {
 		} finally {
 			pm.close();
 		}
-		resp.sendRedirect("/Home/Home.jsp");
+		resp.sendRedirect("/Home/Home_temp.jsp");
 	}
 }

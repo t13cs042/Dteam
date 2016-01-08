@@ -20,7 +20,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 
 @SuppressWarnings("serial")
-public class File_up extends HttpServlet {
+public class File_up_grape extends HttpServlet {
 
 	// インスタンス保持用
 	// このためクローズ処理を書いていないのだが
@@ -70,14 +70,12 @@ public class File_up extends HttpServlet {
 						if (split != null && split.length != 0) {
 							// csvから単語の取り出し
 							String date = split[0].trim();
-							String temp = split[1].trim();
-							String laytime = split[2].trim();
-							String prec = split[3].trim();
+							String num = split[1].trim();
 							
 							if (split != null && split.length != 0) {
 
 								// 登録するモデル
-								Climate per = new Climate(date,Double.parseDouble(temp), Double.parseDouble(laytime), Double.parseDouble(prec));
+								Grape per = new Grape(date,Double.parseDouble(num));
 
 								pm.makePersistent(per);
 								i++;
