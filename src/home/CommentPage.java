@@ -12,7 +12,7 @@ import java.util.*;
 import javax.servlet.http.*;
 
 @SuppressWarnings("serial")
-public class SubPage extends HttpServlet {
+public class CommentPage extends HttpServlet {
 
 	// ページの先頭部分
     private static final String head =     
