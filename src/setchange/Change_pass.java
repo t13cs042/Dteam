@@ -13,7 +13,7 @@ import Dataclass.LoginDB;
 import Dataclass.PMF;
 
 @SuppressWarnings("serial")
-public class Change_address extends HttpServlet {
+public class Change_pass extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		resp.setContentType("text/plain");
@@ -44,7 +44,7 @@ public class Change_address extends HttpServlet {
 				error += 16;
 			}
 			//else if(!inputData[0].matches("[a-zA-Z0-9@.]+")){
-			else if(!inputData[0].matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$")){
+			else if(!inputData[0].matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]{0,12}$")){
 				error += 2;
 			}
 			else{
@@ -76,7 +76,7 @@ public class Change_address extends HttpServlet {
 			
 			// IDが使用済なら登録不可
 			if(error != 0){
-				resp.sendRedirect("/settingchange/change_address.jsp?Error=" + String.valueOf(error)
+				resp.sendRedirect("/settingchange/change_pass.jsp?Error=" + String.valueOf(error)
 						+ "&Before=" + inputData[0] + "&After=" + inputData[1]);
 			}else{
 
