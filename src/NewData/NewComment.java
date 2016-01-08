@@ -1,5 +1,6 @@
-package home;
+package NewData;
 
+import home.Memo;
 import home.PMF;
 
 import java.io.IOException;
@@ -7,19 +8,19 @@ import java.util.Date;
 import javax.jdo.PersistenceManager;
 import javax.servlet.http.*;
 
-public class Newtemp extends HttpServlet {
-
+public class NewComment extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
-		String temp = req.getParameter("temp");
-		Tempdata data = new Tempdata(new Date(), Double.parseDouble(temp));
+		String content = req.getParameter("content");
+		String name = req.getParameter("name");
+		Memo memo = new Memo(content, new Date(), name);
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		try {
-			pm.makePersistent(data);
+			pm.makePersistent(memo);
 		} finally {
 			pm.close();
 		}
-		resp.sendRedirect("/Home/Home_temp.jsp");
+		resp.sendRedirect("/SubPage");
 	}
 }
