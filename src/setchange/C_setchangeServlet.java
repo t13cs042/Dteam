@@ -1,6 +1,6 @@
 package setchange;
 
-import setchange.Memo;
+import Dataclass.Memo;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,8 +9,8 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import javax.servlet.http.*;
 
-import setchange.LoginDB;
-import setchange.PMF;
+import Dataclass.LoginDB;
+import Dataclass.PMF;
 
 @SuppressWarnings("serial")
 public class C_setchangeServlet extends HttpServlet {
