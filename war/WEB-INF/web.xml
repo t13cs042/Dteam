@@ -46,6 +46,17 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<url-pattern>/change_pass</url-pattern>
 	</servlet-mapping>
 	
+	<!-- Servlet Mapping Calc -->
+
+	<servlet>
+		<servlet-name>Candi_get</servlet-name>
+		<servlet-class>Calc.Candi_get</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Candi_get</servlet-name>
+		<url-pattern>/candi_get</url-pattern>
+	</servlet-mapping>
+	
 	
 	<!-- Servlet Mapping c_login -->
 		<servlet>
