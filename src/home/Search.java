@@ -1,6 +1,5 @@
 package home;
 
-import home.PMF;
 
 import java.io.IOException;
 import java.text.MessageFormat;
@@ -10,6 +9,9 @@ import java.util.List;
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 import javax.servlet.http.*;
+
+import Dataclass.Memo;
+import Dataclass.PMF;
 
 public class Search extends HttpServlet {
 

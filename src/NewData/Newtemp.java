@@ -1,7 +1,7 @@
 package NewData;
 
-import home.PMF;
-import home.Tempdata;
+import Dataclass.PMF;
+import Dataclass.Tempdata;
 
 import java.io.IOException;
 import java.util.Date;

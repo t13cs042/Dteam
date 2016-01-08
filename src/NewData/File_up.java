@@ -1,4 +1,4 @@
-package home;
+package NewData;
 
 
 import java.io.BufferedInputStream;
@@ -10,8 +10,8 @@ import javax.jdo.PersistenceManager;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
-import home.PMF;
-import home.Climate;
+import Dataclass.Climate;
+import Dataclass.PMF;
 
 import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;

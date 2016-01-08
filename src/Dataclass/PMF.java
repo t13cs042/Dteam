@@ -1,4 +1,4 @@
-package home;
+package Dataclass;
 
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManagerFactory;
