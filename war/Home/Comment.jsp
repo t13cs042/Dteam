@@ -9,7 +9,7 @@
 <body>
 
  <span style="font-size: 200%">ご要望</span>
-  <form action="/newcomment" method="post">
+  <form action="/new_comment" method="post">
     <div>件名
       <textarea name="sub" rows="1" cols="40" ></textarea>
     </div>ご意見
