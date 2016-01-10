@@ -4,7 +4,6 @@ import Dataclass.Comment;
 import Dataclass.PMF;
 
 import java.io.IOException;
-import java.util.Date;
 import javax.jdo.PersistenceManager;
 import javax.servlet.http.*;
 
@@ -14,11 +13,11 @@ public class NewComment extends HttpServlet {
 		String address = "address";
 		String sub = req.getParameter("sub");
 		String content = req.getParameter("content");
-		Comment memo = new Comment(address, sub, content);
+		Comment comment = new Comment(address, sub, content);
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		try {
-			pm.makePersistent(memo);
+			pm.makePersistent(comment);
 		} finally {
 			pm.close();
 		}

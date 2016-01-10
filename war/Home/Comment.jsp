@@ -13,10 +13,9 @@
     <div>件名
       <textarea name="sub" rows="1" cols="40" ></textarea>
     </div>ご意見
-      <textarea name="content" rows="5" cols="40" ></textarea>    </div>
+      <textarea name="content" rows="5" cols="40" ></textarea>
     <input type="submit" value="Submit" />
   </form>
-
 
 </body>
 </html>
