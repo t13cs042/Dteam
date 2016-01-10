@@ -1,6 +1,6 @@
 package NewData;
 
-import Dataclass.Memo;
+import Dataclass.Comment;
 import Dataclass.PMF;
 
 import java.io.IOException;
@@ -11,9 +11,10 @@ import javax.servlet.http.*;
 public class NewComment extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
+		String address = "address";
+		String sub = req.getParameter("sub");
 		String content = req.getParameter("content");
-		String name = req.getParameter("name");
-		Memo memo = new Memo(content, new Date(), name);
+		Comment memo = new Comment(address, sub, content);
 
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		try {
@@ -21,6 +22,6 @@ public class NewComment extends HttpServlet {
 		} finally {
 			pm.close();
 		}
-		resp.sendRedirect("/SubPage");
+		resp.sendRedirect("/Home/Comment.jsp");
 	}
 }

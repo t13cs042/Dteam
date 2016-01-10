@@ -75,7 +75,7 @@
 						<tr>
 							<td>メニュー</td>
 						<tr>
-							<td><a href="">設定</a></td>
+							<td><a href="../index.html">設定</a></td>
 						</tr>
 						<tr>
 							<td><a href="/CommentPage">ご要望</a></td>

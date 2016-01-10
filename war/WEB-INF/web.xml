@@ -7,7 +7,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 
 	<!-- Servlet Mapping Home -->
 
-	
 		<servlet>
 		<servlet-name>CommentPage</servlet-name>
 		<servlet-class>home.CommentPage</servlet-class>
@@ -15,15 +14,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	<servlet-mapping>
 		<servlet-name>CommentPage</servlet-name>
 		<url-pattern>/CommentPage</url-pattern>
-	</servlet-mapping>
-	
-		<servlet>
-		<servlet-name>Search</servlet-name>
-		<servlet-class>home.Search</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Search</servlet-name>
-		<url-pattern>/Search</url-pattern>
 	</servlet-mapping>
 
 <!-- Servlet Mapping setchange -->
@@ -61,12 +51,12 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 <!-- Servlet Mapping New -->
 
 	<servlet>
-		<servlet-name>new</servlet-name>
+		<servlet-name>newcomment</servlet-name>
 		<servlet-class>NewData.NewComment</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>new</servlet-name>
-		<url-pattern>/new</url-pattern>
+		<servlet-name>newcomment</servlet-name>
+		<url-pattern>/newcomment</url-pattern>
 	</servlet-mapping>
 
 	<servlet>

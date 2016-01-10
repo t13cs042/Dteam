@@ -11,13 +11,9 @@ import javax.jdo.annotations.PrimaryKey;
 @PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class Comment {
 
-	//日付
-	@PrimaryKey
-	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Date date;
-
 	//アドレス
 	@PrimaryKey
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	private String address;
 
 	//件名
@@ -29,17 +25,14 @@ public class Comment {
 	private String comment;
 
 
-	public Comment(Date date, String address, String sub, String comment) {
-		this.date = date;
+	public Comment(String address, String sub, String comment) {
 		this.address = address;
 		this.sub = sub;
 		this.comment = comment; 
 	}
 
 	// ゲッタとセッタ
-	public Date getDate() {
-		return date;
-	}
+
 	public String gettemp() {
 		return address;
 	}
@@ -48,9 +41,6 @@ public class Comment {
 	}
 	public String getprec() {
 		return comment;
-	}
-	public void setDate(Date date) {
-		this.date = date;
 	}
 	public void setContent(String address) {
 		this.address = address;
