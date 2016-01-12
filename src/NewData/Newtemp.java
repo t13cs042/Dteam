@@ -17,15 +17,19 @@ public class Newtemp extends HttpServlet {
 		resp.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = resp.getWriter();
 		String temp = req.getParameter("temp");
-		
-		if(temp == "")
-			out.println("値が入力されていません");
-		else if(isNumber(temp))
-			out.println("数値を入力してください");
-		else if(Double.parseDouble(temp) < -30 || Double.parseDouble(temp) > 50)
-			out.println("無効な数値です");
-		else{
-			
+
+		int error = 0;
+		if(temp == ""){
+			out.println("値が入力されていません<br>");
+			error++;
+		}else if(isNumber(temp)){
+			out.println("数値を入力してください<br>");
+			error++;
+		}else if(Double.parseDouble(temp) < -30 || Double.parseDouble(temp) > 50){
+			out.println("無効な数値です<br>");
+			error++;
+		}
+		if(error == 0){	
 			Tempdata data = new Tempdata(new Date(), Double.parseDouble(temp));
 			PersistenceManager pm = PMF.get().getPersistenceManager();
 
@@ -35,8 +39,10 @@ public class Newtemp extends HttpServlet {
 				pm.close();
 			}
 			//resp.sendRedirect("/Home/Home_temp.jsp");
-			out.println("入力成功");
-		}
+			out.println("入力成功<br>");
+			out.println("<a href=\"Home/Home_temp.jsp\">戻る</a>");
+		}else
+			out.println("<a href=\"Home/Home_temp.jsp\">戻る</a>");
 	}
 
 	public boolean isNumber(String num) {
