@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%@ page import="Dataclass.Climate"%>
+<%@ page import="Dataclass.PMF"%>
+
+<%@ page import="javax.jdo.PersistenceManager"%>
+<%@ page import="javax.jdo.Query"%>
+<%@ page import="java.text.MessageFormat"%>
+<%@ page import="java.util.List"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <title>home2</title>
@@ -20,10 +29,20 @@
 		google.setOnLoadCallback(drawChart);
 		function drawChart() {
 			var data = new google.visualization.DataTable();
-			data.addColumn('number', 'Month');
+			data.addColumn('number', '月');
 			data.addColumn('number', '気温');
-			data.addRows([ [ 1, 37.8 ], [ 2, 30.9 ], [ 3, 25.4 ], [ 4, 11.7 ],
-					[ 5, 20.9 ], ]);
+	<%PersistenceManager pm = null;
+			
+			    pm = PMF.get().getPersistenceManager();
+			    Query query = pm.newQuery(Climate.class);
+			    List<Climate> pizzas = (List<Climate>) query.execute(); 
+			
+			String year = "2014/";
+			
+			for(int i = 1; i < 13; i++){%>
+		data.addRow(
+	<%}%>
+		);
 			var options = {
 				chart : {
 					title : '気温'

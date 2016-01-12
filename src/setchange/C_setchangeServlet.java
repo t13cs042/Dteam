@@ -1,6 +1,5 @@
 package setchange;
 
-import Dataclass.Memo;
 
 import java.io.IOException;
 import java.util.List;

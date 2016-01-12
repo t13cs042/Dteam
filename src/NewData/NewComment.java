@@ -4,6 +4,8 @@ import Dataclass.Comment;
 import Dataclass.PMF;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.jdo.PersistenceManager;
 import javax.servlet.http.*;
 
@@ -13,14 +15,38 @@ public class NewComment extends HttpServlet {
 		String address = "address";
 		String sub = req.getParameter("sub");
 		String content = req.getParameter("content");
-		Comment comment = new Comment(address, sub, content);
 
-		PersistenceManager pm = PMF.get().getPersistenceManager();
-		try {
-			pm.makePersistent(comment);
-		} finally {
-			pm.close();
+		resp.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = resp.getWriter();
+		
+		int error = 0;
+		if(sub == ""){
+			out.println("件名が入力されていません<br>");
+			error++;
 		}
-		resp.sendRedirect("/Home/Comment.jsp");
+		if(content == ""){
+			out.println("本文が入力されていません<br>");
+			error++;
+		}
+		if(sub.length() > 50){
+			out.println("件名が長すぎです<br>");
+			error++;
+		}
+		if(content.length() > 500){
+			out.println("本文が長すぎです<br>");
+			error++;
+		}
+		if(error == 0){
+			Comment comment = new Comment(address, sub, content);
+
+			PersistenceManager pm = PMF.get().getPersistenceManager();
+			try {
+				pm.makePersistent(comment);
+			} finally {
+				pm.close();
+			}
+			out.println("送信完了<br>");
+			//resp.sendRedirect("/Home/Comment.jsp");
+		}
 	}
 }
