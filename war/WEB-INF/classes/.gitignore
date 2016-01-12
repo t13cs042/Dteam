@@ -2,6 +2,12 @@
 /home/
 /memo/
 /Dataclass/
+<<<<<<< HEAD
 /NewData/
 /manager/
 /signup_/
+=======
+/manager/
+/signup_/
+/clogin/
+>>>>>>> branch 'master' of https://github.com/softeng-cs2015/D.git

@@ -12,13 +12,34 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 <!-- Servlet Mapping setchange -->
 
 	<servlet>
-		<servlet-name>C_setchange</servlet-name>
-		<servlet-class>setchange.C_setchangeServlet</servlet-class>
+		<servlet-name>Change_address</servlet-name>
+		<servlet-class>setchange.Change_address</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>C_setchange</servlet-name>
-		<url-pattern>/c_setchange</url-pattern>
+		<servlet-name>Change_address</servlet-name>
+		<url-pattern>/change_address</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Change_pass</servlet-name>
+		<servlet-class>setchange.Change_pass</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Change_pass</servlet-name>
+		<url-pattern>/change_pass</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Servlet Mapping Calc -->
+
+	<servlet>
+		<servlet-name>Candi_get</servlet-name>
+		<servlet-class>Calc.Candi_get</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Candi_get</servlet-name>
+		<url-pattern>/candi_get</url-pattern>
+	</servlet-mapping>
+	
 	
 	<!-- Servlet Mapping c_login -->
 		<servlet>
