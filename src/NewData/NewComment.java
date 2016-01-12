@@ -46,7 +46,9 @@ public class NewComment extends HttpServlet {
 				pm.close();
 			}
 			out.println("送信完了<br>");
+			out.println("<a href=\"Home/Home_temp.jsp\">戻る</a>");
 			//resp.sendRedirect("/Home/Comment.jsp");
-		}
+		}else
+			out.println("<a href=\"Home/Comment.jsp\">戻る</a>");
 	}
 }
