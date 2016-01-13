@@ -23,9 +23,8 @@ public class Change_area extends HttpServlet {
 	public void doPost( HttpServletRequest req, HttpServletResponse resp ) throws IOException
 	{
 
-		// jsp からのデータ
-		String	[] inputData	= new String[3]; // beforeMail と afterMail1 と afterMail2
-
+		String address = "b";//後でsessionに書き換える
+		
 		// 登録エラー用のフラグ
 		int error = 0;
 
@@ -35,9 +34,8 @@ public class Change_area extends HttpServlet {
 		Query query = pm.newQuery(LoginDB.class);
 
 		try{
-			inputData[0] = req.getParameter("before");
-			inputData[1] = req.getParameter("after1");
-			inputData[2] = req.getParameter("after2");
+			String inputData = req.getParameter("area");
+
 			/*
 			// ID欄が入力されているかチェック
 			if(inputData[0].equals("")){
@@ -81,13 +79,13 @@ public class Change_area extends HttpServlet {
 
 			// データ変更
 
-			query.setFilter("mail == " + "'" + inputData[0] + "'");
+			query.setFilter("mail == " + "'" + address + "'");
 
 			List<LoginDB> db = (List<LoginDB>) query.execute();
 
 			//LoginDB db =  (LoginDB)pm.newQuery(query).execute();
 			
-			db.get(0).setMail(inputData[1]);
+			db.get(0).setArea(inputData);
 			 
 
 			// 登録

@@ -29,6 +29,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<url-pattern>/change_pass</url-pattern>
 	</servlet-mapping>
 	
+		<servlet>
+		<servlet-name>Change_area</servlet-name>
+		<servlet-class>setchange.Change_area</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Change_area</servlet-name>
+		<url-pattern>/change_area</url-pattern>
+	</servlet-mapping>
+	
 	<!-- Servlet Mapping Calc -->
 
 	<servlet>
