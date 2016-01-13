@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- The HTML 4.01 Transitional DOCTYPE declaration-->
+<!-- above set at the top of the file will set     -->
+<!-- the browser's rendering engine into           -->
+<!-- "Quirks Mode". Replacing this declaration     -->
+<!-- with a "Standards Mode" doctype is supported, -->
+<!-- but may lead to some differences in layout.   -->
+
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>収穫量の変更</title>
+  </head>
+
+  <body>
+  <!--  
+  <BODY leftmargin="500" topmargin="50" rightmargin="400 "bottommargin="0">
+  -->
+  
+  <script type="text/javascript">
+      function handan(after){
+        if(after == 0){
+           document.getElementById("kekka").innerHTML = "不正な入力です <br> もう一度入力してください";
+        } 
+        else{
+        	document.getElementById("kekka").innerHTML = " <br> ";
+        }
+      }
+   </script>
+  
+  
+  収穫量の変更をします<br>
+  
+  <FONT color = "red">
+  <div id="kekka"> <br></div>
+  </FONT>
+  
+  
+  
+   <p>今年の収穫量(kg)<br>
+  <input type="text" id="after"> kg</p>
+   
+
+   <br>
+   
+   <Div Align="center">
+	<input value="登録" type="button" onclick="handan(after.value)">
+   </Div>
+   
+  
+   <br>
+   
+   <Div Align="right">
+   <a href="http://sample-115509.appspot.com/">ホーム画面へ戻る</a><br><br>
+   </Div>
+   
+  </body>
+</html>
