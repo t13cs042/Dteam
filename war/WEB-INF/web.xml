@@ -62,6 +62,17 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<url-pattern>/c_administer</url-pattern>
 	</servlet-mapping>
 
+<!-- Servlet Mapping manager -->
+
+	<servlet>
+		<servlet-name>C-manager</servlet-name>
+		<servlet-class>manager.MainPage</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>C-manager</servlet-name>
+		<url-pattern>/c_manager</url-pattern>
+	</servlet-mapping>
+
 <!-- Servlet Mapping New -->
 
 	<servlet>
