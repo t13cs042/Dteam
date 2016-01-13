@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="signup_.PMF" %>
-<%@ page import="signup_.LoginDB" %>
+<%@ page import="NewData.PMF" %>
+<%@ page import="Dataclass.LoginDB" %>
 <%@ page import="javax.jdo.PersistenceManager" %>
 <%@ page import="javax.jdo.Query" %>
 <%@ page import="java.util.List" %>
@@ -20,21 +20,14 @@
 		<textarea rows="1" cols="10" ></textarea>
 		<br>
 		<form action="/newsignup" method="post">
-		<font size="3">メールアドレス(半角英数字のみ)</font><br>
-		<!--<form action="/new" method="post">-->
+			<font size="3">メールアドレス(半角英数字のみ)<br>
 			<textarea name="mail" rows="1" cols="27" ></textarea>
-			<br>
-			<font size="3">パスワード(半角英数字のみ)</font><br>
-			<input type = "password" name="mail" size="1" maxlength="27" ></input>
-			<br>
-			<font size="3">パスワードの再入力</font><br>
-			<input type = "password" name="mail" size="1" maxlength="27" ></input>
-			<br>	
-		<!-- ブドウ収穫量予測システムのアカウント作成2 -->
-		<br>作付面積(a)<br>
-
-		 	<textarea name="area" rows="1" cols="10" >
-		 	</textarea>a
+			<br>パスワード(半角英数字のみ)<br>
+			<input type = "password" name="password" size="10" maxlength="10" ></input>
+			<br>パスワードの再入力<br>
+			<input type = "password" name="pppassword" size="10" maxlength="10" ></input>
+			<br><br>作付面積(a)<br>
+		 	<textarea name="area" rows="1" cols="10" ></textarea>a
 			<br>収穫期間(月)<br>
 			<select name="start_month">
 				<option value=""></option>
@@ -76,10 +69,9 @@
 			<br>秘密の質問２ (例)旧姓は？<br>
 			<textarea name="question2" rows="1" cols="50" >
 			</textarea>
-			<br>秘密の質問２の答え (例)山梨 花子<br>
-			<textarea name="answer2" rows="1" cols="50" >
-			</textarea><br><br><div style="margin-left:120px">
-				<input type="submit" value="登録" ></div>
+			<br>秘密の質問２の答え (例)山梨 花子<br></font>
+			<textarea name="answer2" rows="1" cols="50" ></textarea><br><br>
+			<center><input type="submit" value="登録" ></center>
 		</form>
 	</body>
 </html>
