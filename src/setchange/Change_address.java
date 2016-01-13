@@ -44,20 +44,17 @@ public class Change_address extends HttpServlet {
 				error += 16;
 			}
 			//else if(!inputData[0].matches("[a-zA-Z0-9@.]+")){
-			else if(!inputData[0].matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$")){
+			else if(!inputData[0].matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$")){
 				error += 2;
 			}
 			else{
-				// 既に同じIDが使われていないかチェック
-				try{
+				
 					// 検索、見付からなかったら例外を吐く
 					//pm.getObjectById(LoginDB.class, inputData[0]);
 					query.setFilter("mail == " + inputData[0]);
 					List<LoginDB> db =  (List<LoginDB>)pm.newQuery(query).execute();
 					if( db.isEmpty() )
 						error += 4;
-				}catch(Exception e){}
-			
 			
 			}
 			
