@@ -1,6 +1,7 @@
 package Calc;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -19,22 +20,26 @@ import Dataclass.Tempdata;
 
 public class Candi_get  extends HttpServlet{
 
+	
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void doPost( HttpServletRequest req, HttpServletResponse resp ) throws IOException
 	{
+		
 
 		// calendarを作成
 		Calendar calendar = Calendar.getInstance();
 		// pm を用意
 		PersistenceManager	pm	= PMF.get().getPersistenceManager();
 		//Queryを用意
-		Query queryX = pm.newQuery(Climate/*Tempdata*/.class);
+		Query queryX = pm.newQuery(Climate.class); /*Tempdata*/
 		Query queryY = pm.newQuery(Climate.class);
 
 		//現在と比較するの年月
 		int currYear = 2014 /*calendar.get(Calendar.YEAR)*/;
 		int compYear = 2003;
-		int currMon = calendar.get(Calendar.MONTH);
+		int currMon = 12;//calendar.get(Calendar.MONTH);
 		//X年とY年月の
 
 		//各年毎の距離
@@ -60,19 +65,31 @@ public class Candi_get  extends HttpServlet{
 				}else ;
 
 				//現在から過去jヶ月とcompYear年の気候データを取得
+				
+				
 				if( useMon < 1 ){
-					queryX.setFilter("data ==" + String.valueOf(useYearX) +"/" + String.valueOf(useMon+12) );
-					queryY.setFilter("date ==" + String.valueOf(useYearY) +"/" + String.valueOf(useMon+12) );
+					queryX.setFilter("data ==" + String.valueOf(useYearX) +"/" + String.valueOf(useMon+12) +"" );
+					queryY.setFilter("date ==" + String.valueOf(useYearY) +"/" + String.valueOf(useMon+12) +"");
 				}else{
-					queryX.setFilter("data ==" + String.valueOf(useYearX) +"/" + String.valueOf(useMon) );
-					queryY.setFilter("date ==" + String.valueOf(useYearY) +"/" + String.valueOf(useMon) );
+					String uyx = String.valueOf(useYearX);
+					String uyy = String.valueOf(useYearY);
+					String um = String.valueOf(useMon);
+					
+					queryX.setFilter("data ==\'" + uyx +"/" + um +"\'" );
+					queryY.setFilter("date ==\'" + uyy +"/" + um +"\'");
 				}
 
 				List<Climate> cliXs = (List<Climate>) queryX.execute();
 				List<Climate> cliYs = (List<Climate>) queryY.execute();
-
+/*
 				Climate cliX = cliXs.get(0);
 				Climate cliY = cliYs.get(0);
+				
+				resp.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = resp.getWriter();
+				//out.println("useYear");
+				
+				out.println(cliX.getDate());
 
 				//(compMon-j)月の各気候の差
 				double t = ( cliX.gettemp()    - cliY.gettemp()    );  
@@ -119,7 +136,18 @@ public class Candi_get  extends HttpServlet{
 		} finally {
 			pm.close();
 		}
-		resp.sendRedirect("/Home/Home_temp.jsp");
+		*/
+				
+				
+			}}
+		
+		PrintWriter out = resp.getWriter();
+		out.println("<a href=\"Home/Home_temp.jsp\">戻る</a>");
+				
+			
+		
+		
+		//resp.sendRedirect("/index.html");
 
 	}
 
