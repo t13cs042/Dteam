@@ -99,6 +99,16 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>Newtemp</servlet-name>
 		<url-pattern>/newtemp</url-pattern>
 	</servlet-mapping>
+	
+<!-- Servlet Mapping signup -->
+	<servlet>
+		<servlet-name>newsignup</servlet-name>
+		<servlet-class>signup_.Newsignup</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>newsignup</servlet-name>
+		<url-pattern>/newsignup</url-pattern>
+	</servlet-mapping>
 
 <!-- Servlet Mapping welcome-file -->
 	<welcome-file-list>
