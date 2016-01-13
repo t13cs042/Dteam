@@ -24,7 +24,7 @@ public class Candi_get  extends HttpServlet{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public void doGet( HttpServletRequest req, HttpServletResponse resp ) throws IOException
+	public void doPost( HttpServletRequest req, HttpServletResponse resp ) throws IOException
 	{
 		
 
@@ -72,19 +72,19 @@ public class Candi_get  extends HttpServlet{
 					queryX.setFilter("data ==\'" + String.valueOf(useYearX) +"/" + String.valueOf(useMon) +"\'" );
 					queryY.setFilter("date ==\'" + String.valueOf(useYearY) +"/" + String.valueOf(useMon) +"\'");
 				}
-/*
+
 				List<Climate> cliXs = (List<Climate>) queryX.execute();
 				List<Climate> cliYs = (List<Climate>) queryY.execute();
 
 				Climate cliX = cliXs.get(0);
 				Climate cliY = cliYs.get(0);
-	*/			
-	
-				PrintWriter out = resp.getWriter();
-				out.println("useYear");
 				
-				//out.println(cliX.getDate());
-/*
+				resp.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = resp.getWriter();
+				//out.println("useYear");
+				
+				out.println(cliX.getDate());
+
 				//(compMon-j)月の各気候の差
 				double t = ( cliX.gettemp()    - cliY.gettemp()    );  
 				double l = ( cliX.getlaytime() - cliY.getlaytime() );
@@ -131,11 +131,10 @@ public class Candi_get  extends HttpServlet{
 			pm.close();
 		}
 		
-		*/
+		
 				
-			}
-		}
-		resp.setContentType("text/html; charset=UTF-8");
+			
+		
 		
 		resp.sendRedirect("/index.html");
 
