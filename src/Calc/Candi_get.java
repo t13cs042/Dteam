@@ -1,6 +1,7 @@
 package Calc;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -19,9 +20,12 @@ import Dataclass.Tempdata;
 
 public class Candi_get  extends HttpServlet{
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void doPost( HttpServletRequest req, HttpServletResponse resp ) throws IOException
 	{
+		
+		resp.setContentType("text/html; charset=UTF-8");
 
 		// calendarを作成
 		Calendar calendar = Calendar.getInstance();
@@ -58,14 +62,14 @@ public class Candi_get  extends HttpServlet{
 					useYearX--;
 					useYearY--;
 				}else ;
-
+/*
 				//現在から過去jヶ月とcompYear年の気候データを取得
 				if( useMon < 1 ){
-					queryX.setFilter("data ==" + String.valueOf(useYearX) +"/" + String.valueOf(useMon+12) );
-					queryY.setFilter("date ==" + String.valueOf(useYearY) +"/" + String.valueOf(useMon+12) );
+					queryX.setFilter("data ==\'" + String.valueOf(useYearX) +"/" + String.valueOf(useMon+12) +"\'" );
+					queryY.setFilter("date ==\'" + String.valueOf(useYearY) +"/" + String.valueOf(useMon+12) +"\'");
 				}else{
-					queryX.setFilter("data ==" + String.valueOf(useYearX) +"/" + String.valueOf(useMon) );
-					queryY.setFilter("date ==" + String.valueOf(useYearY) +"/" + String.valueOf(useMon) );
+					queryX.setFilter("data ==\'" + String.valueOf(useYearX) +"/" + String.valueOf(useMon) +"\'" );
+					queryY.setFilter("date ==\'" + String.valueOf(useYearY) +"/" + String.valueOf(useMon) +"\'");
 				}
 
 				List<Climate> cliXs = (List<Climate>) queryX.execute();
@@ -73,7 +77,13 @@ public class Candi_get  extends HttpServlet{
 
 				Climate cliX = cliXs.get(0);
 				Climate cliY = cliYs.get(0);
-
+				
+	*/
+				PrintWriter out = resp.getWriter();
+				out.println("useYear");
+				
+				//out.println(cliX.getDate());
+/*
 				//(compMon-j)月の各気候の差
 				double t = ( cliX.gettemp()    - cliY.gettemp()    );  
 				double l = ( cliX.getlaytime() - cliY.getlaytime() );
@@ -119,7 +129,12 @@ public class Candi_get  extends HttpServlet{
 		} finally {
 			pm.close();
 		}
-		resp.sendRedirect("/Home/Home_temp.jsp");
+		
+		*/
+				
+			}
+		}
+		resp.sendRedirect("/index.html");
 
 	}
 
