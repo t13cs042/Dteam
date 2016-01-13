@@ -12,13 +12,14 @@ import javax.jdo.annotations.PrimaryKey;
 public class Candidate {
 
 	//ID
-	@PrimaryKey
-	// メンバ id の値はシステムが自動的に重複しないようつける
-	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Long id;
 
+	// メンバ id の値はシステムが自動的に重複しないようつける
+	/*@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	private Long id;
+*/
 	//候補年１
-	@Persistent 
+	@PrimaryKey
+	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	private String candi1;
 
 	//候補年２
@@ -30,8 +31,7 @@ public class Candidate {
 	private String candi3;
 
 
-	public Candidate(Long id, String candi1, String candi2, String candi3) {
-		this.id = id;
+	public Candidate(String candi1, String candi2, String candi3) {
 		this.candi1 = candi1;
 		this.candi2 = candi2;
 		this.candi3 = candi3; 
@@ -48,11 +48,6 @@ public class Candidate {
 	}
 
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-
 	public void setCandi2(String candi2) {
 		this.candi2 = candi2;
 	}
@@ -62,12 +57,7 @@ public class Candidate {
 		this.candi3 = candi3;
 	}
 
-
-	public Long getId() {
-		return id;
-	}
-
-
+	
 	public String getCandi2() {
 		return candi2;
 	}
