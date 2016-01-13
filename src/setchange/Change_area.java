@@ -12,7 +12,7 @@ import Dataclass.LoginDB;
 import Dataclass.PMF;
 
 @SuppressWarnings("serial")
-public class Change_address extends HttpServlet {
+public class Change_area extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		resp.setContentType("text/plain");
