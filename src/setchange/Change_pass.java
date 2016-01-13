@@ -1,7 +1,5 @@
 package setchange;
 
-import Dataclass.Memo;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -20,6 +18,7 @@ public class Change_pass extends HttpServlet {
 		resp.getWriter().println("Hello, world");
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void doPost( HttpServletRequest req, HttpServletResponse resp ) throws IOException
 	{
 
