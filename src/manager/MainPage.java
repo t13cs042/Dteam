@@ -1,7 +1,6 @@
 package manager;
 
-import Dataclass.Memo;
-import Dataclass.PMF;
+import manager.PMF;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
