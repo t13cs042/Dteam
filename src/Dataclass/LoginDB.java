@@ -53,6 +53,12 @@ public class LoginDB {
     @Persistent 
     private String answer2;
     
+ // メンバ mail address をデータストアに書き込む
+    @Persistent 
+    private int status;
+    
+
+    
     public LoginDB(String mail, String password, String area, String start_month,
     		String finish_month, String question1, String answer1, String question2, String answer2) {
         this.mail = mail;
@@ -64,6 +70,7 @@ public class LoginDB {
         this.answer1 = answer1;
         this.question2 = question2;
         this.answer2 = answer2;
+        this.status = 0;
     }
 
     // ゲッタとセッタ
@@ -123,5 +130,11 @@ public class LoginDB {
 	}
 	public void setAnswer2(String answer2) {
 		this.answer2 = answer2;
+	}
+	public void setStatus(int status){
+		this.status = status;
+	}
+	public int getStatus(){
+		return this.status;
 	}
 }

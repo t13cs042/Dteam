@@ -56,6 +56,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>C_login</servlet-name>
 		<url-pattern>/c_login</url-pattern>
 	</servlet-mapping>
+	
+		<servlet>
+			<servlet-name>C_Initial</servlet-name>
+			<servlet-class>clogin.C_Initial_Servlet</servlet-class>
+		</servlet>
+		<servlet-mapping>
+			<servlet-name>C_Initial</servlet-name>
+			<url-pattern>/c_initial</url-pattern>
+		</servlet-mapping>
 
 <!-- Servlet Mapping administer -->
 

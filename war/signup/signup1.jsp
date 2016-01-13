@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="signup_.PMF" %>
-<%@ page import="signup_.LoginDB" %>
+<%@ page import="Dataclass.PMF" %>
+<%@ page import="Dataclass.LoginDB" %>
 <%@ page import="javax.jdo.PersistenceManager" %>
 <%@ page import="javax.jdo.Query" %>
 <%@ page import="java.util.List" %>
@@ -16,51 +16,75 @@
 		<!-- ブドウ収穫量予測システムのアカウント作成1 -->
 		<font size="3">名前</font><br>
 		<span style="font-size: 80%">姓</span>
-		<textarea rows="1" cols="10" ></textarea>
+		<input type="text" name="firstname" id="firstname">
 		<span style="font-size: 80%">名</span>
-		<textarea rows="1" cols="10" ></textarea>
+		<input type="text" name="lastname" id="lastname">
 		<br>
 		<font size="3">メールアドレス(半角英数字のみ)</font><br>
-		<form action="/new" method="post">
-			<textarea name="mail" rows="1" cols="27" ></textarea>
+		<form action="/c_initial" method="post">
+			<input type="text" name="mail" id="mail">
 			<br>
 			<font size="3">パスワード(半角英数字のみ)</font><br>
-			<textarea name="password" rows="1" cols="27" ></textarea>
+			<input type="password" name="pass" id="pass">
 			<br>
 			<font size="3">パスワードの再入力</font><br>
-			<textarea name="ppassword" rows="1" cols="27" ></textarea>
+			<input type="password" name="repass" id="repass">
 			<br>
-			</form>
-			<form action ="signup2.jsp">
-			<div style="margin-left:120px">
-			<input type="submit" name = "button" value="次へ">
-			</div>
-		</form>
 		
-				<p>
-	<!-- スクリプトレット -->
-			<%
-			PersistenceManager pm = null;
-			try {
-			    pm = PMF.get().getPersistenceManager();
-			    Query query = pm.newQuery(LoginDB.class);
-			    List<LoginDB> date = (List<LoginDB>) query.execute();
-				// すべてのエンティティの表示
-				for (LoginDB ll : date) {
-			%>
+		
+			<!-- ブドウ収穫量予測システムのアカウント作成2 -->
+	
+		<font size="3">作付面積(a)<br>
+		 	<input type="number" name="area" id="area">
+			<br>収穫期間(月)<br>
+			<select name="month">
+				<option value=""></option>
+				<option value="1">1</option> 
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+			</select>月から
+			<select name="month">
+				<option value=""></option>
+				<option value="1">1</option> 
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>			
+			</select>月まで
 			
-			<div>
-	      <%= ll.getMail() %> が <%= ll.getPassword().toString() %> Mail-Pass
-			</div>            
-		    <!--Div that will hold the pie chart-->
-		    <div id="chart_div"></div>
-			<%
-			    }
-			} finally {
-			    if (pm != null && !pm.isClosed())
-			       pm.close();
-			}
-			%>
-		</p>
+			<br>秘密の質問１ (例)最初に飼ったペットの名前は？<br>
+			<input type="text" name="question1" id="question1">
+			<br>秘密の質問１の答え (例)タマ<br>
+			<input type="text" name="answer1" id="answer1">
+			<br>秘密の質問２ (例)旧姓は？<br>
+			<input type="text" name="question2" id="question2">
+			<br>秘密の質問２の答え (例)山梨 花子<br>
+			<input type="text" name="answer2" id="answer2">
+			<br><br>
+			
+			<input type="submit" value="登録" >
+
+			</font>		
+			
+		</form>
+		 
+		 
+		 
 	</body>
 </html>
