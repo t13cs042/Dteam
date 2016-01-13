@@ -131,12 +131,13 @@ public class Candi_get  extends HttpServlet{
 			pm.close();
 		}
 		
-		
+		PrintWriter out = resp.getWriter();
+		out.println("<a href=\"Home/Home_temp.jsp\">戻る</a>");
 				
 			
 		
 		
-		resp.sendRedirect("/index.html");
+		//resp.sendRedirect("/index.html");
 
 	}
 
