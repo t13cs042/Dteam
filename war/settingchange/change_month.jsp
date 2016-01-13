@@ -5,7 +5,7 @@
 
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>作付面積</title>
+    <title>収穫月の変更</title>
   </head>
 
   <body>
@@ -32,9 +32,9 @@
   %>
   
   
-  作付面積の変更をします<br>
+  収穫月の変更をします<br>
   
-  <form action = "/change_area" method = "post">
+  <form action = "/change_month" method = "post">
   <font color="red">
   <%			if((error & 16) == 16){ %>   ※ 変更前のパスワードが未入力です。<br> 
   <%			}if((error & 2) == 2){ %>	※ 半角小文字,12文字以内で再入力して下さい。<br> 
@@ -45,8 +45,37 @@
    <%			} %>
   </font>
   
-  <p>新しい作付面積<br>
-  <input type="text" name="area"></p>
+  <p>新しい収穫月<br>
+<select name="start">
+				<option value=""></option>
+				<option value="1">1</option> 
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+			</select>月から
+			<select name="finish">
+				<option value=""></option>
+				<option value="1">1</option> 
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>			
+			</select>月まで
    
    <br>
    
