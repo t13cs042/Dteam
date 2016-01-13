@@ -12,7 +12,7 @@ import Dataclass.LoginDB;
 import Dataclass.PMF;
 
 @SuppressWarnings("serial")
-public class Change_area extends HttpServlet {
+public class Change_Month extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		resp.setContentType("text/plain");
@@ -34,7 +34,8 @@ public class Change_area extends HttpServlet {
 		Query query = pm.newQuery(LoginDB.class);
 
 		try{
-			String inputData = req.getParameter("area");
+			String start = req.getParameter("start");
+			String finish = req.getParameter("finish");
 
 			/*
 			// ID欄が入力されているかチェック
@@ -85,8 +86,8 @@ public class Change_area extends HttpServlet {
 
 			//LoginDB db =  (LoginDB)pm.newQuery(query).execute();
 			
-			db.get(0).setArea(inputData);
-			 
+			db.get(0).setStart_month(start);
+			db.get(0).setFinish_month(finish);
 
 			// 登録
 			//pm.makePersistent(data);

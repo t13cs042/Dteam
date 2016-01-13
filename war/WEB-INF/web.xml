@@ -9,7 +9,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 
 
 
-<!-- Servlet Mapping setchange -->
+	<!-- Servlet Mapping setchange -->
 
 	<servlet>
 		<servlet-name>Change_address</servlet-name>
@@ -19,7 +19,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>Change_address</servlet-name>
 		<url-pattern>/change_address</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>Change_pass</servlet-name>
 		<servlet-class>setchange.Change_pass</servlet-class>
@@ -28,7 +28,25 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>Change_pass</servlet-name>
 		<url-pattern>/change_pass</url-pattern>
 	</servlet-mapping>
-	
+
+	<servlet>
+		<servlet-name>Change_area</servlet-name>
+		<servlet-class>setchange.Change_area</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Change_area</servlet-name>
+		<url-pattern>/change_area</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Change_month</servlet-name>
+		<servlet-class>setchange.Change_Month</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Change_month</servlet-name>
+		<url-pattern>/change_month</url-pattern>
+	</servlet-mapping>
+
 	<!-- Servlet Mapping Calc -->
 
 	<servlet>
@@ -39,30 +57,16 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>Candi_get</servlet-name>
 		<url-pattern>/candi_get</url-pattern>
 	</servlet-mapping>
-	
-	
-	<!-- Servlet Mapping c_login -->
-	<!--  
-		<servlet>
-		<servlet-name>C_login</servlet-name>
-		<servlet-class>clogin.C_loginServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>C_login</servlet-name>
-		<url-pattern>/c_login</url-pattern>
-	</servlet-mapping>
-	
-		<servlet>
-			<servlet-name>C_Initial</servlet-name>
-			<servlet-class>clogin.C_Initial_Servlet</servlet-class>
-		</servlet>
-		<servlet-mapping>
-			<servlet-name>C_Initial</servlet-name>
-			<url-pattern>/c_initial</url-pattern>
-		</servlet-mapping>
--->
 
-<!-- Servlet Mapping administer -->
+
+	<!-- Servlet Mapping c_login -->
+	<!-- <servlet> <servlet-name>C_login</servlet-name> <servlet-class>clogin.C_loginServlet</servlet-class> 
+		</servlet> <servlet-mapping> <servlet-name>C_login</servlet-name> <url-pattern>/c_login</url-pattern> 
+		</servlet-mapping> <servlet> <servlet-name>C_Initial</servlet-name> <servlet-class>clogin.C_Initial_Servlet</servlet-class> 
+		</servlet> <servlet-mapping> <servlet-name>C_Initial</servlet-name> <url-pattern>/c_initial</url-pattern> 
+		</servlet-mapping> -->
+
+	<!-- Servlet Mapping administer -->
 
 	<servlet>
 		<servlet-name>C_administer</servlet-name>
@@ -73,7 +77,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<url-pattern>/c_administer</url-pattern>
 	</servlet-mapping>
 
-<!-- Servlet Mapping manager -->
+	<!-- Servlet Mapping manager -->
 
 	<servlet>
 		<servlet-name>C-manager</servlet-name>
@@ -84,7 +88,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<url-pattern>/c_manager</url-pattern>
 	</servlet-mapping>
 
-<!-- Servlet Mapping New -->
+	<!-- Servlet Mapping New -->
 
 	<servlet>
 		<servlet-name>new_comment</servlet-name>
@@ -103,8 +107,8 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>File_up</servlet-name>
 		<url-pattern>/File_up</url-pattern>
 	</servlet-mapping>
-	
-		<servlet>
+
+	<servlet>
 		<servlet-name>File_up_grape</servlet-name>
 		<servlet-class>NewData.File_up_grape</servlet-class>
 	</servlet>
@@ -121,8 +125,8 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>Newtemp</servlet-name>
 		<url-pattern>/newtemp</url-pattern>
 	</servlet-mapping>
-	
-<!-- Servlet Mapping signup -->
+
+	<!-- Servlet Mapping signup -->
 	<servlet>
 		<servlet-name>newsignup</servlet-name>
 		<servlet-class>signup_.Newsignup</servlet-class>
@@ -132,7 +136,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<url-pattern>/newsignup</url-pattern>
 	</servlet-mapping>
 
-<!-- Servlet Mapping welcome-file -->
+	<!-- Servlet Mapping welcome-file -->
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
