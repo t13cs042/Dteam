@@ -20,19 +20,20 @@ import Dataclass.Tempdata;
 
 public class Candi_get  extends HttpServlet{
 
+	
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public void doPost( HttpServletRequest req, HttpServletResponse resp ) throws IOException
+	public void doGet( HttpServletRequest req, HttpServletResponse resp ) throws IOException
 	{
 		
-		resp.setContentType("text/html; charset=UTF-8");
 
 		// calendarを作成
 		Calendar calendar = Calendar.getInstance();
 		// pm を用意
 		PersistenceManager	pm	= PMF.get().getPersistenceManager();
 		//Queryを用意
-		Query queryX = pm.newQuery(Climate/*Tempdata*/.class);
+		Query queryX = pm.newQuery(Climate.class); /*Tempdata*/
 		Query queryY = pm.newQuery(Climate.class);
 
 		//現在と比較するの年月
@@ -62,7 +63,7 @@ public class Candi_get  extends HttpServlet{
 					useYearX--;
 					useYearY--;
 				}else ;
-/*
+
 				//現在から過去jヶ月とcompYear年の気候データを取得
 				if( useMon < 1 ){
 					queryX.setFilter("data ==\'" + String.valueOf(useYearX) +"/" + String.valueOf(useMon+12) +"\'" );
@@ -71,14 +72,14 @@ public class Candi_get  extends HttpServlet{
 					queryX.setFilter("data ==\'" + String.valueOf(useYearX) +"/" + String.valueOf(useMon) +"\'" );
 					queryY.setFilter("date ==\'" + String.valueOf(useYearY) +"/" + String.valueOf(useMon) +"\'");
 				}
-
+/*
 				List<Climate> cliXs = (List<Climate>) queryX.execute();
 				List<Climate> cliYs = (List<Climate>) queryY.execute();
 
 				Climate cliX = cliXs.get(0);
 				Climate cliY = cliYs.get(0);
-				
-	*/
+	*/			
+	
 				PrintWriter out = resp.getWriter();
 				out.println("useYear");
 				
@@ -134,6 +135,8 @@ public class Candi_get  extends HttpServlet{
 				
 			}
 		}
+		resp.setContentType("text/html; charset=UTF-8");
+		
 		resp.sendRedirect("/index.html");
 
 	}
