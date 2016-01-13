@@ -1,7 +1,6 @@
 package manager;
 
-import Dataclass.Memo;
-import Dataclass.PMF;
+import NewData.PMF;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -29,7 +28,7 @@ public class MainPage extends HttpServlet {
       +  "<br>\n"
       + "<a href=\"http://c-.appspot.com/\">未認証アカウント</a><br><br>\n"
       + "<a href=\"http://c-.appspot.com/\">アカウント管理</a><br><br>\n"
-      + "<a href=\"http://home-1157.appspot.com/Home/File_up.jsp\">気象情報のアップロード</a><br><br>\n"
+      + "<a href=\"/Home/File_up.jsp\">気象情報のアップロード</a><br><br>\n"
       + "<a href=\"http://c-.appspot.com/\">予測の実行</a><br><br>\n"
       + "<a href=\"http://c-.appspot.com/\">ログアウト</a><br><br>\n"
       + " <br> <span style=\"font-size: 100%\">予測の最終実行日時：X月X日　XX：XX</span>\n"
@@ -50,17 +49,15 @@ public class MainPage extends HttpServlet {
     static {
         TimeZone.setDefault(TimeZone.getTimeZone("JST"));
     }
-    
-    private String render(List<Memo> memos) {
+
+    private String render() {
         StringBuffer sb = new StringBuffer();
         sb.append(head);
-        for (Memo memo : memos)
-            sb.append(MessageFormat.format(memoTmpl, memo.getDate(), memo
-                    .getContent()));
+
         sb.append(tail);
         return sb.toString();
     }
-
+    
     // doGetメソッド
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
@@ -68,14 +65,11 @@ public class MainPage extends HttpServlet {
         PersistenceManager pm = null;
         try {
             pm = PMF.get().getPersistenceManager();
-            Query query = pm.newQuery(Memo.class);
-            query.setOrdering("date desc");
 
-            List<Memo> memos = (List<Memo>) query.execute();
 
             resp.setContentType("text/html");
             resp.setCharacterEncoding("utf-8");
-            resp.getWriter().print(render(memos));
+            resp.getWriter().print(render());
         } finally {
             if (pm != null && !pm.isClosed())
                 pm.close();
