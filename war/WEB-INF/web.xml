@@ -60,6 +60,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 
 
 	<!-- Servlet Mapping c_login -->
+	
 	<!-- <servlet> <servlet-name>C_login</servlet-name> <servlet-class>clogin.C_loginServlet</servlet-class> 
 		</servlet> <servlet-mapping> <servlet-name>C_login</servlet-name> <url-pattern>/c_login</url-pattern> 
 		</servlet-mapping> <servlet> <servlet-name>C_Initial</servlet-name> <servlet-class>clogin.C_Initial_Servlet</servlet-class> 
@@ -124,6 +125,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	<servlet-mapping>
 		<servlet-name>Newtemp</servlet-name>
 		<url-pattern>/newtemp</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>NewYield</servlet-name>
+		<servlet-class>NewData.NewYield</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>NewYield</servlet-name>
+		<url-pattern>/newyield</url-pattern>
 	</servlet-mapping>
 
 	<!-- Servlet Mapping signup -->
