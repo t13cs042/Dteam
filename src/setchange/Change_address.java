@@ -38,35 +38,36 @@ public class Change_address extends HttpServlet {
 			inputData[0] = req.getParameter("before");
 			inputData[1] = req.getParameter("after1");
 			inputData[2] = req.getParameter("after2");
-			/*
+
 			// ID欄が入力されているかチェック
 			if(inputData[0].equals("")){
 				error += 16;
 			}
 			//else if(!inputData[0].matches("[a-zA-Z0-9@.]+")){
-			else if(!inputData[0].matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$")){
+			//	else if(!inputData[0].matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$")){
+			else if(!inputData[1].matches("^[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+(\\.[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+)*+(.*)@[a-zA-Z0-9][a-zA-Z0-9\\-]*(\\.[a-zA-Z0-9\\-]+)+$")){
 				error += 2;
 			}
-			else{
+			/*else{
 
-					// 検索、見付からなかったら例外を吐く
-					//pm.getObjectById(LoginDB.class, inputData[0]);
-					query.setFilter("mail == " + inputData[0]);
-					List<LoginDB> db =  (List<LoginDB>)pm.newQuery(query).execute();
-					if( db.isEmpty() )
-						error += 4;
+				// 検索、見付からなかったら例外を吐く
+				//pm.getObjectById(LoginDB.class, inputData[0]);
+				query.setFilter("mail == " + "'" + inputData[0] + "'");
+				List<LoginDB> db =  (List<LoginDB>)pm.newQuery(query).execute();
+				if( db.isEmpty() )
+					error += 4;
 
-			}
+			}*/
 
 			// afterMailが入力されているかチェック
 			if(inputData[1].equals("")){
 				error +=32;
 			}
-
+			// 2回目の入力がされているかチェック
 			if(inputData[2].equals("")){
 				error += 64;
 			}
-
+			// 一回目と二回目のアドレスが同じかチェック
 			if( !inputData[1].equals(inputData[2]) ){
 				error += 1;
 			}
@@ -77,27 +78,33 @@ public class Change_address extends HttpServlet {
 						+ "&Before=" + inputData[0] + "&After=" + inputData[1]);
 			}else{
 
-			 */
 
-			// データ変更
 
-			query.setFilter("mail == " + "'" + inputData[0] + "'");
+				// データ変更
 
-			List<LoginDB> db = (List<LoginDB>) query.execute();
+				query.setFilter("mail == " + "'" + inputData[0] + "'");
 
-			//LoginDB db =  (LoginDB)pm.newQuery(query).execute();
-			
-			db.get(0).setMail(inputData[1]);
-			 
+				List<LoginDB> db = (List<LoginDB>) query.execute();
 
-			// 登録
-			//pm.makePersistent(data);
-			resp.setContentType("text/html");
-			resp.setCharacterEncoding("utf-8");
-			resp.getWriter().print("成功");
+				//LoginDB db =  (LoginDB)pm.newQuery(query).execute();
 
-			// 画面を更新
-			//resp.sendRedirect( "/index.html" );
+				resp.setContentType("text/html");
+				resp.setCharacterEncoding("utf-8");
+				if(db.size() != 0){
+					db.get(0).setMail(inputData[1]);
+
+					resp.getWriter().print("成功");
+				}else{
+					resp.getWriter().print("失敗");
+				}
+
+				// 登録
+				//pm.makePersistent(data);
+
+
+				// 画面を更新
+				//resp.sendRedirect( "/index.html" );
+			}
 
 
 		}finally{

@@ -58,9 +58,9 @@
 				<option value="<%= i %>"><%= i %></option>
 
 				<%} %>
-			</select>
+			</select>年
 		</p>
-		<input type="text" name="yield"> <br>
+		<input type="text" name="yield">kg (1aあたり)<br>
 		<Div Align="center">
 			<input value="登録" type="submit">
 		</Div>
