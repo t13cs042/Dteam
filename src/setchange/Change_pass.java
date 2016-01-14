@@ -23,7 +23,7 @@ public class Change_pass extends HttpServlet {
 	{
 
 		// jsp からのデータ
-		String	[] inputData	= new String[3]; // beforeMail と afterMail1 と afterMail2
+		String	[] inputData	= new String[3]; // beforepass と afterpass と afterpass2
 
 		// 登録エラー用のフラグ
 		int error = 0;
@@ -85,7 +85,7 @@ public class Change_pass extends HttpServlet {
 				query.setFilter("mail ==" + inputData[0]);
 				
 				List<LoginDB> db =  (List<LoginDB>)pm.newQuery(query).execute();
-				db.get(0).setMail(inputData[1]);
+				db.get(0).setPassword(inputData[1]);
 				
 
 				// 登録
