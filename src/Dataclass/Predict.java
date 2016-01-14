@@ -1,7 +1,6 @@
 package Dataclass;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
