@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.appengine.api.datastore.Query.FilterOperator;
+
 import Dataclass.Candidate;
 import Dataclass.Climate;
 import Dataclass.PMF;
@@ -26,6 +28,9 @@ public class Candi_get  extends HttpServlet{
 	@Override
 	public void doPost( HttpServletRequest req, HttpServletResponse resp ) throws IOException
 	{
+		resp.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = resp.getWriter();
+		
 		
 
 		// calendarを作成
@@ -52,6 +57,7 @@ public class Candi_get  extends HttpServlet{
 		//比較する年のfor文
 		for( int i = 0; i < 12; i++ ){
 
+			String uyx = null,uyy = null,um = null;
 			double sumt,suml,sump;  //各気候の総和
 			sumt = 0.0; suml = 0.0; sump = 0.0;
 
@@ -71,25 +77,26 @@ public class Candi_get  extends HttpServlet{
 					queryX.setFilter("data ==" + String.valueOf(useYearX) +"/" + String.valueOf(useMon+12) +"" );
 					queryY.setFilter("date ==" + String.valueOf(useYearY) +"/" + String.valueOf(useMon+12) +"");
 				}else{
-					String uyx = String.valueOf(useYearX);
-					String uyy = String.valueOf(useYearY);
-					String um = String.valueOf(useMon);
+					uyx = String.valueOf(useYearX);
+					uyy = String.valueOf(useYearY);
+					um = String.valueOf(useMon);
+					double test = 15.0;
 					
-					queryX.setFilter("data ==\'" + uyx +"/" + um +"\'" );
-					queryY.setFilter("date ==\'" + uyy +"/" + um +"\'");
+					queryX.setFilter("date == '" + uyx + "/" + um + "'" );
+					queryY.setFilter("date == '" + uyy + "/" + um + "'" );
+			
 				}
 
 				List<Climate> cliXs = (List<Climate>) queryX.execute();
 				List<Climate> cliYs = (List<Climate>) queryY.execute();
-/*
+
 				Climate cliX = cliXs.get(0);
 				Climate cliY = cliYs.get(0);
 				
-				resp.setContentType("text/html; charset=UTF-8");
-				PrintWriter out = resp.getWriter();
+				
 				//out.println("useYear");
 				
-				out.println(cliX.getDate());
+				
 
 				//(compMon-j)月の各気候の差
 				double t = ( cliX.gettemp()    - cliY.gettemp()    );  
@@ -122,11 +129,13 @@ public class Candi_get  extends HttpServlet{
 			for( int j = 0; j < 12; j++ ){
 				if( dissort[i] == distances[j] ){
 					candi[i] = 2003+j;
+					out.println(candi[i]  + ":" + dissort[i]);
 					break;
 				}
 			}
 		}		
 
+		
 		//登録
 
 		Candidate data = new Candidate( String.valueOf(candi[0]), String.valueOf(candi[1]), String.valueOf(candi[2]) );
@@ -136,12 +145,12 @@ public class Candi_get  extends HttpServlet{
 		} finally {
 			pm.close();
 		}
-		*/
-				
-				
-			}}
 		
-		PrintWriter out = resp.getWriter();
+				
+				
+			
+		
+		//PrintWriter out = resp.getWriter();
 		out.println("<a href=\"Home/Home_temp.jsp\">戻る</a>");
 				
 			
