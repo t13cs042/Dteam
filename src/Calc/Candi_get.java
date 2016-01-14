@@ -114,7 +114,7 @@ public class Candi_get  extends HttpServlet{
 			}
 
 			distances[i] = sumt + (1.1 * suml) + (0.8 * sump);     //距離
-			out.println(i  + ":" + dissort[i] + "\n" );
+			//out.println(i  + ":" + dissort[i] + "\n" );
 			compYear++;                   //比較する年を１年進める
 
 		}
