@@ -74,13 +74,13 @@ public class Candi_get  extends HttpServlet{
 				
 				
 				if( useMon < 1 ){
-					queryX.setFilter("data ==" + String.valueOf(useYearX) +"/" + String.valueOf(useMon+12) +"" );
-					queryY.setFilter("date ==" + String.valueOf(useYearY) +"/" + String.valueOf(useMon+12) +"");
+					queryX.setFilter("date =='" + String.valueOf(useYearX) +"/" + String.valueOf(useMon+12) +"'" );
+					queryY.setFilter("date =='" + String.valueOf(useYearY) +"/" + String.valueOf(useMon+12) +"'");
 				}else{
 					uyx = String.valueOf(useYearX);
 					uyy = String.valueOf(useYearY);
 					um = String.valueOf(useMon);
-					double test = 15.0;
+					
 					
 					queryX.setFilter("date == '" + uyx + "/" + um + "'" );
 					queryY.setFilter("date == '" + uyy + "/" + um + "'" );
@@ -89,10 +89,10 @@ public class Candi_get  extends HttpServlet{
 
 				List<Climate> cliXs = (List<Climate>) queryX.execute();
 				List<Climate> cliYs = (List<Climate>) queryY.execute();
-
+			
 				Climate cliX = cliXs.get(0);
 				Climate cliY = cliYs.get(0);
-				
+				out.println(cliX );
 				
 				//out.println("useYear");
 				
@@ -114,7 +114,7 @@ public class Candi_get  extends HttpServlet{
 			}
 
 			distances[i] = sumt + (1.1 * suml) + (0.8 * sump);     //距離
-
+			out.println(i  + ":" + dissort[i] + "\n" );
 			compYear++;                   //比較する年を１年進める
 
 		}
@@ -129,7 +129,7 @@ public class Candi_get  extends HttpServlet{
 			for( int j = 0; j < 12; j++ ){
 				if( dissort[i] == distances[j] ){
 					candi[i] = 2003+j;
-					out.println(candi[i]  + ":" + dissort[i]);
+					//out.println(candi[i]  + ":" + dissort[i]);
 					break;
 				}
 			}
@@ -138,7 +138,7 @@ public class Candi_get  extends HttpServlet{
 		
 		//登録
 
-		Candidate data = new Candidate( String.valueOf(candi[0]), String.valueOf(candi[1]), String.valueOf(candi[2]) );
+		Candidate data = new Candidate( new Date(), String.valueOf(candi[0]), String.valueOf(candi[1]), String.valueOf(candi[2]) );
 
 		try {
 			pm.makePersistent(data);
@@ -151,7 +151,9 @@ public class Candi_get  extends HttpServlet{
 			
 		
 		//PrintWriter out = resp.getWriter();
-		out.println("<a href=\"Home/Home_temp.jsp\">戻る</a>");
+		
+		out.println("<a href=\"index.html\">戻る</a>");
+		out.println("<a href=\"new_predict\">予測</a>");
 				
 			
 		

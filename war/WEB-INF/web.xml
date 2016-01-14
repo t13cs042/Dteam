@@ -58,6 +58,16 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<url-pattern>/candi_get</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>new_predict</servlet-name>
+		<servlet-class>Calc.NewPredict</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>new_predict</servlet-name>
+		<url-pattern>/new_predict</url-pattern>
+	</servlet-mapping>
+
+
 
 	<!-- Servlet Mapping c_login -->
 	<!-- <servlet> <servlet-name>C_login</servlet-name> <servlet-class>clogin.C_loginServlet</servlet-class> 

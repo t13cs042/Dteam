@@ -18,15 +18,15 @@ public class Predict {
 		//予測気候データ
 		//温度
 		@Persistent 
-		private List<Double> temp;
+		private ArrayList<Double> temp;
 
 		//日照量
 		@Persistent 
-		private List<Double> laytime;
+		private ArrayList<Double> laytime;
 
 		//降水量
 		@Persistent 
-		private List<Double> prec;
+		private ArrayList<Double> prec;
 
 		//予測収穫量
 		@Persistent 
@@ -41,8 +41,7 @@ public class Predict {
 		private double minYield;
 		
 		
-		public Predict(Long id, List<Double> temp, List<Double> laytime, List<Double> prec, double yield, double maxYield, double minYield) {
-			this.id = id;
+		public Predict( ArrayList<Double> temp, ArrayList<Double> laytime, ArrayList<Double> prec, double yield, double maxYield, double minYield) {
 			this.temp = temp;
 			this.laytime = laytime;
 			this.prec = prec;
@@ -67,7 +66,7 @@ public class Predict {
 		}
 
 
-		public void setTemp(List<Double> temp) {
+		public void setTemp(ArrayList<Double> temp) {
 			this.temp = temp;
 		}
 
@@ -77,7 +76,7 @@ public class Predict {
 		}
 
 
-		public void setLaytime(List<Double> laytime) {
+		public void setLaytime(ArrayList<Double> laytime) {
 			this.laytime = laytime;
 		}
 
@@ -87,7 +86,7 @@ public class Predict {
 		}
 
 
-		public void setPrec(List<Double> prec) {
+		public void setPrec(ArrayList<Double> prec) {
 			this.prec = prec;
 		}
 
