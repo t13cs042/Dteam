@@ -4,14 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.IdentityType;
+import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+//xxクラスでカインド（テーブル）を定義するための宣言
+@PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class Predict {
 	
 	//ID
-		@PrimaryKey
+		
 		// メンバ id の値はシステムが自動的に重複しないようつける
+		@PrimaryKey
 		@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 		private Long id;
 
@@ -51,17 +56,7 @@ public class Predict {
 		}
 
 
-		public Long getId() {
-			return id;
-		}
-
-
-		public void setId(Long id) {
-			this.id = id;
-		}
-
-
-		public List<Double> getTemp() {
+		public ArrayList<Double> getTemp() {
 			return temp;
 		}
 
@@ -71,7 +66,7 @@ public class Predict {
 		}
 
 
-		public List<Double> getLaytime() {
+		public ArrayList<Double> getLaytime() {
 			return laytime;
 		}
 
@@ -81,7 +76,7 @@ public class Predict {
 		}
 
 
-		public List<Double> getPrec() {
+		public ArrayList<Double> getPrec() {
 			return prec;
 		}
 
