@@ -5,15 +5,14 @@
 <title>home2</title>
 <body>
 
-<%
-String mail = (String)session.getAttribute("mail");
-
-%>
-
-
+	<%
+		String name = (String) session.getAttribute("familyname")
+				+ (String) session.getAttribute("firstname");
+	%>
 
 
-	<span style="font-size: 200%">ようこそ<%= mail %>さん</span>
+	<span style="font-size: 200%">ようこそ<%=name%>さん
+	</span>
 	<table border="1">
 		<tr>
 			<td><a href="Home_temp.jsp">気温</a></td>
