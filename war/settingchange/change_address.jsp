@@ -46,13 +46,13 @@
   </font>
   
   <p>変更前のメールアドレス<br>
-  <input type="text" name="before"></p>
+  <input type="email" name="before"></p>
   
    <p>新しいメールアドレス<br>
-  <input type="text" name="after1"></p>
+  <input type="email" name="after1"></p>
    
    <p>新しいメールアドレス(再入力)<br>
-   <input type="text"name="after2"></p>
+   <input type="email"name="after2"></p>
    
    
    <br>

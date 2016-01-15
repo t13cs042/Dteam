@@ -4,7 +4,16 @@
 <html>
 <title>home2</title>
 <body>
-	<span style="font-size: 200%">ようこそXXXaa</span>
+
+<%
+String mail = (String)session.getAttribute("mail");
+
+%>
+
+
+
+
+	<span style="font-size: 200%">ようこそ<%= mail %>さん</span>
 	<table border="1">
 		<tr>
 			<td><a href="Home_temp.jsp">気温</a></td>
@@ -75,7 +84,7 @@
 						<tr>
 							<td>メニュー</td>
 						<tr>
-							<td><a href="../index.html">設定</a></td>
+							<td><a href="../settingchange/setting.jsp">設定</a></td>
 						</tr>
 						<tr>
 							<td><a href="/Home/Comment.jsp">ご要望</a></td>

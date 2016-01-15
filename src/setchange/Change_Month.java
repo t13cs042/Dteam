@@ -24,7 +24,7 @@ public class Change_Month extends HttpServlet {
 	{
 
 		String address = "b";//後でsessionに書き換える
-		
+
 		// 登録エラー用のフラグ
 		int error = 0;
 
@@ -85,16 +85,16 @@ public class Change_Month extends HttpServlet {
 			List<LoginDB> db = (List<LoginDB>) query.execute();
 
 			//LoginDB db =  (LoginDB)pm.newQuery(query).execute();
+			if(db.size() != 0){
+				db.get(0).setStart_month(start);
+				db.get(0).setFinish_month(finish);
 			
-			db.get(0).setStart_month(start);
-			db.get(0).setFinish_month(finish);
-
 			// 登録
 			//pm.makePersistent(data);
 			resp.setContentType("text/html");
 			resp.setCharacterEncoding("utf-8");
 			resp.getWriter().print("成功");
-
+			}
 			// 画面を更新
 			//resp.sendRedirect( "/index.html" );
 

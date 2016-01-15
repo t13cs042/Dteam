@@ -13,13 +13,12 @@
 	</head>
 	<body>
 		<!-- ブドウ収穫量予測システムのアカウント作成1 -->
-		<font size="3">名前</font><br>
-		<span style="font-size: 80%">姓</span>
-		<textarea rows="1" cols="10" ></textarea>
-		<span style="font-size: 80%">名</span>
-		<textarea rows="1" cols="10" ></textarea>
-		<br>
 		<form action="/newsignup" method="post">
+					名前<br>姓
+			<textarea name="familyname" rows="1" cols="27" ></textarea>
+					名<br>
+			<textarea name="firstname" rows="1" cols="27" ></textarea>
+		
 			<font size="3">メールアドレス(半角英数字のみ)<br>
 			<textarea name="mail" rows="1" cols="27" ></textarea>
 			<br>パスワード(半角英数字のみ)<br>
