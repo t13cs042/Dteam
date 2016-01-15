@@ -8,6 +8,13 @@
 </head>
 <body>
 
+	<%
+		String address = (String) session.getAttribute("mail");
+		String area = (String) session.getAttribute("area");
+		String start = (String) session.getAttribute("start_month");
+		String finish = (String) session.getAttribute("finish_month");
+	%>
+
 	<Div Align="center">
 		<br> <a href="/settingchange/change_address.jsp">メールアドレスを変更したい方はこちら</a><br>
 		<br> <a href="/settingchange/change_pass.jsp">パスワードを変更したい方はこちら</a><br>
@@ -26,18 +33,22 @@
 				<td>現在の設定</td>
 			<tr>
 				<td>メールアドレス</td>
+				<td><%= address %></td>
 				<td><a href="/settingchange/change_address.jsp">変更</a></td>
 			</tr>
 			<tr>
 				<td>作付面積</td>
+				<td><%=area%></td>
 				<td><a href="/settingchange/change_area.jsp">変更</a></td>
 			</tr>
 			<tr>
 				<td>収穫月</td>
+				<td><%=start%>月から<%=finish %>月</td>
 				<td><a href="/settingchange/change_month.jsp">変更</a></td>
 			</tr>
 			<tr>
 				<td>収穫量</td>
+				<td>あとで</td>
 				<td><a href="/settingchange/set_yield.jsp">変更</a></td>
 			</tr>
 			<tr>

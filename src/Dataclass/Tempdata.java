@@ -13,10 +13,8 @@ public class Tempdata {
 
 	// メンバ id はエンティティ（タプル）のキーである
 	@PrimaryKey
-	// メンバ id の値はシステムが自動的に重複しないようつける
-	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	private Long id;
-
+	
 	//気温
 	@Persistent
 	private double temp;
@@ -24,7 +22,8 @@ public class Tempdata {
 	@Persistent
 	private Date date;
 
-	public Tempdata(Date date, double d) {
+	public Tempdata(Long id, Date date, double d) {
+		this.id = id;
 		this.date = date;
 		this.temp = d;
 	}
@@ -41,6 +40,12 @@ public class Tempdata {
 	}
 	public void setContent(double temp) {
 		this.temp = temp;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }
