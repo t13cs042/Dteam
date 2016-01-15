@@ -71,7 +71,7 @@ public class C_loginServlet extends HttpServlet {
 
         
         
-        resp.sendRedirect("/Login/Login_Result.jsp");
+        resp.sendRedirect("/Home/Home_temp.jsp");
 
 	}
 }

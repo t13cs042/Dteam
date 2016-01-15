@@ -43,7 +43,7 @@ public class Change_pass extends HttpServlet {
 				error += 16;
 			}
 			//else if(!inputData[0].matches("[a-zA-Z0-9@.]+")){
-			else if(!inputData[0].matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]{0,12}$")){
+			else if(!inputData[1].matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]{0,12}$")){
 				error += 2;
 			}
 			else{
