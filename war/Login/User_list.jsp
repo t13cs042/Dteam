@@ -88,7 +88,7 @@
 			</form>
 			<br>
 			<%	} %>
-			<a href = "login.html">ログイン画面へ戻る</a>
+			<a href = "/Login/login.html">ログイン画面へ戻る</a>
 
 </body>
 </html>
