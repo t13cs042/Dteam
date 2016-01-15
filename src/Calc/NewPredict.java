@@ -94,7 +94,7 @@ public class NewPredict  extends HttpServlet{
 		
 		
 		//登録
-		Predict data = new Predict( temps, laytimes, precs, avyield, maxyield, minyield );
+		Predict data = new Predict( new Date(), temps, laytimes, precs, avyield, maxyield, minyield );
 
 		try {
 			pm.makePersistent(data);
@@ -102,7 +102,7 @@ public class NewPredict  extends HttpServlet{
 			pm.close();
 		}
 		
-		
+		out.println("予測データ登録完了");
 		out.println("<a href=\"index.html\">戻る</a>");
 				
 	}

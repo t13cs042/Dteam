@@ -118,8 +118,12 @@ public class Candi_get  extends HttpServlet{
 			compYear++;                   //比較する年を１年進める
 
 		}
-
-		dissort = distances;
+		
+		
+		for( int i = 0; i < 12; i++ ){
+			dissort[i] = distances[i];
+		}
+		
 		Arrays.sort( dissort );            //ソート
 
 		int candi[] = new int[3];		
@@ -151,11 +155,9 @@ public class Candi_get  extends HttpServlet{
 			
 		
 		//PrintWriter out = resp.getWriter();
-		
+		out.println("候補年登録完了");
 		out.println("<a href=\"index.html\">戻る</a>");
-		out.println("<a href=\"new_predict\">予測</a>");
 				
-			
 		
 		
 		//resp.sendRedirect("/index.html");
