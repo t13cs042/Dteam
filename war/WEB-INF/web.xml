@@ -81,6 +81,19 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<url-pattern>/c_login</url-pattern>
 	</servlet-mapping>
 	
+<<<<<<< HEAD
+=======
+		<servlet>
+		<servlet-name>C_logout</servlet-name>
+		<servlet-class>clogin.C_logout</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>C_logout</servlet-name>
+		<url-pattern>/c_logout</url-pattern>
+	</servlet-mapping>
+	
+	<!--  
+>>>>>>> branch 'master' of https://github.com/softeng-cs2015/D
 	<servlet>
 		<servlet-name>Logout_Servlet</servlet-name>
 		<servlet-class>clogin.Logout_Servlet</servlet-class>

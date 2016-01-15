@@ -22,8 +22,8 @@ public class Change_area extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	public void doPost( HttpServletRequest req, HttpServletResponse resp ) throws IOException
 	{
-
-		String address = "b";//後でsessionに書き換える
+		HttpSession session = req.getSession(false);
+		String id = (String)session.getAttribute("id");
 		
 		// 登録エラー用のフラグ
 		int error = 0;
@@ -79,11 +79,12 @@ public class Change_area extends HttpServlet {
 
 			// データ変更
 
-			query.setFilter("mail == " + "'" + address + "'");
+			query.setFilter("id == " + "'" + id + "'");
 
 			List<LoginDB> db = (List<LoginDB>) query.execute();
 
 			//LoginDB db =  (LoginDB)pm.newQuery(query).execute();
+			
 			
 			db.get(0).setArea(inputData);
 			 

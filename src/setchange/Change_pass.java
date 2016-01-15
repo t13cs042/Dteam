@@ -22,6 +22,9 @@ public class Change_pass extends HttpServlet {
 	public void doPost( HttpServletRequest req, HttpServletResponse resp ) throws IOException
 	{
 
+		HttpSession session = req.getSession(false);
+		String id = (String)session.getAttribute("id");
+		
 		// jsp からのデータ
 		String	[] inputData	= new String[3]; // beforepass と afterpass と afterpass2
 
@@ -51,7 +54,7 @@ public class Change_pass extends HttpServlet {
 				try{
 					// 検索、見付からなかったら例外を吐く
 					//pm.getObjectById(LoginDB.class, inputData[0]);
-					query.setFilter("mail == " + inputData[0]);
+					query.setFilter("id == " + id);
 					List<LoginDB> db =  (List<LoginDB>)pm.newQuery(query).execute();
 					if( db.isEmpty() )
 						error += 4;
@@ -82,7 +85,7 @@ public class Change_pass extends HttpServlet {
 				
 
 				// データ変更
-				query.setFilter("mail ==" + inputData[0]);
+				query.setFilter("id ==" + "'" + id + "'");
 				
 				List<LoginDB> db =  (List<LoginDB>)pm.newQuery(query).execute();
 				db.get(0).setPassword(inputData[1]);

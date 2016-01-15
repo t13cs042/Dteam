@@ -12,7 +12,10 @@ import javax.servlet.http.*;
 public class NewComment extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
-		String address = "address";
+		
+		HttpSession session = req.getSession(false);
+		
+		String address = (String)session.getAttribute("mail");
 		String sub = req.getParameter("sub");
 		String content = req.getParameter("content");
 

@@ -3,11 +3,11 @@ package clogin;
 import javax.jdo.PersistenceManager;
 import Dataclass.LoginDB;
 import Dataclass.PMF;
+
 import java.io.IOException;
 import java.util.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
-
 
 
 @SuppressWarnings("serial")
@@ -17,6 +17,7 @@ public class C_loginServlet extends HttpServlet {
 			throws IOException,ServletException {
 		resp.setContentType("text/html;charset=UTF-8");
 		resp.setCharacterEncoding("utf-8");
+		
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		
 		// クエリを作成
@@ -24,7 +25,6 @@ public class C_loginServlet extends HttpServlet {
 
 		// ユーザデータを取得
 		List<LoginDB> users = (List<LoginDB>) pm.newQuery(query).execute();
-
 
 		HttpSession session = req.getSession(true);
 
@@ -38,7 +38,7 @@ public class C_loginServlet extends HttpServlet {
 			msg += "パスワードが入力されていません．\n";
 		}	
 		int flag = 0;
-
+		         
 		for(LoginDB ur : users){
 			if( adr.equals( ur.getMail() ) && pass.equals(ur.getPassword()) ){
 				
@@ -69,5 +69,5 @@ public class C_loginServlet extends HttpServlet {
 		if (pm != null && !pm.isClosed())
 			pm.close();
 	}
-}
 
+}

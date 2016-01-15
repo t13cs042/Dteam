@@ -13,8 +13,10 @@
 <html>
 <title>home2</title>
 <body>
+
 <%String username = (String)session.getAttribute("familyname") + " " + (String)session.getAttribute("firstname"); %>
 	<span style="font-size: 200%">ようこそ<%=username%></span>
+
 	<table border="1">
 		<tr>
 			<td><a href="">気温</a></td>
@@ -101,7 +103,9 @@
 							<td><a href="/Home/Comment.jsp">ご要望</a></td>
 						</tr>
 						<tr>
+
 							<td><a href="/logout">ログアウト</a></td>
+
 						</tr>
 					</table>
 				</td>
