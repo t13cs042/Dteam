@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="NewData.PMF" %>
+<%@ page import="Dataclass.PMF" %>
 <%@ page import="Dataclass.LoginDB" %>
 <%@ page import="javax.jdo.PersistenceManager" %>
 <%@ page import="javax.jdo.Query" %>
@@ -15,18 +15,18 @@
 		<!-- ブドウ収穫量予測システムのアカウント作成1 -->
 		<form action="/newsignup" method="post">
 					名前<br>姓
-			<textarea name="familyname" rows="1" cols="27" ></textarea>
-					名<br>
-			<textarea name="firstname" rows="1" cols="27" ></textarea>
+			<input type = "text" name="familyname" size="30" maxlength="27" >
+					名
+			<input type = "text" name="firstname" size="30" maxlength="27" ><br>
 		
-			<font size="3">メールアドレス(半角英数字のみ)<br>
-			<textarea name="mail" rows="1" cols="27" ></textarea>
+			<font size="3">メールアドレス(半角英数字のみ)
+			<input type ="text" name="mail" size="30" maxlength="27" ><br>
 			<br>パスワード(半角英数字のみ)<br>
 			<input type = "password" name="password" size="10" maxlength="10" ></input>
 			<br>パスワードの再入力<br>
 			<input type = "password" name="pppassword" size="10" maxlength="10" ></input>
 			<br><br>作付面積(a)<br>
-		 	<textarea name="area" rows="1" cols="10" ></textarea>a
+		 	<input type="number" name="area">a
 			<br>収穫期間(月)<br>
 			<select name="start_month">
 				<option value=""></option>

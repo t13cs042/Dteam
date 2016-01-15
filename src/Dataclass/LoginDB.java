@@ -61,7 +61,7 @@ public class LoginDB {
 	@Persistent 
 	private String answer2;
 
-	// メンバ mail address をデータストアに書き込む
+	// メンバ ユーザの状態(管理者状態，停止状態,承認状態) をデータストアに書き込む
 	@Persistent 
 	private int status;
 

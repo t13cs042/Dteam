@@ -81,6 +81,8 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<url-pattern>/c_login</url-pattern>
 	</servlet-mapping>
 	
+<<<<<<< HEAD
+=======
 		<servlet>
 		<servlet-name>C_logout</servlet-name>
 		<servlet-class>clogin.C_logout</servlet-class>
@@ -91,15 +93,27 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	</servlet-mapping>
 	
 	<!--  
+>>>>>>> branch 'master' of https://github.com/softeng-cs2015/D
 	<servlet>
-		<servlet-name>C_Initial</servlet-name>
-		<servlet-class>clogin.C_Initial_Servlet</servlet-class>
+		<servlet-name>Logout_Servlet</servlet-name>
+		<servlet-class>clogin.Logout_Servlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>C_Initial</servlet-name>
-		<url-pattern>/c_initial</url-pattern>
+		<servlet-name>Logout_Servlet</servlet-name>
+		<url-pattern>/logout</url-pattern>
 	</servlet-mapping>
--->
+	
+	<!-- Servlet Mapping DataEliminator -->
+	
+	<servlet>
+		<servlet-name>User_Eliminator</servlet-name>
+		<servlet-class>DataEliminator.User_Eliminator</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>User_Eliminator</servlet-name>
+		<url-pattern>/user_eliminator</url-pattern>
+	</servlet-mapping>
+	
 
 	<!-- Servlet Mapping administer -->
 
