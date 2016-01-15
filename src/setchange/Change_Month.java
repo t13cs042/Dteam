@@ -23,7 +23,8 @@ public class Change_Month extends HttpServlet {
 	public void doPost( HttpServletRequest req, HttpServletResponse resp ) throws IOException
 	{
 
-		String address = "b";//後でsessionに書き換える
+		HttpSession session = req.getSession(false);
+		String id = (String)session.getAttribute("id");
 
 		// 登録エラー用のフラグ
 		int error = 0;
@@ -80,7 +81,7 @@ public class Change_Month extends HttpServlet {
 
 			// データ変更
 
-			query.setFilter("mail == " + "'" + address + "'");
+			query.setFilter("id == " + "'" + id + "'");
 
 			List<LoginDB> db = (List<LoginDB>) query.execute();
 

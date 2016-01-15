@@ -18,6 +18,9 @@ public class Newtemp extends HttpServlet {
 		PrintWriter out = resp.getWriter();
 		String temp = req.getParameter("temp");
 
+		HttpSession session = req.getSession(false);
+		Long id = (Long) session.getAttribute("id");
+		
 		int error = 0;
 		if(temp == ""){
 			out.println("値が入力されていません<br>");
@@ -30,7 +33,7 @@ public class Newtemp extends HttpServlet {
 			error++;
 		}
 		if(error == 0){	
-			Tempdata data = new Tempdata(new Date(), Double.parseDouble(temp));
+			Tempdata data = new Tempdata(id, new Date(), Double.parseDouble(temp));
 			PersistenceManager pm = PMF.get().getPersistenceManager();
 
 			try {

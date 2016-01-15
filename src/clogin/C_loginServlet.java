@@ -7,9 +7,9 @@ import javax.jdo.Query;
 import Dataclass.LoginDB;
 import Dataclass.PMF;
 
-import com.google.appengine.api.users.User;
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
+//import com.google.appengine.api.users.User;
+//import com.google.appengine.api.users.UserService;
+//import com.google.appengine.api.users.UserServiceFactory;
 import java.io.IOException;
 import java.util.*;
 
@@ -42,21 +42,22 @@ public class C_loginServlet extends HttpServlet {
 		List<LoginDB> users = (List<LoginDB>) pm.newQuery(query).execute();
 
 		if(users.size() == 1){
-			LoginDB aa = users.get(0); 
+			LoginDB db = users.get(0); 
 
 			HttpSession session = req.getSession(true);
-
-			session.setAttribute("familyname", 			aa.getFamilyname());
-			session.setAttribute("firstname", 		aa.getfirstname());
-			session.setAttribute("mail", 			aa.getMail());
-			session.setAttribute("password", 		aa.getPassword());
-			session.setAttribute("area",           aa.getArea());
-			session.setAttribute("start_month",    aa.getStart_month());
-			session.setAttribute("finish_month", 	aa.getFinish_month());
-			session.setAttribute("question1", 		aa.getQuestion1());
-			session.setAttribute("question2", 		aa.getQuestion2());
-			session.setAttribute("answer1", 		aa.getAnswer1());
-			session.setAttribute("answer2",        aa.getAnswer2());
+			
+			session.setAttribute("id", db.getId());
+			session.setAttribute("familyname", db.getFamilyname());
+			session.setAttribute("firstname", 	db.getfirstname());
+			session.setAttribute("mail", db.getMail());
+			session.setAttribute("password", db.getPassword());
+			session.setAttribute("area",  db.getArea());
+			session.setAttribute("start_month", db.getStart_month());
+			session.setAttribute("finish_month", 	db.getFinish_month());
+			session.setAttribute("question1", 	db.getQuestion1());
+			session.setAttribute("question2", 	db.getQuestion2());
+			session.setAttribute("answer1", db.getAnswer1());
+			session.setAttribute("answer2", db.getAnswer2());
 			resp.sendRedirect("/Home/Home_temp.jsp");
 		}
 
