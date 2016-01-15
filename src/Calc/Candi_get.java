@@ -22,16 +22,16 @@ import Dataclass.Tempdata;
 
 public class Candi_get  extends HttpServlet{
 
-	
-	
+
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public void doPost( HttpServletRequest req, HttpServletResponse resp ) throws IOException
 	{
 		resp.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = resp.getWriter();
-		
-		
+
+
 
 		// calendarを作成
 		Calendar calendar = Calendar.getInstance();
@@ -44,7 +44,7 @@ public class Candi_get  extends HttpServlet{
 		//現在と比較するの年月
 		int currYear = 2014 /*calendar.get(Calendar.YEAR)*/;
 		int compYear = 2003;
-		int currMon = 12;//calendar.get(Calendar.MONTH);
+		int currMon = calendar.get(Calendar.MONTH);
 		//X年とY年月の
 
 		//各年毎の距離
@@ -60,6 +60,7 @@ public class Candi_get  extends HttpServlet{
 			String uyx = null,uyy = null,um = null;
 			double sumt,suml,sump;  //各気候の総和
 			sumt = 0.0; suml = 0.0; sump = 0.0;
+			boolean than2003 = false;
 
 			for( int j = 3; j > 0; j-- ){
 				int useMon    = currMon-j;
@@ -71,55 +72,62 @@ public class Candi_get  extends HttpServlet{
 				}else ;
 
 				//現在から過去jヶ月とcompYear年の気候データを取得
-				
-				
-				if( useMon < 1 ){
-					queryX.setFilter("date =='" + String.valueOf(useYearX) +"/" + String.valueOf(useMon+12) +"'" );
-					queryY.setFilter("date =='" + String.valueOf(useYearY) +"/" + String.valueOf(useMon+12) +"'");
-				}else{
-					uyx = String.valueOf(useYearX);
-					uyy = String.valueOf(useYearY);
-					um = String.valueOf(useMon);
-					
-					
-					queryX.setFilter("date == '" + uyx + "/" + um + "'" );
-					queryY.setFilter("date == '" + uyy + "/" + um + "'" );
-			
+				if( useYearY < 2003 )than2003 = true;
+				else{
+
+					if( useMon < 1 ){
+						queryX.setFilter("date =='" + String.valueOf(useYearX) +"/" + String.valueOf(useMon+12) +"'" );
+						queryY.setFilter("date =='" + String.valueOf(useYearY) +"/" + String.valueOf(useMon+12) +"'");
+					}else{
+						uyx = String.valueOf(useYearX);
+						uyy = String.valueOf(useYearY);
+						um = String.valueOf(useMon);
+
+
+						queryX.setFilter("date == '" + uyx + "/" + um + "'" );
+						queryY.setFilter("date == '" + uyy + "/" + um + "'" );
+
+					}
+
+					List<Climate> cliXs = (List<Climate>) queryX.execute();
+					List<Climate> cliYs = (List<Climate>) queryY.execute();
+
+					Climate cliX = cliXs.get(0);
+					Climate cliY = cliYs.get(0);
+					out.println(cliX );
+
+					//out.println("useYear");
+
+
+
+					//(compMon-j)月の各気候の差
+					double t = ( cliX.gettemp()    - cliY.gettemp()    );  
+					double l = ( cliX.getlaytime() - cliY.getlaytime() );
+					double p = ( cliX.getprec()    - cliY.getprec()    );
+
+					if( t < 0 ) t *= -1;       //それぞれを絶対値にする
+					if( l < 0 ) l *= -1;
+					if( p < 0 ) p *= -1;
+
+					sumt += t;                     //各総和を計算
+					suml += l;
+					sump += p;			
 				}
-
-				List<Climate> cliXs = (List<Climate>) queryX.execute();
-				List<Climate> cliYs = (List<Climate>) queryY.execute();
-			
-				Climate cliX = cliXs.get(0);
-				Climate cliY = cliYs.get(0);
-				out.println(cliX );
-				
-				//out.println("useYear");
-				
-				
-
-				//(compMon-j)月の各気候の差
-				double t = ( cliX.gettemp()    - cliY.gettemp()    );  
-				double l = ( cliX.getlaytime() - cliY.getlaytime() );
-				double p = ( cliX.getprec()    - cliY.getprec()    );
-
-				if( t < 0 ) t *= -1;       //それぞれを絶対値にする
-				if( l < 0 ) l *= -1;
-				if( p < 0 ) p *= -1;
-
-				sumt += t;                     //各総和を計算
-				suml += l;
-				sump += p;			
-
 			}
 
-			distances[i] = sumt + (1.1 * suml) + (0.8 * sump);     //距離
+			if( than2003 ) distances[i] = 1000000.0;
+			else
+				distances[i] = sumt + (1.1 * suml) + (0.8 * sump);     //距離
 			//out.println(i  + ":" + dissort[i] + "\n" );
 			compYear++;                   //比較する年を１年進める
 
 		}
 
-		dissort = distances;
+
+		for( int i = 0; i < 12; i++ ){
+			dissort[i] = distances[i];
+		}
+
 		Arrays.sort( dissort );            //ソート
 
 		int candi[] = new int[3];		
@@ -135,7 +143,7 @@ public class Candi_get  extends HttpServlet{
 			}
 		}		
 
-		
+
 		//登録
 
 		Candidate data = new Candidate( new Date(), String.valueOf(candi[0]), String.valueOf(candi[1]), String.valueOf(candi[2]) );
@@ -145,19 +153,17 @@ public class Candi_get  extends HttpServlet{
 		} finally {
 			pm.close();
 		}
-		
-				
-				
-			
-		
+
+
+
+
+
 		//PrintWriter out = resp.getWriter();
-		
+		out.println("候補年登録完了");
 		out.println("<a href=\"index.html\">戻る</a>");
-		out.println("<a href=\"new_predict\">予測</a>");
-				
-			
-		
-		
+
+
+
 		//resp.sendRedirect("/index.html");
 
 	}

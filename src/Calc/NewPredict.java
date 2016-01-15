@@ -34,7 +34,7 @@ public class NewPredict  extends HttpServlet{
 		PersistenceManager	pm	= PMF.get().getPersistenceManager();
 		//Queryを用意
 		Query queryCa = pm.newQuery(Candidate.class); 
-		Query queryCl = pm.newQuery(Candidate.class); 
+		Query queryCl = pm.newQuery(Climate.class); 
 		Query queryGr = pm.newQuery(Grape.class);
 
 		queryCa.setOrdering( "date desc" );
@@ -60,7 +60,7 @@ public class NewPredict  extends HttpServlet{
 			
 			for( int j = 0; j < 3; j++ ){
 				String candi = candies[j];
-				queryCl.setFilter("date == '" + candi + "/" + (i+1) + "'" );
+				queryCl.setFilter("date == '" + candi + "/" + String.valueOf(i+1) + "'" );
 				List<Climate> climates = (List<Climate>) queryCl.execute();
 		
 				sumt += climates.get(0).gettemp();
@@ -94,7 +94,7 @@ public class NewPredict  extends HttpServlet{
 		
 		
 		//登録
-		Predict data = new Predict( temps, laytimes, precs, avyield, maxyield, minyield );
+		Predict data = new Predict( new Date(), temps, laytimes, precs, avyield, maxyield, minyield );
 
 		try {
 			pm.makePersistent(data);
@@ -102,7 +102,7 @@ public class NewPredict  extends HttpServlet{
 			pm.close();
 		}
 		
-		
+		out.println("予測データ登録完了");
 		out.println("<a href=\"index.html\">戻る</a>");
 				
 	}
