@@ -1,6 +1,7 @@
 package Dataclass;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
@@ -19,6 +20,10 @@ public class Predict {
 		@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 		private Long id;
 
+		//登録日
+		@Persistent 
+		private Date date;
+		
 		//予測気候データ
 		//温度
 		@Persistent 
@@ -45,7 +50,8 @@ public class Predict {
 		private double minYield;
 		
 		
-		public Predict( ArrayList<Double> temp, ArrayList<Double> laytime, ArrayList<Double> prec, double yield, double maxYield, double minYield) {
+		public Predict( Date date, ArrayList<Double> temp, ArrayList<Double> laytime, ArrayList<Double> prec, double yield, double maxYield, double minYield) {
+			this.date = date;
 			this.temp = temp;
 			this.laytime = laytime;
 			this.prec = prec;
@@ -112,6 +118,16 @@ public class Predict {
 
 		public void setMinYield(double minYield) {
 			this.minYield = minYield;
+		}
+
+
+		public Date getDate() {
+			return date;
+		}
+
+
+		public void setDate(Date date) {
+			this.date = date;
 		}
 
 }
