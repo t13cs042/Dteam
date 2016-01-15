@@ -15,15 +15,16 @@
   <body>
   <center>
     <h1>ぶどう収穫量予測システム</h1>
+    <form action="/c_login" method ="post">
 		メールアドレス：<input type="text" name="address" maxlength = "50" /><br>
 　　		パスワード：<input type="password" name="password" maxlength = "12" /><br>
-		<form action="/c_login">
-			<input type="submit" value="ログイン">
+		<input type="submit" value="ログイン">
 		</form>
 		<br>
-		パスワードを忘れた方はこちら<br>
+		<a href = "/passforget/passforget.jsp">パスワードを忘れた方はこちら<br>
 		<a href="/signup/signup.jsp">初めて利用する方</a><br> 
-        <a href="/Login/Login_Result.jsp">登録者リスト</a><br>
+       <a href="/Login/User_list.jsp">登録者リスト</a><br>
+       <a href="/Login/Login_Result.jsp">管理者用ログイン</a><br>
   </center>
   </body>
 

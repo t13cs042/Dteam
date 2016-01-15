@@ -1,7 +1,7 @@
 package signup_;
 
 import Dataclass.LoginDB;
-import NewData.PMF;
+import Dataclass.PMF;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -9,6 +9,7 @@ import javax.jdo.PersistenceManager;
 import javax.servlet.http.*;
 
 
+@SuppressWarnings("serial")
 public class Newsignup extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
@@ -59,6 +60,14 @@ public class Newsignup extends HttpServlet {
 			out.println("秘密の質問が長すぎです<br>");
 			error++;
 		}
+		
+		
+		
+		
+		
+		
+		
+		
 
 		if(error == 0){
 
@@ -67,11 +76,12 @@ public class Newsignup extends HttpServlet {
 			PersistenceManager pm = PMF.get().getPersistenceManager();
 			try {
 				pm.makePersistent(logindb);
+			
 			} finally {
 				pm.close();
 			}
 			out.println("送信完了<br>");
-			out.println("<a href=\"signup/signup.jsp\">戻る</a>");
+			out.println("<a href=\"/Login/login.html\">戻る</a>");
 			//resp.sendRedirect("/Home/Comment.jsp");
 		}else
 			out.println("<a href=\"signup/signup.jsp\">戻る</a>");
