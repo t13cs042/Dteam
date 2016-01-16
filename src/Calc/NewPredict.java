@@ -31,7 +31,6 @@ public class NewPredict  extends HttpServlet{
 		resp.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = resp.getWriter();
 		
-		
 		//session用意
 		HttpSession session = req.getSession(true);
 		// pm を用意
@@ -41,15 +40,23 @@ public class NewPredict  extends HttpServlet{
 		Query queryCl = pm.newQuery(Climate.class); 
 		Query queryGr = pm.newQuery(Grape.class);
 
+		String id = (String) session.getAttribute("mail");
+		
+		queryCa.setFilter("id == '" + id + "'" );
 		queryCa.setOrdering( "date desc" );
 		
 		List<Candidate> candidates = (List<Candidate>) queryCa.execute();
 		
+		
+		
 		//候補年取得
 		String candies[] = new String[3];
-		candies[0] = candidates.get(0).getCandi1();
-		candies[1] = candidates.get(0).getCandi2();
-		candies[2] = candidates.get(0).getCandi3();
+		//candies[0] = candidates.get(0).getCandi1();
+		//candies[1] = candidates.get(0).getCandi2();
+		//candies[2] = candidates.get(0).getCandi3();
+		candies[0] = (String) session.getAttribute("candi1");
+		candies[1] = (String) session.getAttribute("candi2");
+		candies[2] = (String) session.getAttribute("candi3");
 		ArrayList<Double> temps = new ArrayList<Double>();
 		ArrayList<Double> laytimes = new ArrayList<Double>();
 		ArrayList<Double> precs = new ArrayList<Double>();
@@ -84,6 +91,7 @@ public class NewPredict  extends HttpServlet{
 		String areastr = (String) session.getAttribute("area");
 		double areanum = Double.valueOf( areastr );
 		
+		
 		for( int i = 0; i < 3; i++ ){
 			queryGr.setFilter("date == '" + candies[i]  +"'");
 			List<Grape> grapes = (List<Grape>) queryGr.execute(); 
@@ -100,18 +108,17 @@ public class NewPredict  extends HttpServlet{
 		
 		
 		//登録
-		Predict data = new Predict( new Date(), temps, laytimes, precs, avyield, maxyield, minyield );
-
+		Predict data = new Predict( id, new Date(), temps, laytimes, precs, avyield, maxyield, minyield );
+		
+		
 		try {
 			pm.makePersistent(data);
 		} finally {
 			pm.close();
 		}
 		
-		out.println("候補年＋予測データ登録完了");
+		out.println("候補年計算＋予測データ登録完了");
 		out.println("<a href=\"index.html\">戻る</a>");
-		out.println("<a href=\"manager/managerwindow.jsp\">管理者画面へ戻る</a>");
-		
 				
 	}
 

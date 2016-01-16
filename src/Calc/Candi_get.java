@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.appengine.api.datastore.Query.FilterOperator;
 
@@ -33,8 +34,8 @@ public class Candi_get  extends HttpServlet{
 		resp.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = resp.getWriter();
 
-
-
+		//Session作成
+		HttpSession session = req.getSession(true);
 		// calendarを作成
 		Calendar calendar = Calendar.getInstance();
 		// pm を用意
@@ -47,7 +48,7 @@ public class Candi_get  extends HttpServlet{
 		int currYear = 2014 /*calendar.get(Calendar.YEAR)*/;
 		int compYear = 2003;
 		int currMon = calendar.get(Calendar.MONTH);
-		//X年とY年月の
+		
 
 		//各年毎の距離
 		double distances[] = new double[12];
@@ -147,9 +148,14 @@ public class Candi_get  extends HttpServlet{
 
 
 		//登録
+		String id = (String) session.getAttribute("mail");
+		
+		Candidate data = new Candidate( id, new Date(), String.valueOf(candi[0]), String.valueOf(candi[1]), String.valueOf(candi[2]) );
 
-		Candidate data = new Candidate( new Date(), String.valueOf(candi[0]), String.valueOf(candi[1]), String.valueOf(candi[2]) );
-
+		session.setAttribute("candi1",  String.valueOf(candi[0])  );
+		session.setAttribute("candi2",  String.valueOf(candi[1])  );
+		session.setAttribute("candi3",  String.valueOf(candi[2])  );
+		
 		try {
 			pm.makePersistent(data);
 		} finally {
@@ -163,9 +169,9 @@ public class Candi_get  extends HttpServlet{
 		//PrintWriter out = resp.getWriter();
 		//out.println("候補年登録完了");
 		//out.println("<a href=\"index.html\">戻る</a>");
-
 		RequestDispatcher dis = req.getRequestDispatcher("/new_predict");
-	    dis.forward(req, resp);
+       dis.forward(req, resp);
+
 
 		//resp.sendRedirect("/index.html");
 

@@ -15,8 +15,9 @@ public class Candidate {
 
 	// メンバ id の値はシステムが自動的に重複しないようつける
 	@PrimaryKey
-	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
-	private Long id;
+	private String id;
+	//@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	//private Long id;
 
 	//登録日
 	
@@ -37,11 +38,32 @@ public class Candidate {
 	private String candi3;
 
 
-	public Candidate(Date date, String candi1, String candi2, String candi3) {
+	public Candidate(String id,Date date, String candi1, String candi2, String candi3) {
+		this.id     = id;
 		this.date   = date;
 		this.candi1 = candi1;
 		this.candi2 = candi2;
 		this.candi3 = candi3; 
+	}
+
+
+	public String getId() {
+		return id;
+	}
+
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
+	public Date getDate() {
+		return date;
+	}
+
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 
