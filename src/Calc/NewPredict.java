@@ -13,6 +13,7 @@ import javax.jdo.Query;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 import Dataclass.Candidate;
@@ -30,6 +31,9 @@ public class NewPredict  extends HttpServlet{
 		resp.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = resp.getWriter();
 		
+		
+		//session用意
+		HttpSession session = req.getSession(true);
 		// pm を用意
 		PersistenceManager	pm	= PMF.get().getPersistenceManager();
 		//Queryを用意
@@ -77,12 +81,14 @@ public class NewPredict  extends HttpServlet{
 		//予測収穫量
 		double yields[] = new double[3];
 		double yield,maxyield = 0.0,minyield = 10000.0,sumyield = 0.0,avyield = 0.0;
+		String areastr = (String) session.getAttribute("area");
+		double areanum = Double.valueOf( areastr );
 		
 		for( int i = 0; i < 3; i++ ){
 			queryGr.setFilter("date == '" + candies[i]  +"'");
 			List<Grape> grapes = (List<Grape>) queryGr.execute(); 
 
-			yields[i] = grapes.get(0).getNum();
+			yields[i] = grapes.get(0).getNum() * areanum;
 		}
 		
 		for( int i = 0; i < 3; i++ ){
