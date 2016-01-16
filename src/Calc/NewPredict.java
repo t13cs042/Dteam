@@ -108,8 +108,10 @@ public class NewPredict  extends HttpServlet{
 			pm.close();
 		}
 		
-		out.println("予測データ登録完了");
+		out.println("候補年＋予測データ登録完了");
 		out.println("<a href=\"index.html\">戻る</a>");
+		out.println("<a href=\"manager/managerwindow.jsp\">管理者画面へ戻る</a>");
+		
 				
 	}
 
