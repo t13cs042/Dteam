@@ -9,6 +9,8 @@ import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +28,7 @@ public class Candi_get  extends HttpServlet{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public void doPost( HttpServletRequest req, HttpServletResponse resp ) throws IOException
+	public void doPost( HttpServletRequest req, HttpServletResponse resp ) throws IOException, ServletException
 	{
 		resp.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = resp.getWriter();
@@ -159,10 +161,11 @@ public class Candi_get  extends HttpServlet{
 
 
 		//PrintWriter out = resp.getWriter();
-		out.println("候補年登録完了");
-		out.println("<a href=\"index.html\">戻る</a>");
+		//out.println("候補年登録完了");
+		//out.println("<a href=\"index.html\">戻る</a>");
 
-
+		RequestDispatcher dis = req.getRequestDispatcher("/new_predict");
+	    dis.forward(req, resp);
 
 		//resp.sendRedirect("/index.html");
 
