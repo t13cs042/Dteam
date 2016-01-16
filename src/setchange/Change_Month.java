@@ -2,6 +2,7 @@ package setchange;
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -22,9 +23,11 @@ public class Change_Month extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	public void doPost( HttpServletRequest req, HttpServletResponse resp ) throws IOException
 	{
+		resp.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = resp.getWriter();
 
 		HttpSession session = req.getSession(false);
-		String id = (String)session.getAttribute("id");
+		String mail = (String)session.getAttribute("mail");
 
 		// 登録エラー用のフラグ
 		int error = 0;
@@ -38,11 +41,16 @@ public class Change_Month extends HttpServlet {
 			String start = req.getParameter("start");
 			String finish = req.getParameter("finish");
 
-			/*
+			
 			// ID欄が入力されているかチェック
-			if(inputData[0].equals("")){
+			if(start.equals("")){
 				error += 16;
 			}
+			if(finish.equals("")){
+				error += 8;
+			}
+			
+			/*
 			//else if(!inputData[0].matches("[a-zA-Z0-9@.]+")){
 			else if(!inputData[0].matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$")){
 				error += 2;
@@ -70,18 +78,17 @@ public class Change_Month extends HttpServlet {
 			if( !inputData[1].equals(inputData[2]) ){
 				error += 1;
 			}
-
+*/
 			// IDが使用済なら登録不可
 			if(error != 0){
-				resp.sendRedirect("/settingchange/change_address.jsp?Error=" + String.valueOf(error)
-						+ "&Before=" + inputData[0] + "&After=" + inputData[1]);
+				resp.sendRedirect("/settingchange/change_month.jsp?Error=" + String.valueOf(error)
+						+ "&Before=" + start + "&After=" + finish);
 			}else{
 
-			 */
 
 			// データ変更
 
-			query.setFilter("id == " + "'" + id + "'");
+			query.setFilter("mail == " + "'" + mail + "'");
 
 			List<LoginDB> db = (List<LoginDB>) query.execute();
 
@@ -89,16 +96,24 @@ public class Change_Month extends HttpServlet {
 			if(db.size() != 0){
 				db.get(0).setStart_month(start);
 				db.get(0).setFinish_month(finish);
-			
-			// 登録
-			//pm.makePersistent(data);
-			resp.setContentType("text/html");
-			resp.setCharacterEncoding("utf-8");
-			resp.getWriter().print("成功");
-			}
-			// 画面を更新
-			//resp.sendRedirect( "/index.html" );
+				session.setAttribute("start_month", start);
+				session.setAttribute("finish_month", finish);
+				
 
+				resp.getWriter().print("収穫月の変更に成功しました。<br><br>");
+					
+			}else{
+				resp.getWriter().print("収穫月の変更に失敗しました。<br><br>");
+			}
+			
+			out.println("<a href=\"settingchange/setting.jsp\">設定画面へ戻る</a><br><br>");			
+			out.println("<a href=\"Home/Home_temp.jsp\">ホーム画面へ戻る</a><br>");	
+			
+			
+		
+				
+			}
+		
 
 		}finally{
 			pm.close();

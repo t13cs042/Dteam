@@ -2,6 +2,7 @@ package setchange;
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -22,7 +23,13 @@ public class Change_address extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	public void doPost( HttpServletRequest req, HttpServletResponse resp ) throws IOException
 	{
-
+		resp.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = resp.getWriter();
+		
+		//session用意
+		HttpSession session = req.getSession(false);
+		String mail = (String)session.getAttribute("mail");
+		
 		// jsp からのデータ
 		String	[] inputData	= new String[3]; // beforeMail と afterMail1 と afterMail2
 
@@ -45,23 +52,25 @@ public class Change_address extends HttpServlet {
 			}
 			//else if(!inputData[0].matches("[a-zA-Z0-9@.]+")){
 			//	else if(!inputData[0].matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$")){
-			else if(!inputData[1].matches("^[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+(\\.[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+)*+(.*)@[a-zA-Z0-9][a-zA-Z0-9\\-]*(\\.[a-zA-Z0-9\\-]+)+$")){
-				error += 2;
-			}
-			/*else{
+			
+			else {
 
+				
 				// 検索、見付からなかったら例外を吐く
 				//pm.getObjectById(LoginDB.class, inputData[0]);
-				query.setFilter("mail == " + "'" + inputData[0] + "'");
+				query.setFilter("mail == " + "'" + mail + "'");
 				List<LoginDB> db =  (List<LoginDB>)pm.newQuery(query).execute();
-				if( db.isEmpty() )
+				if( !( db.get(0).getMail().equals(inputData[0]) ) )
 					error += 4;
 
-			}*/
+			}
 
 			// afterMailが入力されているかチェック
 			if(inputData[1].equals("")){
 				error +=32;
+			}
+			else if(!inputData[1].matches("^[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+(\\.[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+)*+(.*)@[a-zA-Z0-9][a-zA-Z0-9\\-]*(\\.[a-zA-Z0-9\\-]+)+$")){
+				error += 2;
 			}
 			// 2回目の入力がされているかチェック
 			if(inputData[2].equals("")){
@@ -71,8 +80,9 @@ public class Change_address extends HttpServlet {
 			if( !inputData[1].equals(inputData[2]) ){
 				error += 1;
 			}
-
-			// IDが使用済なら登録不可
+			
+			
+			// エラーがあるなら登録不可
 			if(error != 0){
 				resp.sendRedirect("/settingchange/change_address.jsp?Error=" + String.valueOf(error)
 						+ "&Before=" + inputData[0] + "&After=" + inputData[1]);
@@ -86,24 +96,21 @@ public class Change_address extends HttpServlet {
 
 				List<LoginDB> db = (List<LoginDB>) query.execute();
 
-				//LoginDB db =  (LoginDB)pm.newQuery(query).execute();
-
 				resp.setContentType("text/html");
 				resp.setCharacterEncoding("utf-8");
 				if(db.size() != 0){
 					db.get(0).setMail(inputData[1]);
+					session.setAttribute("mail", inputData[1]);
 
-					resp.getWriter().print("成功");
+					resp.getWriter().print("メールアドレスの変更に成功しました。<br><br>");
+						
 				}else{
-					resp.getWriter().print("失敗");
+					resp.getWriter().print("メールアドレスの変更に失敗しました。<br><br>");
 				}
+				
+				out.println("<a href=\"settingchange/setting.jsp\">設定画面へ戻る</a><br><br>");			
+				out.println("<a href=\"Home/Home_temp.jsp\">ホーム画面へ戻る</a><br>");	
 
-				// 登録
-				//pm.makePersistent(data);
-
-
-				// 画面を更新
-				//resp.sendRedirect( "/index.html" );
 			}
 
 
@@ -111,8 +118,8 @@ public class Change_address extends HttpServlet {
 			pm.close();
 		}
 
-		// 画面を更新
-		//	resp.sendRedirect( "/index.html" );
+		out.println("IOexception");	
+		
 	}
 
 
