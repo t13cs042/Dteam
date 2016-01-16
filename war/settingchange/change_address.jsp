@@ -36,16 +36,16 @@
   
   <form action = "/change_address" method = "post">
   <font color="red">
-  <%			if((error & 16) == 16){ %>   ※ 変更前のメールアドレスが未入力です。<br> 
-  <%			}if((error & 2) == 2){ %>	※ 半角小文字で再入力して下さい。<br> 
-  <%			}if((error & 4) == 4){ %> ※このアドレスは登録されていません。<br> 
+  <%			if((error & 16) == 16){ %>   ※現在のメールアドレスが未入力です。<br> 
+  <%			}if((error & 4) == 4){ %> ※入力されたメールアドレスは間違っています。<br> 
+   <%			}if((error & 2) == 2){ %> ※正しいメールアドレスを入力してください<br> 
   <%		   }if((error & 32) == 32){ %> ※新しいメールアドレスが未入力です。<br>
   <%		   }if((error & 64) == 64){ %> ※新しいメールアドレス(確認用)が未入力です。<br>
   <%		   }if((error & 1) == 1){ %> ※新しいメールアドレスが一致していません。 もう一度入力してください。<br>
    <%			} %>
   </font>
   
-  <p>変更前のメールアドレス<br>
+  <p>現在のメールアドレス<br>
   <input type="email" name="before"></p>
   
    <p>新しいメールアドレス<br>
@@ -56,20 +56,22 @@
    
    
    <br>
+   <br>
+  
    
-   <Div Align="center">
-	<input value="登録" type="submit" >
-   </Div>
+
+	<input value="変更" type="submit" >
+ 
    </form>
    
    
-  
+  <br>
    <br>
    
-   <Div Align="right">
-   <a href="http://sample-115509.appspot.com/">ホーム画面へ戻る</a><br><br>
-   </Div>
-   
+
+   <a href="/settingchange/setting.jsp">設定変更画面へ戻る</a><br><br>
+   <a href="../Home/Home_temp.jsp">ホーム画面へ戻る</a><br><br>
+     
   </body>
 
 </html>

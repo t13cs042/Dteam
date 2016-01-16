@@ -2,6 +2,7 @@ package setchange;
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
@@ -22,9 +23,12 @@ public class Change_area extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	public void doPost( HttpServletRequest req, HttpServletResponse resp ) throws IOException
 	{
+		resp.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = resp.getWriter();
+
 		HttpSession session = req.getSession(false);
-		String id = (String)session.getAttribute("id");
-		
+		String mail = (String)session.getAttribute("mail");
+
 		// 登録エラー用のフラグ
 		int error = 0;
 
@@ -34,17 +38,19 @@ public class Change_area extends HttpServlet {
 		Query query = pm.newQuery(LoginDB.class);
 
 		try{
-			String inputData = req.getParameter("area");
+		String inputData = req.getParameter("area");
 
-			/*
-			// ID欄が入力されているかチェック
-			if(inputData[0].equals("")){
-				error += 16;
-			}
-			//else if(!inputData[0].matches("[a-zA-Z0-9@.]+")){
-			else if(!inputData[0].matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$")){
-				error += 2;
-			}
+
+		// ID欄が入力されているかチェック
+		if(inputData.equals("")){
+			error += 16;
+		}
+		//else if(!inputData[0].matches("[a-zA-Z0-9@.]+")){
+		else if(!inputData.matches("[0-9]+")){
+			error += 2;
+		}
+
+		/*
 			else{
 
 					// 検索、見付からなかったら例外を吐く
@@ -67,45 +73,48 @@ public class Change_area extends HttpServlet {
 
 			if( !inputData[1].equals(inputData[2]) ){
 				error += 1;
-			}
+			}*/
 
 			// IDが使用済なら登録不可
 			if(error != 0){
-				resp.sendRedirect("/settingchange/change_address.jsp?Error=" + String.valueOf(error)
-						+ "&Before=" + inputData[0] + "&After=" + inputData[1]);
+				resp.sendRedirect("/settingchange/change_area.jsp?Error=" + String.valueOf(error)
+						+ "&Before=" + inputData );
 			}else{
 
-			 */
+		 
 
-			// データ変更
+		// データ変更
 
-			query.setFilter("id == " + "'" + id + "'");
+		query.setFilter("mail == " + "'" + mail + "'");
 
-			List<LoginDB> db = (List<LoginDB>) query.execute();
+		List<LoginDB> db = (List<LoginDB>) query.execute();
 
-			//LoginDB db =  (LoginDB)pm.newQuery(query).execute();
-			
-			
+		//LoginDB db =  (LoginDB)pm.newQuery(query).execute();
+		if(db.size() != 0){
 			db.get(0).setArea(inputData);
-			 
+			session.setAttribute("area", inputData);
 
-			// 登録
-			//pm.makePersistent(data);
-			resp.setContentType("text/html");
-			resp.setCharacterEncoding("utf-8");
-			resp.getWriter().print("成功");
+			resp.getWriter().print("作付面積の変更に成功しました。<br><br>");
 
-			// 画面を更新
-			//resp.sendRedirect( "/index.html" );
+		}else{
+			resp.getWriter().print("作付面積の変更に失敗しました。<br><br>");
+		}
 
+		out.println("<a href=\"settingchange/setting.jsp\">設定画面へ戻る</a><br><br>");			
+		out.println("<a href=\"Home/Home_temp.jsp\">ホーム画面へ戻る</a><br>");	
+
+
+			}
 
 		}finally{
 			pm.close();
 		}
-
-		// 画面を更新
-		//	resp.sendRedirect( "/index.html" );
+		
 	}
-
-
+	
 }
+			
+			
+
+
+

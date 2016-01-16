@@ -36,8 +36,8 @@
   
   <form action = "/change_pass" method = "post">
   <font color="red">
-  <%			if((error & 16) == 16){ %>   ※ 変更前のパスワードが未入力です。<br> 
-  <%			}if((error & 2) == 2){ %>	※ 半角小文字,12文字以内で再入力して下さい。<br> 
+  <%			if((error & 16) == 16){ %>   ※現在のパスワードが未入力です。<br> 
+  <%			}if((error & 2) == 2){ %>	※半角小文字,12文字以内で再入力して下さい。<br> 
   <%			}if((error & 4) == 4){ %> ※パスワードが間違っています。<br> 
   <%		   }if((error & 32) == 32){ %> ※新しいパスワードが未入力です。<br>
   <%		   }if((error & 64) == 64){ %> ※新しいパスワード(確認用)が未入力です。<br>
@@ -45,10 +45,10 @@
    <%			} %>
   </font>
   
-  <p>変更前のパスワード<br>
+  <p>現在のパスワード<br>
   <input type="text" name="before"></p>
   
-   <p>新しいパスワード(半角小文字,12文字以内)<br>
+   <p>新しいパスワード(半角英数記号,12文字以内)<br>
   <input type="text" name="after1"></p>
    
    <p>新しいパスワード(再入力)<br>
@@ -56,19 +56,21 @@
    
    
    <br>
+   <br>
    
-   <Div Align="center">
+   
 	<input value="変更" type="submit" >
-   </Div>
+   
    </form>
    
    
-  
+  <br>
    <br>
    
-   <Div Align="right">
-   <a href="http://sample-115509.appspot.com/">ホーム画面へ戻る</a><br><br>
-   </Div>
+ 
+    <a href="/settingchange/setting.jsp">設定変更画面へ戻る</a><br><br>
+   <a href="../Home/Home_temp.jsp">ホーム画面へ戻る</a><br><br>
+ 
    
   </body>
 
