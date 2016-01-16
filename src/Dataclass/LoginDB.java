@@ -68,7 +68,7 @@ public class LoginDB {
 
 
 	public LoginDB(String familyname, String firstname,  String mail, String password, String area, String start_month,
-			String finish_month, String question1, String answer1, String question2, String answer2) {
+			String finish_month, String question1, String answer1, String question2, String answer2,int status) {
 		this.familyname = familyname;
 		this.firstname = firstname;
 		this.mail = mail;
@@ -80,7 +80,7 @@ public class LoginDB {
 		this.answer1 = answer1;
 		this.question2 = question2;
 		this.answer2 = answer2;
-		this.status = 0;
+		this.status = status;
 	}
 
 	// ゲッタとセッタ

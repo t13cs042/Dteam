@@ -90,6 +90,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<url-pattern>/logout</url-pattern>
 	</servlet-mapping>
 	
+		<servlet>
+		<servlet-name>Admini_Login_Servlet</servlet-name>
+		<servlet-class>clogin.Admini_Login_Servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Admini_Login_Servlet</servlet-name>
+		<url-pattern>/admn_login</url-pattern>
+	</servlet-mapping>
+	
 	<!-- Servlet Mapping DataEliminator -->
 	
 	<servlet>
@@ -179,6 +188,15 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	<servlet-mapping>
 		<servlet-name>newsignup</servlet-name>
 		<url-pattern>/newsignup</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Register_Administer</servlet-name>
+		<servlet-class>signup_.Register_Administer</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Register_Administer</servlet-name>
+		<url-pattern>/register_administer</url-pattern>
 	</servlet-mapping>
 
 	<!-- Servlet Mapping welcome-file -->

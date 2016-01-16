@@ -5,7 +5,10 @@ import Dataclass.LoginDB;
 import Dataclass.PMF;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
@@ -30,40 +33,74 @@ public class C_loginServlet extends HttpServlet {
 
 		String adr = req.getParameter("address");
 		String pass = req.getParameter("password");
+		
+		PrintWriter out = resp.getWriter();
+		int error = 0;
 		String msg = "";
 		if(adr == ""){
-			msg = "メールアドレスが入力されていません．\n";
+			error++;
+			msg +="メールアドレスが入力されていません．<br>";
+			
 		}
 		if(pass == ""){
-			msg += "パスワードが入力されていません．\n";
+			error++;
+			msg += "パスワードが入力されていません.<br>";
 		}	
-		int flag = 0;
-		         
+		
 		for(LoginDB ur : users){
 			if( adr.equals( ur.getMail() ) && pass.equals(ur.getPassword()) ){
 				
-				flag = 1;
-				session.setAttribute("familyname",     ur.getFamilyname());
-				session.setAttribute("firstname",      ur.getfirstname());
-				session.setAttribute("mail",           ur.getMail());
-				session.setAttribute("password",       ur.getPassword());
-				session.setAttribute("area",           ur.getArea());
-				session.setAttribute("start_month",    ur.getStart_month());
-				session.setAttribute("finish_month",   ur.getFinish_month());
-				session.setAttribute("question1",      ur.getQuestion1());
-				session.setAttribute("question2",      ur.getQuestion2());
-				session.setAttribute("answer1",        ur.getAnswer1());
-				session.setAttribute("answer2",        ur.getAnswer2());
-				session.setAttribute("status",         ur.getStatus());
+				int status = ur.getStatus();//ユーザ状態
+	
+				if(status == 0){
+					error++;
+					msg += "このアカウントは未認証です．<br>";
+				}
+				
+				else if(status == 1){//ユーザが認証されているなら
+					
+					session.setAttribute("id",             ur.getId() );
+					session.setAttribute("familyname",     ur.getFamilyname());
+					session.setAttribute("firstname",      ur.getfirstname());
+					session.setAttribute("mail",           ur.getMail());
+					session.setAttribute("password",       ur.getPassword());
+					session.setAttribute("area",           ur.getArea());
+					session.setAttribute("start_month",    ur.getStart_month());
+					session.setAttribute("finish_month",   ur.getFinish_month());
+					session.setAttribute("question1",      ur.getQuestion1());
+					session.setAttribute("question2",      ur.getQuestion2());
+					session.setAttribute("answer1",        ur.getAnswer1());
+					session.setAttribute("answer2",        ur.getAnswer2());
+					session.setAttribute("status",         ur.getStatus());
+					
+				}
+				else if(status == 2){
+					error++;
+					msg += "このアカウントは停止されています．<br>";
+				}
+				else if(status == 3){
+					error++;
+					msg += "このアカウントは未認証です．<br>";
+				}
+				else if(status == 4){
+					error++;
+					msg += "管理者はこちらからログインできません.<br>";
+				}
 				break;
 			}
+			if( ur.equals(users.get( users.size()-1 )) ){
+				error++;
+				msg += "登録されていません.<br>";
+			}
 		}
-		if(flag == 1){
-			resp.sendRedirect("/Home/Home_temp.jsp");		   
+		if(error == 0){
+			resp.sendRedirect("/Home/Home_temp.jsp");	   
 		}
 		else {
 			req.setAttribute("msg", msg);
-			req.getRequestDispatcher("/Login/Login_error.jsp").forward(req, resp);
+			getServletConfig().getServletContext().
+			getRequestDispatcher("/Login/login.jsp" ).
+			forward( req, resp );
 		}
 
 		if (pm != null && !pm.isClosed())

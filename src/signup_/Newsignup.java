@@ -72,7 +72,7 @@ public class Newsignup extends HttpServlet {
 		if(error == 0){
 
 			LoginDB logindb = new LoginDB(familyname, firstname, mail, password, area, start_month,
-					finish_month,  question1,  answer1,  question2, answer2);
+					finish_month,  question1,  answer1,  question2, answer2,0);
 			PersistenceManager pm = PMF.get().getPersistenceManager();
 			try {
 				pm.makePersistent(logindb);
@@ -81,7 +81,7 @@ public class Newsignup extends HttpServlet {
 				pm.close();
 			}
 			out.println("送信完了<br>");
-			out.println("<a href=\"/Login/login.html\">戻る</a>");
+			out.println("<a href=\"/Login/login.jsp\">戻る</a>");
 			//resp.sendRedirect("/Home/Comment.jsp");
 		}else
 			out.println("<a href=\"signup/signup.jsp\">戻る</a>");
