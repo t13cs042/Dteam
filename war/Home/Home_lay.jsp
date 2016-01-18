@@ -89,7 +89,7 @@
 							<td><a href="/Home/Comment.jsp">ご要望</a></td>
 						</tr>
 						<tr>
-							<td><a href="../c_logout">ログアウト</a></td>
+							<td><a href="/logout">ログアウト</a></td>
 						</tr>
 					</table>
 				</td>

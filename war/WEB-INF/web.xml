@@ -71,7 +71,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 
 	<!-- Servlet Mapping c_login -->
 
-	
+
 	<servlet>
 		<servlet-name>C_login</servlet-name>
 		<servlet-class>clogin.C_loginServlet</servlet-class>
@@ -80,7 +80,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>C_login</servlet-name>
 		<url-pattern>/c_login</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>Logout_Servlet</servlet-name>
 		<servlet-class>clogin.Logout_Servlet</servlet-class>
@@ -89,8 +89,8 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>Logout_Servlet</servlet-name>
 		<url-pattern>/logout</url-pattern>
 	</servlet-mapping>
-	
-		<servlet>
+
+	<servlet>
 		<servlet-name>Admini_Login_Servlet</servlet-name>
 		<servlet-class>clogin.Admini_Login_Servlet</servlet-class>
 	</servlet>
@@ -98,9 +98,9 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>Admini_Login_Servlet</servlet-name>
 		<url-pattern>/admn_login</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- Servlet Mapping DataEliminator -->
-	
+
 	<servlet>
 		<servlet-name>User_Eliminator</servlet-name>
 		<servlet-class>DataEliminator.User_Eliminator</servlet-class>
@@ -109,7 +109,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>User_Eliminator</servlet-name>
 		<url-pattern>/user_eliminator</url-pattern>
 	</servlet-mapping>
-	
+
 
 	<!-- Servlet Mapping administer -->
 
@@ -131,6 +131,24 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	<servlet-mapping>
 		<servlet-name>C-manager</servlet-name>
 		<url-pattern>/c_manager</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>Accountmanage</servlet-name>
+		<servlet-class>manager.Accountmanage</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Accountmanage</servlet-name>
+		<url-pattern>/accountmanage</url-pattern>
+	</servlet-mapping>
+	
+		<servlet>
+		<servlet-name>DeleteAccount</servlet-name>
+		<servlet-class>manager.DeleteAccount</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteAccount</servlet-name>
+		<url-pattern>/DeleteAccount</url-pattern>
 	</servlet-mapping>
 
 	<!-- Servlet Mapping New -->
@@ -189,7 +207,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>newsignup</servlet-name>
 		<url-pattern>/newsignup</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>Register_Administer</servlet-name>
 		<servlet-class>signup_.Register_Administer</servlet-class>

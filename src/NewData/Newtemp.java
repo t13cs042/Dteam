@@ -9,6 +9,7 @@ import java.util.Date;
 import javax.jdo.PersistenceManager;
 import javax.servlet.http.*;
 
+@SuppressWarnings("serial")
 public class Newtemp extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
