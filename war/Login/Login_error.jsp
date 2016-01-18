@@ -16,7 +16,7 @@ String msg = (String)request.getAttribute("msg");
 ログインできません。
 <br><%=msg %>
 <br> もしかして。。
-<br><a href = "/Login/login.html">戻る</a>
+<br><a href = "/Login/login.jsp">戻る</a>
 <br> ・新規登録しましたか？→
 <a href = "../signup/newsignup">新規登録</a>
 <br> ・管理者に承認されていないかもしれません.
