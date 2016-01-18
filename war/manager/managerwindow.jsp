@@ -18,7 +18,7 @@
        <form name = "form1" action="/candi_get" method="post">
 		<a href="#" onClick="document.form1.submit();">予測の実行</a>
 	  	</form><br><br>
-       <a href="/manager/logout.jsp">ログアウト</a><br><br>
+       <a href="/logout">ログアウト</a><br><br>
        <br> <span style="font-size: 100%">予測の最終実行日時：X月X日　XX：XX</span>
       	</div>
 
