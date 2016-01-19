@@ -141,8 +141,8 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>Accountmanage</servlet-name>
 		<url-pattern>/accountmanage</url-pattern>
 	</servlet-mapping>
-	
-		<servlet>
+
+	<servlet>
 		<servlet-name>DeleteAccount</servlet-name>
 		<servlet-class>manager.DeleteAccount</servlet-class>
 	</servlet>
@@ -150,6 +150,16 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<servlet-name>DeleteAccount</servlet-name>
 		<url-pattern>/DeleteAccount</url-pattern>
 	</servlet-mapping>
+
+	<servlet>
+		<servlet-name>ViewComment</servlet-name>
+		<servlet-class>manager.ViewComment</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ViewComment</servlet-name>
+		<url-pattern>/ViewComment</url-pattern>
+	</servlet-mapping>
+
 
 	<!-- Servlet Mapping New -->
 
