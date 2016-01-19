@@ -20,30 +20,37 @@
 	%>
 
 	<div style="font-size: 200%">未認証アカウント</div>
-
+<table>
 	<%
 		for (LoginDB ur : users) {
 			int status = ur.getStatus();//ユーザ状態
 			if (status == 0) {
 	%>
 
-	<div><%=ur.getMail()%></div>
-
+	<tr><td><%=ur.getMail()%></td>
+<td>
 	<form action="/accountmanage" method="post" style="display: inline">
 		<input type="hidden" name="state" value=1> <input
 			type="hidden" name="mail" value="<%=ur.getMail()%>"> <input
 			type="submit" value="承認">
 	</form>
+</td>
 
+<td>
 	<form action="/DeleteAccount" method="post" style="display: inline">
 		<input type="hidden" name="mail" value="<%=ur.getMail()%>"> <input
 			type="submit" value="拒否">
 	</form>
+</td>
 
 	<%
 		}
 		}
 	%>
+	</tr>
+	</table>
+
+<a href=/manager/managerwindow.jsp>戻る</a>
 
 </body>
 </html>
