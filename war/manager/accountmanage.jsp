@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>アカウント管理</title>
 </head>
 <body>
 
@@ -19,7 +19,7 @@
 		List<LoginDB> users = (List<LoginDB>) pm.newQuery(query).execute();
 	%>
 
-	<div style="font-size: 200%">未認証アカウント</div>
+	<div style="font-size: 200%">アカウント管理</div>
 
 	<table>
 

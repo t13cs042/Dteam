@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>未認証アカウント</title>
 </head>
 <body>
 
@@ -39,7 +39,7 @@
 <td>
 	<form action="/DeleteAccount" method="post" style="display: inline">
 		<input type="hidden" name="mail" value="<%=ur.getMail()%>"> <input
-			type="submit" value="拒否">
+			type="submit" value="拒否" >
 	</form>
 </td>
 
@@ -51,6 +51,7 @@
 	</table>
 
 <a href=/manager/managerwindow.jsp>戻る</a>
+
 
 </body>
 </html>

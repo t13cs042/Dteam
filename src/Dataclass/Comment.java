@@ -13,6 +13,9 @@ public class Comment {
 	//アドレス
 	@PrimaryKey
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	private Long id;
+	
+	@Persistent 
 	private String address;
 
 	//件名
@@ -23,7 +26,6 @@ public class Comment {
 	@Persistent 
 	private String comment;
 
-
 	public Comment(String address, String sub, String comment) {
 		this.address = address;
 		this.sub = sub;
@@ -32,23 +34,27 @@ public class Comment {
 
 	// ゲッタとセッタ
 
-	public String gettemp() {
+	public String getAddress() {
 		return address;
 	}
-	public String getlaytime() {
-		return sub;
-	}
-	public String getprec() {
-		return comment;
-	}
-	public void setContent(String address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
-	public void setlaytime(String sub) {
+	public String getSub() {
+		return sub;
+	}
+	public void setSub(String sub) {
 		this.sub = sub;
 	}
-	public void setprec(String comment) {
+	public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
 		this.comment = comment;
 	}
+	public Long getId() {
+		return id;
+	}
+
 
 }
