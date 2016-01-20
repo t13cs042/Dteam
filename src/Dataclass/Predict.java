@@ -23,7 +23,7 @@ public class Predict {
 
 		//登録日
 		@Persistent 
-		private Date date;
+		private String date;
 		
 		//予測気候データ
 		//温度
@@ -51,7 +51,7 @@ public class Predict {
 		private double minYield;
 		
 		
-		public Predict( Long id, Date date, ArrayList<Double> temp, ArrayList<Double> laytime, ArrayList<Double> prec, double yield, double maxYield, double minYield) {
+		public Predict( Long id, String date, ArrayList<Double> temp, ArrayList<Double> laytime, ArrayList<Double> prec, double yield, double maxYield, double minYield) {
 			this.id   = id;
 			this.date = date;
 			this.temp = temp;
@@ -123,12 +123,12 @@ public class Predict {
 		}
 
 
-		public Date getDate() {
+		public String getDate() {
 			return date;
 		}
 
 
-		public void setDate(Date date) {
+		public void setDate(String date) {
 			this.date = date;
 		}
 

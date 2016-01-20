@@ -13,37 +13,110 @@ public class Yielddata {
 
 	// メンバ id はエンティティ（タプル）のキーである
 	@PrimaryKey
+	private String yearmail;
+	
 	/*
 	// メンバ id の値はシステムが自動的に重複しないようつける
 	@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	private Long id;
 	*/
 	@Persistent
-	private String year;
+	private int year;
+	
+	@Persistent
+	private String mail;
+
+	@Persistent
+	private String date;
 	
 	//気温
 	@Persistent
-	private String yield;
+	private double yield;
+	
 
 
 
-	public Yielddata(String date, String d) {
-		this.year = date;
-		this.yield = d;
+	public Yielddata(String yearmail, int year, String mail, String date,  double yield) {
+		this.yearmail = yearmail;
+		this.year     = year;
+		this.mail     = mail;
+		this.date     = date;
+		this.yield    = yield;
 	}
 
-	// ゲッタとセッタ
-	public String getDate() {
+
+
+
+	public String getYearmail() {
+		return yearmail;
+	}
+
+
+
+
+	public void setYearmail(String yearmail) {
+		this.yearmail = yearmail;
+	}
+
+
+
+
+
+
+	public int getYear() {
 		return year;
 	}
-	public String gettemp() {
-		return yield;
-	}
-	public void setDate(String date) {
-		this.year = date;
-	}
-	public void setContent(String temp) {
-		this.yield = temp;
+
+
+
+
+	public void setYear(int year) {
+		this.year = year;
 	}
 
+
+
+
+	public String getMail() {
+		return mail;
+	}
+
+
+
+
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+
+
+
+	public String getDate() {
+		return date;
+	}
+
+
+
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+
+
+
+	public double getYield() {
+		return yield;
+	}
+
+
+
+
+	public void setYield(double yield) {
+		this.yield = yield;
+	}
+
+	
+	
+	
 }
