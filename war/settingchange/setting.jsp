@@ -55,8 +55,8 @@
 		</tr>
 		<tr>
 			<td>収穫量  [kg] (1aあたり)</td>
-			<td><%=yield %> </td>
-			<td><a href="/settingchange/set_yield.jsp">変更</a></td>
+		<!-- 	<td><%=yield %> </td>   -->
+			<td><a href="/settingchange/set_yield.jsp">登録</a></td>
 		</tr>
 		<!-- 
 		<tr>
