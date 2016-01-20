@@ -20,6 +20,7 @@
 	%>
 
 	<div style="font-size: 200%">アカウント管理</div>
+	<br>
 
 	<table>
 
@@ -31,6 +32,9 @@
 		<tr>
 			<td><%=ur.getMail()%></td>
 
+		</tr>
+		<tr>
+			<td>名前:<%=ur.getFamilyname() + ur.getfirstname() %></td>
 			<td>
 				<form action="/accountmanage" method="post" style="display: inline">
 					<input type="hidden" name="state" value=2> <input
@@ -38,12 +42,20 @@
 						type="submit" value="停止">
 				</form>
 			</td>
-			<%
-				} else if (status == 2) {
-			%>
-		
+		</tr>
+		<tr>
+			<td>状態:通常</td>
+		</tr>
+		<%
+			} else if (status == 2) {
+		%>
+
 		<tr>
 			<td><%=ur.getMail()%></td>
+
+		</tr>
+		<tr>
+			<td>名前:<%=ur.getFamilyname() + ur.getfirstname() %></td>
 			<td>
 				<form action="/accountmanage" method="post" style="display: inline">
 					<input type="hidden" name="state" value=1> <input
@@ -51,10 +63,14 @@
 						type="submit" value="解除">
 				</form>
 			</td>
-			<%
-				}
-			%>
 		</tr>
+		<tr>
+			<td>状態:停止</td>
+		</tr>
+		<%
+			}
+		%>
+
 		<%
 			}
 		%>
