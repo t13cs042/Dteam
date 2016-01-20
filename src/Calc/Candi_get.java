@@ -20,6 +20,7 @@ import com.google.appengine.api.datastore.Query.FilterOperator;
 
 import Dataclass.Candidate;
 import Dataclass.Climate;
+import Dataclass.LoginDB;
 import Dataclass.PMF;
 import Dataclass.Tempdata;
 
@@ -39,138 +40,155 @@ public class Candi_get  extends HttpServlet{
 		// calendarを作成
 		Calendar calendar = Calendar.getInstance();
 		// pm を用意
-		PersistenceManager	pm	= PMF.get().getPersistenceManager();
-		//Queryを用意
-		Query queryX = pm.newQuery(Climate.class); /*Tempdata*/
-		Query queryY = pm.newQuery(Climate.class);
+		PersistenceManager	pm0	= PMF.get().getPersistenceManager();
 
-		//現在と比較するの年月
-		int currYear = 2014 /*calendar.get(Calendar.YEAR)*/;
-		int compYear = 2003;
-		int currMon = calendar.get(Calendar.MONTH);
-		
+		// クエリを作成
+		Query user = pm0.newQuery(LoginDB.class);
 
-		//各年毎の距離
-		double distances[] = new double[12];
-		//角距離をソートしたもの
-		double dissort[] = new double[12];
+		user.setFilter( "status == 1" );
+		// ユーザデータを取得
+		List<LoginDB> users = (List<LoginDB> )user.execute();
 
-		//List<Distances> distances;
+		for(LoginDB ur : users){
 
-		//比較する年のfor文
-		for( int i = 0; i < 12; i++ ){
+			// pm を用意
+			PersistenceManager pm = PMF.get().getPersistenceManager();
+			
+			//Queryを用意
+			Query queryX = pm.newQuery(Climate.class); /*Tempdata*/
+			Query queryY = pm.newQuery(Climate.class);
 
-			String uyx = null,uyy = null,um = null;
-			double sumt,suml,sump;  //各気候の総和
-			sumt = 0.0; suml = 0.0; sump = 0.0;
-			boolean than2003 = false;
+			//現在と比較するの年月
+			int currYear = 2014 /*calendar.get(Calendar.YEAR)*/;
+			int compYear = 2003;
+			int currMon = calendar.get(Calendar.MONTH);
 
-			for( int j = 3; j > 0; j-- ){
-				int useMon    = currMon-j;
-				int useYearX = currYear;
-				int useYearY = compYear;
-				if( useMon < 1 ){
-					useYearX--;
-					useYearY--;
-				}else ;
 
-				//現在から過去jヶ月とcompYear年の気候データを取得
-				if( useYearY < 2003 )than2003 = true;
-				else{
+			//各年毎の距離
+			double distances[] = new double[12];
+			//角距離をソートしたもの
+			double dissort[] = new double[12];
 
+			//List<Distances> distances;
+
+			//比較する年のfor文
+			for( int i = 0; i < 12; i++ ){
+
+				String uyx = null,uyy = null,um = null;
+				double sumt,suml,sump;  //各気候の総和
+				sumt = 0.0; suml = 0.0; sump = 0.0;
+				boolean than2003 = false;
+
+				for( int j = 3; j > 0; j-- ){
+					int useMon    = currMon-j;
+					int useYearX = currYear;
+					int useYearY = compYear;
 					if( useMon < 1 ){
-						queryX.setFilter("date =='" + String.valueOf(useYearX) +"/" + String.valueOf(useMon+12) +"'" );
-						queryY.setFilter("date =='" + String.valueOf(useYearY) +"/" + String.valueOf(useMon+12) +"'");
-					}else{
-						uyx = String.valueOf(useYearX);
-						uyy = String.valueOf(useYearY);
-						um = String.valueOf(useMon);
+						useYearX--;
+						useYearY--;
+					}else ;
+
+					//現在から過去jヶ月とcompYear年の気候データを取得
+					if( useYearY < 2003 )than2003 = true;
+					else{
+
+						if( useMon < 1 ){
+							queryX.setFilter("date =='" + String.valueOf(useYearX) +"/" + String.valueOf(useMon+12) +"'" );
+							queryY.setFilter("date =='" + String.valueOf(useYearY) +"/" + String.valueOf(useMon+12) +"'");
+						}else{
+							uyx = String.valueOf(useYearX);
+							uyy = String.valueOf(useYearY);
+							um = String.valueOf(useMon);
 
 
-						queryX.setFilter("date == '" + uyx + "/" + um + "'" );
-						queryY.setFilter("date == '" + uyy + "/" + um + "'" );
+							queryX.setFilter("date == '" + uyx + "/" + um + "'" );
+							queryY.setFilter("date == '" + uyy + "/" + um + "'" );
 
+						}
+
+						List<Climate> cliXs = (List<Climate>) queryX.execute();
+						List<Climate> cliYs = (List<Climate>) queryY.execute();
+
+					/*	if( cliXs.size() == 0 || cliYs.size() == 0 ) {
+							out.println("気候を予測するためのデータが足りていません。");;
+							;
+						}
+*/
+
+						Climate cliX = cliXs.get(0);
+						Climate cliY = cliYs.get(0);
+
+
+
+
+
+
+						//(compMon-j)月の各気候の差
+						double t = ( cliX.gettemp()    - cliY.gettemp()    );  
+						double l = ( cliX.getlaytime() - cliY.getlaytime() );
+						double p = ( cliX.getprec()    - cliY.getprec()    );
+
+						if( t < 0 ) t *= -1;       //それぞれを絶対値にする
+						if( l < 0 ) l *= -1;
+						if( p < 0 ) p *= -1;
+
+						sumt += t;                     //各総和を計算
+						suml += l;
+						sump += p;			
 					}
-
-					List<Climate> cliXs = (List<Climate>) queryX.execute();
-					List<Climate> cliYs = (List<Climate>) queryY.execute();
-
-					Climate cliX = cliXs.get(0);
-					Climate cliY = cliYs.get(0);
-					out.println(cliX );
-
-					//out.println("useYear");
-
-
-
-					//(compMon-j)月の各気候の差
-					double t = ( cliX.gettemp()    - cliY.gettemp()    );  
-					double l = ( cliX.getlaytime() - cliY.getlaytime() );
-					double p = ( cliX.getprec()    - cliY.getprec()    );
-
-					if( t < 0 ) t *= -1;       //それぞれを絶対値にする
-					if( l < 0 ) l *= -1;
-					if( p < 0 ) p *= -1;
-
-					sumt += t;                     //各総和を計算
-					suml += l;
-					sump += p;			
 				}
+
+				if( than2003 ) distances[i] = 1000000.0;
+				else
+					distances[i] = sumt + (1.1 * suml) + (0.8 * sump);     //距離
+				//out.println(i  + ":" + dissort[i] + "\n" );
+				compYear++;                   //比較する年を１年進める
+
 			}
 
-			if( than2003 ) distances[i] = 1000000.0;
-			else
-				distances[i] = sumt + (1.1 * suml) + (0.8 * sump);     //距離
-			//out.println(i  + ":" + dissort[i] + "\n" );
-			compYear++;                   //比較する年を１年進める
 
-		}
-
-
-		for( int i = 0; i < 12; i++ ){
-			dissort[i] = distances[i];
-		}
-
-		Arrays.sort( dissort );            //ソート
-
-		int candi[] = new int[3];		
-
-		//候補年検出
-		for( int i = 0; i < 3; i++ ){
-			for( int j = 0; j < 12; j++ ){
-				if( dissort[i] == distances[j] ){
-					candi[i] = 2003+j;
-					//out.println(candi[i]  + ":" + dissort[i]);
-					break;
-				}
+			for( int i = 0; i < 12; i++ ){
+				dissort[i] = distances[i];
 			}
-		}		
+
+			Arrays.sort( dissort );            //ソート
+
+			int candi[] = new int[3];		
+
+			//候補年検出
+			for( int i = 0; i < 3; i++ ){
+				for( int j = 0; j < 12; j++ ){
+					if( dissort[i] == distances[j] ){
+						candi[i] = 2003+j;
+						//out.println(candi[i]  + ":" + dissort[i]);
+						break;
+					}
+				}
+			}		
 
 
-		//登録
-		String id = (String) session.getAttribute("mail");
-		
-		Candidate data = new Candidate( id, new Date(), String.valueOf(candi[0]), String.valueOf(candi[1]), String.valueOf(candi[2]) );
+			//登録
+//			String id = (String) session.getAttribute("mail");
 
-		session.setAttribute("candi1",  String.valueOf(candi[0])  );
-		session.setAttribute("candi2",  String.valueOf(candi[1])  );
-		session.setAttribute("candi3",  String.valueOf(candi[2])  );
-		
-		try {
-			pm.makePersistent(data);
-		} finally {
-			pm.close();
+			Candidate data = new Candidate( ur.getId(), new Date(), String.valueOf(candi[0]), String.valueOf(candi[1]), String.valueOf(candi[2]) );
+
+			//session.setAttribute("candi1",  String.valueOf(candi[0])  );
+			//session.setAttribute("candi2",  String.valueOf(candi[1])  );
+			//session.setAttribute("candi3",  String.valueOf(candi[2])  );
+
+			try {
+				pm.makePersistent(data);
+			} finally {
+				pm.close();
+			}
+
+
 		}
 
+		pm0.close();
 
-
-
-
-		//PrintWriter out = resp.getWriter();
-		//out.println("候補年登録完了");
-		//out.println("<a href=\"index.html\">戻る</a>");
 		RequestDispatcher dis = req.getRequestDispatcher("/new_predict");
-       dis.forward(req, resp);
+		dis.forward(req, resp);
 
 
 		//resp.sendRedirect("/index.html");
