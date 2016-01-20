@@ -25,15 +25,25 @@ public class Comment {
 	//要望
 	@Persistent 
 	private String comment;
+	
+	@Persistent 
+	private int time;
 
-	public Comment(String address, String sub, String comment) {
+	public Comment(String address, String sub, String comment, String date) {
 		this.address = address;
 		this.sub = sub;
-		this.comment = comment; 
+		this.comment = comment;
+		this.time = Integer.parseInt(date);
 	}
 
 	// ゲッタとセッタ
 
+	public int getTime() {
+		return time;
+	}
+	public void setTime(int date) {
+		this.time = date;
+	}
 	public String getAddress() {
 		return address;
 	}

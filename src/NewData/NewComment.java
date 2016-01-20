@@ -5,6 +5,10 @@ import Dataclass.PMF;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.jdo.PersistenceManager;
 import javax.servlet.http.*;
@@ -21,6 +25,15 @@ public class NewComment extends HttpServlet {
 
 		resp.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = resp.getWriter();
+		
+		// 日本時間で日時を取得する
+		Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Tokyo"));
+		// 07月29日(金)の形でフォーマットする
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd", Locale.JAPAN);//"MM月dd日(E) HH:mm:ss"
+		// フォーマット側のTimeZoneも日本にしておく
+		format.setTimeZone(TimeZone.getTimeZone("Asia/Tokyo"));
+		// dateString = "07月29日(金) 時刻"になっている
+		String dateString = format.format(calendar.getTime());
 		
 		int error = 0;
 		if(sub == ""){
@@ -40,7 +53,7 @@ public class NewComment extends HttpServlet {
 			error++;
 		}
 		if(error == 0){
-			Comment comment = new Comment(address, sub, content);
+			Comment comment = new Comment(address, sub, content, dateString);
 
 			PersistenceManager pm = PMF.get().getPersistenceManager();
 			try {

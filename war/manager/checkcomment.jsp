@@ -19,8 +19,11 @@
 		<%
 			PersistenceManager pm = PMF.get().getPersistenceManager();
 			Query query = pm.newQuery(Comment.class);
+			query.setOrdering("date dsec");
+
 			List<Comment> comment = (List<Comment>) pm.newQuery(query)
 					.execute();
+					
 		%>
 
 		<%
