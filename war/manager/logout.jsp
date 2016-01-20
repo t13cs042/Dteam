@@ -1,12 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- ログアウトページ -->
+<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ page import="java.io.*"%>
+<%@ page import="javax.servlet.*"%>
+<%@ page import="javax.servlet.http.*"%>
+
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
 <body>
+
+	<% // ユーザをチェック
+	
+	session = request.getSession(true);
+	session.invalidate();
+	
+	
+    // Login/login.jsp へリダイレクト
+	response.sendRedirect("Login/login.jsp");
+%>
+
 
 </body>
 </html>
