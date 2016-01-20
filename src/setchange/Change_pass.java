@@ -119,8 +119,6 @@ public class Change_pass extends HttpServlet {
 			pm.close();
 		}
 
-		// 画面を更新
-	//	resp.sendRedirect( "/index.html" );
 	}
 	
 	

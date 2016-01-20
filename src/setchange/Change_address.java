@@ -54,10 +54,6 @@ public class Change_address extends HttpServlet {
 			//	else if(!inputData[0].matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$")){
 			
 			else {
-
-				
-				// 検索、見付からなかったら例外を吐く
-				//pm.getObjectById(LoginDB.class, inputData[0]);
 				query.setFilter("mail == " + "'" + mail + "'");
 				List<LoginDB> db =  (List<LoginDB>)pm.newQuery(query).execute();
 				if( !( db.get(0).getMail().equals(inputData[0]) ) )

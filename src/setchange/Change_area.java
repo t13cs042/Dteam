@@ -50,30 +50,7 @@ public class Change_area extends HttpServlet {
 			error += 2;
 		}
 
-		/*
-			else{
-
-					// 検索、見付からなかったら例外を吐く
-					//pm.getObjectById(LoginDB.class, inputData[0]);
-					query.setFilter("mail == " + inputData[0]);
-					List<LoginDB> db =  (List<LoginDB>)pm.newQuery(query).execute();
-					if( db.isEmpty() )
-						error += 4;
-
-			}
-
-			// afterMailが入力されているかチェック
-			if(inputData[1].equals("")){
-				error +=32;
-			}
-
-			if(inputData[2].equals("")){
-				error += 64;
-			}
-
-			if( !inputData[1].equals(inputData[2]) ){
-				error += 1;
-			}*/
+	
 
 			// IDが使用済なら登録不可
 			if(error != 0){

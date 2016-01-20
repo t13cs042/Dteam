@@ -31,12 +31,12 @@ public class Yielddata {
 	
 	//気温
 	@Persistent
-	private String yield;
+	private double yield;
 	
 
 
 
-	public Yielddata(String yearmail, int year, String mail, String date,  String yield) {
+	public Yielddata(String yearmail, int year, String mail, String date,  double yield) {
 		this.yearmail = yearmail;
 		this.year     = year;
 		this.mail     = mail;
@@ -105,14 +105,14 @@ public class Yielddata {
 
 
 
-	public String getYield() {
+	public double getYield() {
 		return yield;
 	}
 
 
 
 
-	public void setYield(String yield) {
+	public void setYield(double yield) {
 		this.yield = yield;
 	}
 

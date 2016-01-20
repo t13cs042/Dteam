@@ -26,6 +26,7 @@ import Dataclass.LoginDB;
 import Dataclass.PMF;
 import Dataclass.Predict;
 import Dataclass.Tempdata;
+import Dataclass.Yielddata;
 
 public class NewPredict  extends HttpServlet{
 
@@ -58,6 +59,7 @@ public class NewPredict  extends HttpServlet{
 			Query queryCa = pm.newQuery(Candidate.class); 
 			Query queryCl = pm.newQuery(Climate.class); 
 			Query queryGr = pm.newQuery(Grape.class);
+			Query queryYi = pm.newQuery(Yielddata.class);
 
 //			String id = (String) session.getAttribute("mail");
 
@@ -109,13 +111,23 @@ public class NewPredict  extends HttpServlet{
 			double yield,maxyield = 0.0,minyield = 100000000000.0,sumyield = 0.0,avyield = 0.0;
 			String areastr = ur.getArea();
 			double areanum = Double.valueOf( areastr );
+			
+		
 
 
 			for( int i = 0; i < 3; i++ ){
 				queryGr.setFilter("date == '" + candies[i]  +"'");
+				queryYi.setFilter( "mail == '" + ur.getMail() +"'  &&  year == " + Integer.valueOf( candies[i] )  );
+				
 				List<Grape> grapes = (List<Grape>) queryGr.execute(); 
+				List<Yielddata> yielddatas = (List<Yielddata>) queryYi.execute(); 
 
-				yields[i] = grapes.get(0).getNum() * areanum;
+
+				if( yielddatas.size() != 0 )
+					yields[i] = yielddatas.get(0).getYield() * areanum;
+				else
+					yields[i] = grapes.get(0).getNum() * areanum;
+
 			}
 
 			for( int i = 0; i < 3; i++ ){
@@ -148,7 +160,7 @@ public class NewPredict  extends HttpServlet{
 		
 
 		
-		out.println("予測が完了しました。<br><br>");
+		out.println("予測データを更新しました。<br><br>");
 		out.println("<a href=\"/manager/managerwindow.jsp\">管理者画面へ戻る</a>");
 
 	}

@@ -62,7 +62,9 @@
 		</p>
 		<br><br>
 		
-		<input type="text" name="yield">kg (1aあたり)<br>
+		<input type="text" name="yield">kg (1aあたり)
+		
+		<br><br>
 		
 			<input value="登録" type="submit">
 		

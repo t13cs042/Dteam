@@ -82,7 +82,7 @@ public class NewYield extends HttpServlet {
 		if(error == 0){	
 		 */
 		if(error != 0){
-			resp.sendRedirect("/settingchange/change_address.jsp?Error=" + String.valueOf(error)
+			resp.sendRedirect("/settingchange/set_yield.jsp?Error=" + String.valueOf(error)
 					+ "&Before=" + yield );
 		}else{
 
@@ -90,7 +90,7 @@ public class NewYield extends HttpServlet {
 			// データ登録
 			int yearIn = Integer.valueOf(year);
 			
-			Yielddata data = new Yielddata(year + mail, yearIn, mail, dateString, yield );
+			Yielddata data = new Yielddata(year + mail, yearIn, mail, dateString, Double.valueOf( yield ) );
 			
 			try {
 				pm.makePersistent(data);
