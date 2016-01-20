@@ -12,8 +12,38 @@
 	<title>管理者登録画面</title>
 	</head>
 	<body>
+	<% 
+  // エラーの種類
+	// 0 : エラーなし
+	// 1 : メールアドレスが未入力
+	// 2 : 入力されたメールアドレスが間違っている
+	// 4 : パスワードが未入力
+	// 8 : 管理者ではない
+	//16 : 登録されていない 
+    int error;
+	String str;
+	try{
+		str = request.getParameter("Error");
+		error = Integer.valueOf(str);
+	}catch(Exception e){
+		error = 0;
+	}
+  %>
+ 
+  <center>
+    <h1>ぶどう収穫量予測システム</h1>    
 		<!-- ブドウ収穫量予測システムの管理者アカウント作成 -->
 		<form action="/register_administer" method="post">
+		
+		<font color = "red">
+	  	<%			if((error & 1) == 1){ %>   ※メールアドレスが既に登録されています<br> 
+  		<%			}if((error & 2) == 2){ %> ※メールアドレスが未入力です<br> 
+  		<%			}if((error & 4) == 4){ %> ※パスワードを入力してください<br> 
+  		<%		   }if((error & 8) == 8){ %> ※パスワードが違います<br>
+  		<%		   }if((error & 16) == 16){ %> ※パスワードが長すぎます<br>
+  		<%			} %> 
+    	</font>
+		
 					名前<br>姓
 			<input type = "text" name="familyname" size="30" maxlength="27" >
 					名
