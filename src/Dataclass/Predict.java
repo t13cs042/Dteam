@@ -17,7 +17,7 @@ public class Predict {
 		
 		// メンバ id の値はシステムが自動的に重複しないようつける
 		@PrimaryKey
-		private String id;
+		private Long id;
 		//@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 		//private Long id;
 
@@ -51,7 +51,7 @@ public class Predict {
 		private double minYield;
 		
 		
-		public Predict( String id, Date date, ArrayList<Double> temp, ArrayList<Double> laytime, ArrayList<Double> prec, double yield, double maxYield, double minYield) {
+		public Predict( Long id, Date date, ArrayList<Double> temp, ArrayList<Double> laytime, ArrayList<Double> prec, double yield, double maxYield, double minYield) {
 			this.id   = id;
 			this.date = date;
 			this.temp = temp;
@@ -133,12 +133,12 @@ public class Predict {
 		}
 
 
-		public String getId() {
+		public Long getId() {
 			return id;
 		}
 
 
-		public void setId(String id) {
+		public void setId(Long id) {
 			this.id = id;
 		}
 
