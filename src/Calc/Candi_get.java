@@ -2,10 +2,14 @@ package Calc;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -38,7 +42,7 @@ public class Candi_get  extends HttpServlet{
 		//Session作成
 		HttpSession session = req.getSession(true);
 		// calendarを作成
-		Calendar calendar = Calendar.getInstance();
+		Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Tokyo"));
 		// pm を用意
 		PersistenceManager	pm0	= PMF.get().getPersistenceManager();
 
@@ -57,9 +61,10 @@ public class Candi_get  extends HttpServlet{
 			//Queryを用意
 			Query queryX = pm.newQuery(Climate.class); /*Tempdata*/
 			Query queryY = pm.newQuery(Climate.class);
+			Query queryT = pm.newQuery(Tempdata.class);
 
 			//現在と比較するの年月
-			int currYear = 2014 /*calendar.get(Calendar.YEAR)*/;
+			int currYear = calendar.get(Calendar.YEAR);
 			int compYear = 2003;
 			int currMon = calendar.get(Calendar.MONTH);
 
@@ -80,6 +85,7 @@ public class Candi_get  extends HttpServlet{
 				boolean than2003 = false;
 
 				for( int j = 3; j > 0; j-- ){
+					boolean noTemp = false;
 					int useMon    = currMon-j;
 					int useYearX = currYear;
 					int useYearY = compYear;
@@ -91,25 +97,37 @@ public class Candi_get  extends HttpServlet{
 					//現在から過去jヶ月とcompYear年の気候データを取得
 					if( useYearY < 2003 )than2003 = true;
 					else{
-
+/*
 						if( useMon < 1 ){
 							queryX.setFilter("date =='" + String.valueOf(useYearX) +"/" + String.valueOf(useMon+12) +"'" );
 							queryY.setFilter("date =='" + String.valueOf(useYearY) +"/" + String.valueOf(useMon+12) +"'");
-						}else{
+						}else{*/
 							uyx = String.valueOf(useYearX);
 							uyy = String.valueOf(useYearY);
-							um = String.valueOf(useMon);
+							um = String.valueOf((useMon + 11) % 12 + 2);
 
 
 							queryX.setFilter("date == '" + uyx + "/" + um + "'" );
 							queryY.setFilter("date == '" + uyy + "/" + um + "'" );
 
-						}
+							
+							//tempdata関連の処理
+		
+								queryT.setFilter( "mail == '" + ur.getMail() +"'  &&  year == " + useYearX + " &&  month == " + (((useMon + 11) % 12) + 2) );
+								
+							
+						//}
 
 						List<Climate> cliXs = (List<Climate>) queryX.execute();
 						List<Climate> cliYs = (List<Climate>) queryY.execute();
+						List<Tempdata> temps = (List<Tempdata>) queryT.execute();
 
-					/*	if( cliXs.size() == 0 || cliYs.size() == 0 ) {
+						double temp = 0.0;
+						double sumtemps = 0.0;
+
+						
+						
+				/*		if( cliXs.size() == 0 || cliYs.size() == 0 ) {
 							out.println("気候を予測するためのデータが足りていません。");;
 							;
 						}
@@ -117,14 +135,22 @@ public class Candi_get  extends HttpServlet{
 
 						Climate cliX = cliXs.get(0);
 						Climate cliY = cliYs.get(0);
+						
+						
+						if( temps.size() == 0 ) noTemp = true;
+						else{
+							for( int k = 0; k < temps.size(); k++ ){
+								sumtemps += temps.get(k).gettemp();
+							}
+							temp = sumtemps/temps.size();
+						}
 
-
-
-
-
-
+						double t = 0.0;
+						
 						//(compMon-j)月の各気候の差
-						double t = ( cliX.gettemp()    - cliY.gettemp()    );  
+						//double t = ( cliX.gettemp()    - cliY.gettemp()    );  
+						if( !noTemp )	t = ( temp              - cliY.gettemp()    ); 
+						else 	       t = ( cliX.gettemp()    - cliY.gettemp()    );						
 						double l = ( cliX.getlaytime() - cliY.getlaytime() );
 						double p = ( cliX.getprec()    - cliY.getprec()    );
 
@@ -135,10 +161,11 @@ public class Candi_get  extends HttpServlet{
 						sumt += t;                     //各総和を計算
 						suml += l;
 						sump += p;			
+						//out.println( uyx + "/" + um + ":" + noTemp + " " );
 					}
 				}
 
-				if( than2003 ) distances[i] = 1000000.0;
+				if( than2003 ) distances[i] = 10000000000.0;
 				else
 					distances[i] = sumt + (1.1 * suml) + (0.8 * sump);     //距離
 				//out.println(i  + ":" + dissort[i] + "\n" );
@@ -169,12 +196,16 @@ public class Candi_get  extends HttpServlet{
 
 			//登録
 //			String id = (String) session.getAttribute("mail");
+			
+			// 07月29日(金)の形でフォーマットする
+			SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日", Locale.JAPAN);//"MM月dd日(E) HH:mm:ss"
+			// フォーマット側のTimeZoneも日本にしておく
+			format.setTimeZone(TimeZone.getTimeZone("Asia/Tokyo"));
+			// dateString = "07月29日(金) 時刻"になっている
+			String dateString = format.format(calendar.getTime());
 
-			Candidate data = new Candidate( ur.getId(), new Date(), String.valueOf(candi[0]), String.valueOf(candi[1]), String.valueOf(candi[2]) );
+			Candidate data = new Candidate( ur.getId(), dateString, String.valueOf(candi[0]), String.valueOf(candi[1]), String.valueOf(candi[2]) );
 
-			//session.setAttribute("candi1",  String.valueOf(candi[0])  );
-			//session.setAttribute("candi2",  String.valueOf(candi[1])  );
-			//session.setAttribute("candi3",  String.valueOf(candi[2])  );
 
 			try {
 				pm.makePersistent(data);

@@ -6,8 +6,12 @@ import Dataclass.Yielddata;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
@@ -21,6 +25,22 @@ public class NewYield extends HttpServlet {
 
 		resp.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = resp.getWriter();
+		
+		
+		// 日本時間で日時を取得する
+		Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Tokyo"));
+		// 07月29日(金)の形でフォーマットする
+		SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日", Locale.JAPAN);//"MM月dd日(E) HH:mm:ss"
+		// フォーマット側のTimeZoneも日本にしておく
+		format.setTimeZone(TimeZone.getTimeZone("Asia/Tokyo"));
+		// dateString = "07月29日(金) 時刻"になっている
+		String dateString = format.format(calendar.getTime());
+
+		String Year = dateString.substring(0, 4);
+		String month = dateString.substring(5, 7);
+		String day = dateString.substring(8, 10);
+
+		String temp = req.getParameter("temp");
 
 		HttpSession session = req.getSession(false);
 		String mail = (String)session.getAttribute("mail");
@@ -36,6 +56,7 @@ public class NewYield extends HttpServlet {
 
 		String yield = req.getParameter("yield");
 		String year = req.getParameter("year");
+		
 
 		if(yield.equals("")){
 			error += 16;
@@ -67,8 +88,15 @@ public class NewYield extends HttpServlet {
 
 
 			// データ登録
+			int yearIn = Integer.valueOf(year);
 			
-			Yielddata data = new Yielddata(year, yield);
+			Yielddata data = new Yielddata(year + mail, yearIn, mail, dateString, yield );
+			
+			try {
+				pm.makePersistent(data);
+			} finally {
+				pm.close();
+			}
 
 			session.setAttribute("yield", yield);			
 
