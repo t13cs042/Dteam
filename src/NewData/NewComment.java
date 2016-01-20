@@ -29,7 +29,7 @@ public class NewComment extends HttpServlet {
 		// 日本時間で日時を取得する
 		Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Tokyo"));
 		// 07月29日(金)の形でフォーマットする
-		SimpleDateFormat format = new SimpleDateFormat("yyMMddHH", Locale.JAPAN);//"MM月dd日(E) HH:mm:ss"
+		SimpleDateFormat format = new SimpleDateFormat("yyMMddHHmmss", Locale.JAPAN);//"MM月dd日(E) HH:mm:ss"
 		// フォーマット側のTimeZoneも日本にしておく
 		format.setTimeZone(TimeZone.getTimeZone("Asia/Tokyo"));
 		// dateString = "07月29日(金) 時刻"になっている

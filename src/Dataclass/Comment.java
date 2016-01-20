@@ -27,21 +27,21 @@ public class Comment {
 	private String comment;
 	
 	@Persistent 
-	private int time;
+	private String time;
 
 	public Comment(String address, String sub, String comment, String date) {
 		this.address = address;
 		this.sub = sub;
 		this.comment = comment;
-		this.time = Integer.parseInt(date);
+		this.time = date;
 	}
 
 	// ゲッタとセッタ
 
-	public int getTime() {
+	public String getTime() {
 		return time;
 	}
-	public void setTime(int date) {
+	public void setTime(String date) {
 		this.time = date;
 	}
 	public String getAddress() {
