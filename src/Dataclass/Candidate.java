@@ -22,7 +22,7 @@ public class Candidate {
 	//登録日
 	
 	@Persistent
-	private Date date;
+	private String date;
 	
 	
 	//候補年１
@@ -38,7 +38,7 @@ public class Candidate {
 	private String candi3;
 
 
-	public Candidate(Long id,Date date, String candi1, String candi2, String candi3) {
+	public Candidate(Long id,String date, String candi1, String candi2, String candi3) {
 		this.id     = id;
 		this.date   = date;
 		this.candi1 = candi1;
@@ -57,12 +57,12 @@ public class Candidate {
 	}
 
 
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
 
 
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
