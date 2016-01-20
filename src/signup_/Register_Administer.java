@@ -5,7 +5,8 @@ import Dataclass.LoginDB;
 import Dataclass.PMF;
 import java.io.IOException;
 import java.io.PrintWriter;
-
+import java.util.List;
+import signup_.Encryption;
 import javax.jdo.PersistenceManager;
 import javax.servlet.http.*;
 
@@ -14,52 +15,71 @@ import javax.servlet.http.*;
 public class Register_Administer extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
-
+		
+		//エラー登録用フラグ
+		int error = 0;
+		
 		String familyname = req.getParameter("familyname");
 		String firstname = req.getParameter("firstname");
 		String mail = req.getParameter("mail");
 		String password = req.getParameter("password");
 		String repassword = req.getParameter("repassword");
+		
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		
+		// クエリを作成
+		String query = "select from " + LoginDB.class.getName();
+
+		// ユーザデータを取得
+		List<LoginDB> users = (List<LoginDB>) pm.newQuery(query).execute();
+		
+		for(LoginDB user: users){
+			if(mail.equals( user.getMail() ) ){
+				//メールアドレスが既に登録されている
+				error += 1;
+			}
+				
+		}
+		
 
 		resp.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = resp.getWriter();
 		//out.println("aa<br>");
 
-		int error = 0;
-		if(mail == ""){
-			out.println("メールアドレスが入力されていません<br>");
-			error++;
+
+		if(mail.equals("")){
+			//メールアドレスが入力されていない
+			error += 2;
 		}
-		if(password == ""){
-			out.println("パスワードが入力されていません<br>");
-			error++;
+		if(password.equals("")){
+			//パスワードが入力されていない
+			error += 4;
 		}else if(password == repassword){
-			out.println("パスワードが異なります<br>");
-			error++;
+			//パスワードが異なっている
+			error += 8;
 		}
 		
 		if(password.length() > 10){
-			out.println("パスワードが長すぎです<br>");
-			error++;
+			//パスワードが長すぎ;
+			error += 16;
 		}
 		
-		if(error == 0){
+		if(error == 0){//エラーがなかったとき
 
-			LoginDB logindb = new LoginDB(familyname, firstname, mail, password, "", "",
+			String encrypedpass = Encryption.getSaltedPassword(password, mail);
+			
+			LoginDB logindb = new LoginDB(familyname, firstname, mail, encrypedpass, "", "",
 					"",  "",  "",  "", "", 4);
-			PersistenceManager pm = PMF.get().getPersistenceManager();
 			try {
-				pm.makePersistent(logindb);
+				pm.makePersistent(logindb);//管理者を登録
 			
 			} finally {
 				pm.close();
 			}
-			out.println("送信完了<br>");
-			out.println("<a href=\"/Login/login.jsp\">戻る</a>");
-			//resp.sendRedirect("/Home/Comment.jsp");
+			out.println("登録されました<br>");
+			out.println("<a href=\"/Login/admin_login.jsp\">管理者ログイン画面へ戻る</a>");
+			//resp.sendRedirect("/Login/admin_login.jsp");
 		}else
-			out.println("<a href=\"signup/Signup_Admini.jsp\">戻る</a>");
-
-
+			resp.sendRedirect("signup/Signup_Admini.jsp?Error=" + String.valueOf(error));
 	}
 }

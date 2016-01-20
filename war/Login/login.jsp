@@ -7,18 +7,40 @@
     <title>ログイン画面</title>
   </head>
   <body>
+    <% 
+  // エラーの種類
+	// 0 : エラーなし
+	// 1 : メールアドレスが未入力
+	// 2 : 入力されたメールアドレスが間違っている
+	// 4 : パスワードが未入力
+	// 8 : 管理者ではない
+	//16 : 登録されていない 
+    int error;
+	String str;
+	try{
+		str = request.getParameter("Error");
+		error = Integer.valueOf(str);
+	}catch(Exception e){
+		error = 0;
+	}
+  %>
+  
+  
+  
   <center>
     <h1>ぶどう収穫量予想システム</h1>
-    <%String errormsg = "";
-    try{
-    	errormsg = (String)request.getAttribute("msg");
-    }catch(Exception e){
-    	errormsg = "";
-    }%>
-    <font color = "red"><%=errormsg %></font><br>
-
-    
     <form action="/c_login" method ="post">
+    
+      <font color = "red">
+  		<%			if((error & 1) == 1){ %>   ※メールアドレスが入力さてれいません。<br> 
+  		<%			}if((error & 64) == 64){ %> ※入力されたメールアドレスは間違っています<br> 
+  		<%			}if((error & 4) == 4){ %> ※アカウントが未認証です<br> 
+  		<%		   }if((error & 8) == 8){ %> ※このアカウントは停止されています<br>
+  		<%		   }if((error & 16) == 16){ %> ※管理者はこちらからログインできません<br>
+    		<%		   }if((error & 32) == 32){ %> ※登録されていません<br>
+  		<%			} %> 
+    	</font>
+    
 		メールアドレス：<input type="text" name="address" maxlength = "50" /><br>
 		パスワード：<input type="password" name="password" maxlength = "12" /><br>
 		<input type="submit" value="ログイン">

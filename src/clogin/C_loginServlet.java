@@ -3,6 +3,7 @@ package clogin;
 import javax.jdo.PersistenceManager;
 import Dataclass.LoginDB;
 import Dataclass.PMF;
+import signup_.Encryption;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -34,27 +35,38 @@ public class C_loginServlet extends HttpServlet {
 		String adr = req.getParameter("address");
 		String pass = req.getParameter("password");
 		
+		
+		String mailFormat = "^[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+(\\.[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+)*" +                                   
+                "@" +
+                "[a-zA-Z0-9][a-zA-Z0-9\\-]*(\\.[a-zA-Z0-9\\-]+)*$";
+		
+		
 		PrintWriter out = resp.getWriter();
 		int error = 0;
-		String msg = "";
-		if(adr == ""){
-			error++;
-			msg +="メールアドレスが入力されていません．<br>";
-			
+		
+		if(adr.equals("")){
+			//メールアドレスが入力されていない
+			error += 1;
 		}
-		if(pass == ""){
-			error++;
-			msg += "パスワードが入力されていません.<br>";
-		}	
+		if(pass.equals("")){
+			//パスワードが入力されていない
+			error += 2;
+		}
+		if(adr.matches(mailFormat)){
+			//入力されたメールアドレスが正規表現にあっていないとき
+			error += 64;
+		}
+		
+		String encryptedpass = Encryption.getSaltedPassword(pass, adr);
 		
 		for(LoginDB ur : users){
-			if( adr.equals( ur.getMail() ) && pass.equals(ur.getPassword()) ){
+			if( adr.equals( ur.getMail() ) && encryptedpass.equals(ur.getPassword()) ){
 				
 				int status = ur.getStatus();//ユーザ状態
 	
 				if(status == 0){
-					error++;
-					msg += "このアカウントは未認証です．<br>";
+					//アカウントが未認証の場合
+					error += 4;
 				}
 				
 				else if(status == 1){//ユーザが認証されているなら
@@ -75,32 +87,28 @@ public class C_loginServlet extends HttpServlet {
 					
 				}
 				else if(status == 2){
-					error++;
-					msg += "このアカウントは停止されています．<br>";
-				}
-				else if(status == 3){
-					error++;
-					msg += "このアカウントは未認証です．<br>";
+					//アカウントが停止されている
+					error += 8;
+					
 				}
 				else if(status == 4){
-					error++;
-					msg += "管理者はこちらからログインできません.<br>";
+					//管理者の場合
+					error += 16;
+					
 				}
 				break;
 			}
 			if( ur.equals(users.get( users.size()-1 )) ){
-				error++;
-				msg += "登録されていません.<br>";
+				//データベースに登録されていない
+				error += 32;
+				
 			}
 		}
 		if(error == 0){
 			resp.sendRedirect("/Home/Home_temp.jsp");	   
 		}
 		else {
-			req.setAttribute("msg", msg);
-			getServletConfig().getServletContext().
-			getRequestDispatcher("/Login/login.jsp" ).
-			forward( req, resp );
+			resp.sendRedirect("/Login/login.jsp?Error=" + String.valueOf(error));
 		}
 
 		if (pm != null && !pm.isClosed())
