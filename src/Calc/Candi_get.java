@@ -125,13 +125,14 @@ public class Candi_get  extends HttpServlet{
 						double temp = 0.0;
 						double sumtemps = 0.0;
 
-						
-						
-				/*		if( cliXs.size() == 0 || cliYs.size() == 0 ) {
+						//データが無い場合のエラー処理を追加予定
+						/*
+						if( cliXs.size() == 0 || cliYs.size() == 0 ) {
 							out.println("気候を予測するためのデータが足りていません。");;
 							;
 						}
-*/
+						*/
+
 
 						Climate cliX = cliXs.get(0);
 						Climate cliY = cliYs.get(0);
@@ -165,6 +166,8 @@ public class Candi_get  extends HttpServlet{
 					}
 				}
 
+				
+				
 				if( than2003 ) distances[i] = 10000000000.0;
 				else
 					distances[i] = sumt + (1.1 * suml) + (0.8 * sump);     //距離
@@ -193,9 +196,6 @@ public class Candi_get  extends HttpServlet{
 				}
 			}		
 
-
-			//登録
-//			String id = (String) session.getAttribute("mail");
 			
 			// 07月29日(金)の形でフォーマットする
 			SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日", Locale.JAPAN);//"MM月dd日(E) HH:mm:ss"
@@ -204,8 +204,10 @@ public class Candi_get  extends HttpServlet{
 			// dateString = "07月29日(金) 時刻"になっている
 			String dateString = format.format(calendar.getTime());
 
+			
+			//登録
+			
 			Candidate data = new Candidate( ur.getId(), dateString, String.valueOf(candi[0]), String.valueOf(candi[1]), String.valueOf(candi[2]) );
-
 
 			try {
 				pm.makePersistent(data);
