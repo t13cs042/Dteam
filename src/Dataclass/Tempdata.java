@@ -12,40 +12,68 @@ import javax.jdo.annotations.PrimaryKey;
 public class Tempdata {
 
 	// メンバ id はエンティティ（タプル）のキーである
-	@PrimaryKey
-	private Long id;
+	//@PrimaryKey
+	//@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
+	//private Long id;
 	
+	@PrimaryKey
+	private String datestring;
+	
+	@Persistent
+	private String mail;
+
+	@Persistent
+	private String date;
 	//気温
 	@Persistent
 	private double temp;
 
 	@Persistent
-	private Date date;
+	private int year;
+	
+	@Persistent
+	private int month;
+	
+	@Persistent
+	private int day;
 
-	public Tempdata(Long id, Date date, double d) {
-		this.id = id;
+	public Tempdata( String dateString, String mail, String date, double temp, String year, String month, String day) {
+		this.datestring = dateString;
+		this.mail = mail;
 		this.date = date;
-		this.temp = d;
+		this.temp = temp;
+		this.year = Integer.parseInt(year);
+		this.month = Integer.parseInt(month);
+		this.day = Integer.parseInt(day);
 	}
 
 	// ゲッタとセッタ
-	public Date getDate() {
-		return date;
-	}
+
 	public double gettemp() {
 		return temp;
 	}
-	public void setDate(Date date) {
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
 		this.date = date;
 	}
+
 	public void setContent(double temp) {
 		this.temp = temp;
 	}
-	public Long getId() {
-		return id;
+//	public Long getId() {
+//		return id;
+//	}
+//	public void setId(Long id) {
+//		this.id = id;
+//	}
+	public String getMail() {
+		return mail;
 	}
-	public void setId(Long id) {
-		this.id = id;
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
-
 }

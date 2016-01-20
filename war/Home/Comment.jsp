@@ -10,11 +10,15 @@
 
  <span style="font-size: 200%">ご要望</span>
   <form action="/new_comment" method="post">
-    <div>件名
+    <div>件名</div>
+    <div>
       <textarea name="sub" rows="1" cols="40" ></textarea>
-    </div>ご意見
+    </div>
+    <div>ご意見</div>
+    <div>
       <textarea name="content" rows="5" cols="40" ></textarea>
     <input type="submit" value="Submit" />
+    </div>
   </form>
 
 </body>

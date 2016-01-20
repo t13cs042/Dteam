@@ -5,7 +5,12 @@ import Dataclass.Tempdata;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
+
 import javax.jdo.PersistenceManager;
 import javax.servlet.http.*;
 
@@ -17,10 +22,24 @@ public class Newtemp extends HttpServlet {
 
 		resp.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = resp.getWriter();
+		
+		// 日本時間で日時を取得する
+		Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Tokyo"));
+		// 07月29日(金)の形でフォーマットする
+		SimpleDateFormat format = new SimpleDateFormat("yyyy年MM月dd日", Locale.JAPAN);//"MM月dd日(E) HH:mm:ss"
+		// フォーマット側のTimeZoneも日本にしておく
+		format.setTimeZone(TimeZone.getTimeZone("Asia/Tokyo"));
+		// dateString = "07月29日(金) 時刻"になっている
+		String dateString = format.format(calendar.getTime());
+		
+		String year = dateString.substring(0, 4);
+		String month = dateString.substring(5, 7);
+		String day = dateString.substring(8, 10);
+		
 		String temp = req.getParameter("temp");
 
 		HttpSession session = req.getSession(false);
-		Long id = (Long) session.getAttribute("id");
+		String mail = (String) session.getAttribute("mail");
 		
 		int error = 0;
 		if(temp == ""){
@@ -34,7 +53,7 @@ public class Newtemp extends HttpServlet {
 			error++;
 		}
 		if(error == 0){	
-			Tempdata data = new Tempdata(id, new Date(), Double.parseDouble(temp));
+			Tempdata data = new Tempdata(dateString + mail, mail, dateString, Double.parseDouble(temp),year,month,day);
 			PersistenceManager pm = PMF.get().getPersistenceManager();
 
 			try {
@@ -42,6 +61,8 @@ public class Newtemp extends HttpServlet {
 			} finally {
 				pm.close();
 			}
+			
+			out.println(year+month+day);
 			//resp.sendRedirect("/Home/Home_temp.jsp");
 			out.println("入力成功<br>");
 			out.println("<a href=\"Home/Home_temp.jsp\">戻る</a>");
