@@ -12,7 +12,46 @@
 	<title>新規登録画面</title>
 	</head>
 	<body>
+	  <% 
+  // エラー処理
+  	int error;
+	int error_2;
+	String str;
+	String str2;
+	try{
+		str = request.getParameter("Error");//256
+		str2 = request.getParameter("Error_2");//512
+		error = Integer.valueOf(str);
+		error_2 = Integer.valueOf(str2);
+	}catch(Exception e){
+		error = 0;
+		error_2 = 0;
+	}
+  %>
 		<!-- ブドウ収穫量予測システムのアカウント作成1 -->
+		<font color="red">
+  <%			if((error & 1) == 1){ %>※姓が未入力です。<br> 
+  <%			}if((error & 2) == 2){ %>※名が未入力です。<br> 
+  <%			}if((error & 4) == 4){ %>※メールアドレスが未入力です。<br> 
+  <%		   }if((error & 8) == 8){ %>※正しいメールアドレスを入力してください。<br>
+  <%		   }if((error & 16) == 16){ %>※そのメールアドレスは既に登録済みです。<br>
+  <%		   }if((error & 32) == 32){ %>※パスワードが未入力です。<br>
+  <%		   }if((error & 64) == 64){ %>※パスワードは半角英数字で入力してください。<br>
+  <%		   }if((error & 128) == 128){ %>※パスワード(再入力)が未入力です。<br>
+  <%		   }if((error & 256) == 256){ %>※パスワードが一致していません。もう一度入力してください。<br>
+  <%			}%>
+  <%			if((error_2 & 1) == 1){ %>※作付面積が未入力です。<br> 
+  <%			}if((error_2 & 2) == 2){ %>※作付面積は数値で入力してください。<br> 
+  <%			}if((error_2 & 4) == 4){ %>※収穫月が未入力です。<br> 
+  <%		   }if((error_2 & 8) == 8){ %>※収穫期間が長すぎます。<br>
+  <%		   }if((error_2 & 16) == 16){ %>※秘密の質問1が未入力です。<br>
+  <%		   }if((error_2 & 32) == 32){ %>※秘密の質問1の答えが未入力です。<br>
+  <%		   }if((error_2 & 64) == 64){ %>※秘密の質問2が未入力です。<br>
+  <%		   }if((error_2 & 128) == 128){ %>※秘密の質問2の答えが未入力です。<br>
+  <%		   }if((error_2 & 256) == 256){ %>※秘密の質問が長すぎます。<br>
+  <%			}%>
+  		</font>
+		
 		<form action="/newsignup" method="post">
 					名前<br>姓
 			<input type = "text" name="familyname" size="30" maxlength="27" >
