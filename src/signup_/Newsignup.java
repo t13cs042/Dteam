@@ -2,10 +2,13 @@ package signup_;
 
 import Dataclass.LoginDB;
 import Dataclass.PMF;
+import signup_.Encryption;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.jdo.PersistenceManager;
+import javax.jdo.Query;
 import javax.servlet.http.*;
 
 
@@ -30,62 +33,110 @@ public class Newsignup extends HttpServlet {
 
 		resp.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = resp.getWriter();
-		//out.println("aa<br>");
-
+		
 		int error = 0;
-		if(mail == ""){
-			out.println("メールアドレスが入力されていません<br>");
-			error++;
-		}
-		if(password == ""){
-			out.println("パスワードが入力されていません<br>");
-			error++;
-		}else if(password == pppassword){
-			out.println("パスワードが異なります<br>");
-			error++;
-		}
-		if(area == ""){
-			out.println("作付面積が入力されていません<br>");
-			error++;
-		}
-		if(start_month == "" || finish_month == ""){
-			out.println("収穫月が入力されていません<br>");
-			error++;
-		}
-		if(password.length() > 10){
-			out.println("パスワードが長すぎです<br>");
-			error++;
-		}
-		if(question1.length() > 500 || question1.length() > 500){
-			out.println("秘密の質問が長すぎです<br>");
-			error++;
-		}
+		// pm を用意
+		PersistenceManager	pm	= PMF.get().getPersistenceManager();
 		
-		
-		
-		
-		
-		
-		
-		
+		// クエリを作成
+		String query = "select from " + LoginDB.class.getName();
 
-		if(error == 0){
+		// ユーザデータを取得
+		List<LoginDB> users = (List<LoginDB>) pm.newQuery(query).execute();
+		
+		for(LoginDB user: users){
+			if(mail.equals( user.getMail() ) ){
+				//メールアドレスが既に登録されている
+				error += 16;
+			}
+				
+		}
+		
+		if(familyname.equals("")){
+			error += 1;	//未入力
+		}
+		if(firstname.equals("")){
+			error += 2;	//未入力
+		}
+		
+		if(mail.equals("")){
+			error += 4;	//メールアドレスが未入力
+		}else if(!mail.matches("^[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+(\\.[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+)*+(.*)@[a-zA-Z0-9][a-zA-Z0-9\\-]*(\\.[a-zA-Z0-9\\-]+)+$")){
+			error += 8;	//メールアドレスの形でない
+		}
+		if(password.equals("")){	//パスワードが未入力
+			error += 32;
+		}else if(!password.matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]{0,12}$")){
+			error += 64;	//パスワードの型が違う
+		}
+		if(pppassword.equals("")){
+			error += 128;	//パスワード(再入力)が未入力
+		}
+		if(!password.equals(pppassword)){
+			error += 256;	//パスワードが異なる
+		}
+		
+		int error_2 = 0;
+		if(area.equals("")){
+			error_2 += 1;//作付面積が未入力
+		}else if(!isNumber(area)){
+			error_2 += 2;	//作付面積が数値以外で入力
+		}
+		
+		if(start_month.equals("") || finish_month.equals("")){
+			error_2 += 4;//収穫月が未入力
+		}else if(Integer.parseInt(start_month) > Integer.parseInt(finish_month)){
+			if(Integer.parseInt(start_month) - Integer.parseInt(finish_month)+12 > 6)
+				error_2 += 8;	//"収穫期間が長すぎます
+		}else if(Integer.parseInt(start_month) < Integer.parseInt(finish_month)){
+			if(Integer.parseInt(finish_month) - Integer.parseInt(start_month) > 6)
+				error_2 += 8;	//収穫期間が長すぎます
+		}
+		
+		if(question1.equals("") == false && answer1.equals("") == true){
+			error_2 += 16;	//秘密の質問1が入力されていませ
+		}else if(question1.equals("") == true && answer1.equals("") == false){
+			error_2 += 32;	//秘密の質問1の答えが入力されていません
+		}
+		if(question2.equals("") == false && answer2.equals("") == true){
+			error_2 += 64;	//秘密の質問2が入力されていません
+		}else if(question2.equals("") == true && answer2.equals("") == false){
+			error_2 += 128;	//秘密の質問2の答えが入力されていません
+		}
+		if(question1.length() > 500 || question2.length() > 500){
+			error_2 += 256;	//秘密の質問が長すぎ
+		}
+		
+		int allerror = error + error_2;
 
-			LoginDB logindb = new LoginDB(familyname, firstname, mail, password, area, start_month,
+		// エラーがあったら登録不可
+		if(allerror != 0){
+			resp.sendRedirect("/signup/signup.jsp?Error=" + String.valueOf(error)
+					+ "&Error_2=" + error_2);
+		}else{
+			String pass = Encryption.getSaltedPassword(password, mail);
+			LoginDB logindb = new LoginDB(familyname, firstname, mail, pass, area, start_month,
 					finish_month,  question1,  answer1,  question2, answer2,0);
-			PersistenceManager pm = PMF.get().getPersistenceManager();
+			//PersistenceManager pm = PMF.get().getPersistenceManager();
 			try {
 				pm.makePersistent(logindb);
 			
 			} finally {
 				pm.close();
 			}
-			out.println("送信完了<br>");
+			resp.getWriter().print("アカウント作成しました。<br><br>");
+			//out.println("<a href=\"/signup/signup.jsp\">戻る</a>");
 			out.println("<a href=\"/Login/login.jsp\">戻る</a>");
 			//resp.sendRedirect("/Home/Comment.jsp");
-		}else
-			out.println("<a href=\"signup/signup.jsp\">戻る</a>");
-
-
+		}
+	}
+	
+	public boolean isNumber(String num) {
+	    try {
+	        Integer.parseInt(num);
+	        return true;
+	        } catch (NumberFormatException e) {
+	        return false;
+	    }
 	}
 }
