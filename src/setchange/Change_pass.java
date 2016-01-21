@@ -10,6 +10,7 @@ import javax.servlet.http.*;
 
 import Dataclass.LoginDB;
 import Dataclass.PMF;
+import signup_.Encryption;
 
 @SuppressWarnings("serial")
 public class Change_pass extends HttpServlet {
@@ -31,7 +32,9 @@ public class Change_pass extends HttpServlet {
 		
 		// jsp からのデータ
 		String	[] inputData	= new String[3]; // beforepass と afterpass と afterpass2
-
+		
+		
+		
 		// 登録エラー用のフラグ
 		int error = 0;
 		
@@ -58,7 +61,10 @@ public class Change_pass extends HttpServlet {
 				try{
 					query.setFilter("mail == '" + mail + "'" );
 					List<LoginDB> db =  (List<LoginDB>)pm.newQuery(query).execute();
-					if( !( db.get(0).getPassword().equals(inputData[0]) ) )
+					//String passBefore = Encryption.getSaltedPassword(db.get(0).getPassword(), db.get(0).getMail() );
+					String passInput = Encryption.getSaltedPassword(inputData[0], db.get(0).getMail() );
+					
+					if( !( db.get(0).getPassword().equals(passInput) ) )
 						error += 4;
 				}catch(Exception e){}
 			
@@ -91,8 +97,9 @@ public class Change_pass extends HttpServlet {
 				
 				List<LoginDB> db =  (List<LoginDB>)pm.newQuery(query).execute();
 				if(db.size() != 0){
-					db.get(0).setPassword(inputData[1]);
-					session.setAttribute("password", inputData[1]);
+					String pass = Encryption.getSaltedPassword(inputData[1], db.get(0).getMail() );
+					db.get(0).setPassword(pass);
+					session.setAttribute("password", pass);
 
 					resp.getWriter().print("パスワードの変更に成功しました。<br><br>");
 						
