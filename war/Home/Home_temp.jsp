@@ -1,21 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ page import="Dataclass.Climate"%>
+<%@ page import="Dataclass.Predict"%>
 <%@ page import="Dataclass.PMF"%>
 
 <%@ page import="javax.jdo.PersistenceManager"%>
 <%@ page import="javax.jdo.Query"%>
 <%@ page import="java.text.MessageFormat"%>
 <%@ page import="java.util.List"%>
+<%@ page import="java.util.ArrayList"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <title>home2</title>
 <body>
 
-<%String username = (String)session.getAttribute("familyname") + " " + (String)session.getAttribute("firstname"); %>
-	<span style="font-size: 200%">ようこそ<%=username%></span>
+	<%
+		String username = (String)session.getAttribute("familyname") + " " + (String)session.getAttribute("firstname");
+		
+			PersistenceManager pm = null;
+		
+		    pm = PMF.get().getPersistenceManager();
+		    Query query = pm.newQuery(Predict.class);
+		Long id = (Long)session.getAttribute("id");
+		    
+		    query.setFilter("id ==" + id );
+		    List<Predict> pre = (List<Predict>) query.execute(); 
+		String year = "2015";
+		ArrayList<Double> temp = pre.get(0).getTemp();
+	
+	%>
+	<span style="font-size: 200%">ようこそ<%=username%>さん</span>
 
 	<table border="1">
 		<tr>
@@ -32,20 +47,17 @@
 		google.setOnLoadCallback(drawChart);
 		function drawChart() {
 			var data = new google.visualization.DataTable();
-			data.addColumn('number', '月');
+			data.addColumn('string', '月');
 			data.addColumn('number', '気温');
-	<%PersistenceManager pm = null;
+
+			//data.addRows([ [ 1, 37.8 ], [ 2, 30.9 ], [ 3, 25.4 ], [ 4, 11.7 ],
+				//			[ 5, 20.9 ], ]);
 			
-			    pm = PMF.get().getPersistenceManager();
-			    Query query = pm.newQuery(Climate.class);
-			    List<Climate> pizzas = (List<Climate>) query.execute(); 
-			
-			String year = "2014/";
-			
-			for(int i = 1; i < 13; i++){%>
-		data.addRow(
-	<%}%>
-		);
+<% for(int i = 1; i < 13; i++){%>
+			data.addRow(['<%=String.valueOf(i)%>',<%=temp.get(i-1)%>]);
+
+			<%}%>
+
 			var options = {
 				chart : {
 					title : '気温'
@@ -69,15 +81,15 @@
 					<table border="3">
 						<tr>
 							<td>予測収穫量</td>
-							<td>xxxx</td>
+							<td><%=pre.get(0).getYield() %></td>
 						</tr>
 						<tr>
 							<td>最大収穫量</td>
-							<td>xxxx</td>
+							<td><%=pre.get(0).getMaxYield() %></td>
 						</tr>
 						<tr>
 							<td>最小収穫量</td>
-							<td>xxxx</td>
+							<td><%=pre.get(0).getMinYield() %></td>
 						</tr>
 					</table>
 				</td>

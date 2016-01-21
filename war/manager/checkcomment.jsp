@@ -21,8 +21,7 @@
 			Query query = pm.newQuery(Comment.class);
 			query.setOrdering("time asc");
 
-			List<Comment> comment = (List<Comment>) pm.newQuery(query)
-					.execute();
+			List<Comment> comment = (List<Comment>) pm.newQuery(query).execute();
 					
 		%>
 
