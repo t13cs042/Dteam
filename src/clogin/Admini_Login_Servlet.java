@@ -97,7 +97,7 @@ public class Admini_Login_Servlet extends HttpServlet {
 			
 			
 			if(error == 0){//エラーがないなら	
-				resp.sendRedirect("/manager/accountmanage.jsp");
+				resp.sendRedirect("/manager/managerwindow.jsp");
 			}
 			else{//エラーがあれば管理者ログイン画面へ
 				resp.sendRedirect("/Login/admin_login.jsp?Error=" + String.valueOf(error));

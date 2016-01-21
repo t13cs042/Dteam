@@ -35,11 +35,11 @@ public class C_loginServlet extends HttpServlet {
 		String adr = req.getParameter("address");
 		String pass = req.getParameter("password");
 		
-		
+		/*
 		String mailFormat = "^[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+(\\.[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+)*" +                                   
                 "@" +
                 "[a-zA-Z0-9][a-zA-Z0-9\\-]*(\\.[a-zA-Z0-9\\-]+)*$";
-		
+		*/
 		
 		PrintWriter out = resp.getWriter();
 		int error = 0;
@@ -52,15 +52,26 @@ public class C_loginServlet extends HttpServlet {
 			//パスワードが入力されていない
 			error += 2;
 		}
+		/*
 		if(adr.matches(mailFormat)){
 			//入力されたメールアドレスが正規表現にあっていないとき
 			error += 64;
 		}
-		
+		*/
 		String encryptedpass = Encryption.getSaltedPassword(pass, adr);
 		
+		System.out.println("mailAddress: " + adr);
+		System.out.println("Password: " + pass);
+		System.out.println("hashedPassword: " + encryptedpass);
+
+		
+		
+		
 		for(LoginDB ur : users){
-			if( adr.equals( ur.getMail() ) && encryptedpass.equals(ur.getPassword()) ){
+			System.out.println(ur.getMail());
+			System.out.println(ur.getPassword());
+			
+			if( adr.equals(ur.getMail()) && encryptedpass.equals(ur.getPassword()) ){
 				
 				int status = ur.getStatus();//ユーザ状態
 	

@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%@ page import="Dataclass.Predict"%>
+<%@ page import="Dataclass.PMF"%>
+
+<%@ page import="javax.jdo.PersistenceManager"%>
+<%@ page import="javax.jdo.Query"%>
+<%@ page import="java.text.MessageFormat"%>
+<%@ page import="java.util.List"%>
+<%@ page import="java.util.ArrayList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <title>home2</title>
@@ -8,6 +17,18 @@
 	<%
 		String name = (String) session.getAttribute("familyname")
 				+ (String) session.getAttribute("firstname");
+	
+	
+	PersistenceManager pm = null;
+
+    pm = PMF.get().getPersistenceManager();
+    Query query = pm.newQuery(Predict.class);
+Long id = (Long)session.getAttribute("id");
+    
+    query.setFilter("id ==" + id );
+    List<Predict> pre = (List<Predict>) query.execute(); 
+String year = "2015";
+ArrayList<Double> lay = pre.get(0).getLaytime();
 	%>
 
 
@@ -28,10 +49,17 @@
 		google.setOnLoadCallback(drawChart);
 		function drawChart() {
 			var data = new google.visualization.DataTable();
-			data.addColumn('number', 'Month');
+			data.addColumn('string', '月');
 			data.addColumn('number', '日射量');
-			data.addRows([ [ 1, 37.8 ], [ 2, 30.9 ], [ 3, 25.4 ], [ 4, 11.7 ],
-					[ 5, 20.9 ], ]);
+
+			//data.addRows([ [ 1, 37.8 ], [ 2, 30.9 ], [ 3, 25.4 ], [ 4, 11.7 ],
+				//			[ 5, 20.9 ], ]);
+			
+<% for(int i = 1; i < 13; i++){%>
+			data.addRow(['<%=String.valueOf(i)%>',<%=lay.get(i-1)%>]);
+
+			<%}%>
+
 			var options = {
 				chart : {
 					title : '日射量'
@@ -55,15 +83,15 @@
 					<table border="3">
 						<tr>
 							<td>予測収穫量</td>
-							<td>xxxx</td>
+							<td><%=pre.get(0).getYield() %></td>
 						</tr>
 						<tr>
 							<td>最大収穫量</td>
-							<td>xxxx</td>
+							<td><%=pre.get(0).getMaxYield() %></td>
 						</tr>
 						<tr>
 							<td>最小収穫量</td>
-							<td>xxxx</td>
+							<td><%=pre.get(0).getMinYield() %></td>
 						</tr>
 					</table>
 				</td>

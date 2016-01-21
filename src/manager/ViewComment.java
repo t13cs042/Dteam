@@ -20,7 +20,6 @@ public class ViewComment extends HttpServlet {
 		resp.getWriter().println("Hello, world");
 	}
 
-	@SuppressWarnings("unchecked")
 	public void doPost( HttpServletRequest req, HttpServletResponse resp ) throws IOException
 	{
 		resp.setContentType("text/html; charset=UTF-8");

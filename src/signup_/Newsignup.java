@@ -115,6 +115,12 @@ public class Newsignup extends HttpServlet {
 					+ "&Error_2=" + error_2);
 		}else{
 			String pass = Encryption.getSaltedPassword(password, mail);
+
+			System.out.println("new mailAddress: " + mail);
+			System.out.println("new Password: " + password);
+			System.out.println("new hashedPassword: " + pass);
+
+
 			LoginDB logindb = new LoginDB(familyname, firstname, mail, pass, area, start_month,
 					finish_month,  question1,  answer1,  question2, answer2,0);
 			//PersistenceManager pm = PMF.get().getPersistenceManager();
