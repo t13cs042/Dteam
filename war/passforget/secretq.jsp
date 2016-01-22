@@ -21,16 +21,16 @@
 	// 8 : 仮パスワード欄が未入力
 	//16 : 半角小文字で入力されていない 
     int error;
-	String str, petname, exname;
+	String str, qone, qtwo;
 	try{
 		str = request.getParameter("Error");
 		error = Integer.valueOf(str);
-		petname = request.getParameter("Petname");
-		exname = request.getParameter("Exname");
+		qone = request.getParameter("Qone");
+		qtwo = request.getParameter("Qtwo");
 	}catch(Exception e){
 		error = 0;
-		petname = "";
-		exname = "";
+		qone = "";
+		qtwo = "";
 	}
   %>
   
@@ -49,11 +49,11 @@
   </font>
 
 <div Align="center"/>
-  <p>最初に飼ったペットの名前は？<br>
-  <input type="text" id="petname"></p>
+  <p>一つ目の質問<br>
+  <input type="text" id="qone"></p>
   
-    <p>旧姓は？<br>
-  <input type="text" id="exname"></p>
+    <p>二つ目の質問<br>
+  <input type="text" id="qtwo"></p>
 
 <br><br> <input type="submit" value="送信" />
   </form>

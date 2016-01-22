@@ -9,12 +9,16 @@
  </head>
  <body>
  
-<div Align="center"/> <span style="font-size: 100%">パスワードを再設定するために下に登録メールを入力してください。</span>
+<div Align="center"/> <span style="font-size: 100%">パスワードを再設定するために下に登録メールを入力してください。</span><br>
+<br>
+    <form action="/passforget/secretq.jsp" method ="post">
+  <input type="text" id="mailadress" maxlength = "50" /></p>
 
-
-<br><br> <input type="submit" value="次へ" />
+<br><br> <input type="submit" value="次へ" /><br>
   </form>
+  
+  	<a href = "/Login/login.jsp">ログイン画面へ戻る</a>
+  
 </div>
-
   </body> 
 </html>

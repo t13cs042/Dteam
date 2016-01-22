@@ -125,6 +125,35 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 		<url-pattern>/c_administer</url-pattern>
 	</servlet-mapping>
 
+	<!-- Servlet Mapping passforget -->
+
+	<servlet>
+		<servlet-name>passforget</servlet-name>
+		<servlet-class>passforget.passforget</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>passforget</servlet-name>
+		<url-pattern>/passforget</url-pattern>
+	</servlet-mapping>
+	
+		<servlet>
+		<servlet-name>passrest</servlet-name>
+		<servlet-class>passforget.passreset</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>passreset</servlet-name>
+		<url-pattern>/passreset</url-pattern>
+	</servlet-mapping>
+	
+		<servlet>
+		<servlet-name>secretq</servlet-name>
+		<servlet-class>passforget.secretq</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>secretq</servlet-name>
+		<url-pattern>/secretq</url-pattern>
+	</servlet-mapping>
+
 	<!-- Servlet Mapping manager -->
 
 	<servlet>
