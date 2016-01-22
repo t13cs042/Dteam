@@ -41,9 +41,8 @@
   <%		   }if((error & 256) == 256){ %>※パスワードが一致していません。もう一度入力してください。<br>
   <%			}%>
   <%			if((error_2 & 1) == 1){ %>※作付面積が未入力です。<br> 
-  <%			}if((error_2 & 2) == 2){ %>※作付面積は数値で入力してください。<br> 
-  <%			}if((error_2 & 4) == 4){ %>※収穫月が未入力です。<br> 
-  <%		   }if((error_2 & 8) == 8){ %>※収穫期間が長すぎます。<br>
+  <%			}if((error_2 & 2) == 2){ %>※収穫月が未入力です。<br> 
+  <%			}if((error_2 & 4) == 4){ %>※収穫期間が長すぎます。<br> 
   <%		   }if((error_2 & 16) == 16){ %>※秘密の質問1が未入力です。<br>
   <%		   }if((error_2 & 32) == 32){ %>※秘密の質問1の答えが未入力です。<br>
   <%		   }if((error_2 & 64) == 64){ %>※秘密の質問2が未入力です。<br>
@@ -99,17 +98,14 @@
 			</select>月まで
 			
 			<br>秘密の質問１ (例)最初に飼ったペットの名前は？<br>
-			<textarea name="question1" rows="1" cols="50" >
-			</textarea>
+			<textarea name="question1" rows="1" cols="50" ></textarea>
 			<br>秘密の質問１の答え (例)タマ<br>
-			<textarea name="answer1" rows="1" cols="50" >
-			</textarea>
+			<textarea name="answer1" rows="1" cols="50" ></textarea>
 			<br>秘密の質問２ (例)旧姓は？<br>
-			<textarea name="question2" rows="1" cols="50" >
-			</textarea>
-			<br>秘密の質問２の答え (例)山梨 花子<br></font>
+			<textarea name="question2" rows="1" cols="50" ></textarea>
+			<br>秘密の質問２の答え (例)山梨 花子<br>
 			<textarea name="answer2" rows="1" cols="50" ></textarea><br><br>
-			<center><input type="submit" value="登録" ></center>
+			<center><input type="submit" value="登録" ></center></font>
 		</form>
 	</body>
 </html>
