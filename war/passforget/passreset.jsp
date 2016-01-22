@@ -23,16 +23,16 @@
 	// 8 : 仮パスワード欄が未入力
 	//16 : 半角小文字で入力されていない 
     int error;
-	String str, petname, exname;
+	String str, pass, repass;
 	try{
 		str = request.getParameter("Error");
 		error = Integer.valueOf(str);
-		petname = request.getParameter("Petname");
-		exname = request.getParameter("Exname");
+		pass = request.getParameter("Pass");
+		repass = request.getParameter("Repass");
 	}catch(Exception e){
 		error = 0;
-		petname = "";
-		exname = "";
+		pass = "";
+		repass = "";
 	}
   %>
   
@@ -41,12 +41,12 @@
   
   <form action = "/change_address" method = "post">
   <font color="red">
-  <%			if((error & 16) == 16){ %>   ※ 変更前のメールアドレスが未入力です。<br> 
-  <%			}if((error & 2) == 2){ %>	※ 半角小文字で再入力して下さい。<br> 
-  <%			}if((error & 4) == 4){ %> ※このアドレスは登録されていません。<br> 
-  <%		   }if((error & 32) == 32){ %> ※新しいメールアドレスが未入力です。<br>
-  <%		   }if((error & 64) == 64){ %> ※新しいメールアドレス(確認用)が未入力です。<br>
-  <%		   }if((error & 1) == 1){ %> ※新しいメールアドレスが一致していません。 もう一度入力してください。<br>
+  <%			if((error & 16) == 16){ %>   ※<br> 
+  <%			}if((error & 2) == 2){ %>	※ 半角英数字、１２文字以内で再入力して下さい。<br> 
+  <%			}if((error & 4) == 4){ %> ※<br> 
+  <%		   }if((error & 32) == 32){ %> ※新しいパスワードが未入力です。<br>
+  <%		   }if((error & 64) == 64){ %> ※パスワードの再入力が未入力です。<br>
+  <%		   }if((error & 1) == 1){ %> ※新しいパスワードが一致していません。 もう一度入力してください。<br>
    <%			} %>
   </font>
 
@@ -56,10 +56,10 @@
 新しいパスワードを入力してください。<br><br><br>
 
   <p>新しいパスワード(半角英数字、12文字以内)<br><br>
-  <input type="text" id="petname"></p>
+  <input type="text" id="pass"></p>
   
     <p>パスワードの再入力<br><br>
-  <input type="text" id="exname"></p>
+  <input type="text" id="repass"></p>
 
 <br><br> <input type="submit" value="送信" />
   </form>
