@@ -51,7 +51,7 @@ public class Newsignup extends HttpServlet {
 			}
 				
 		}
-		
+
 		if(familyname.equals("")){
 			error += 1;	//未入力
 		}
@@ -79,30 +79,32 @@ public class Newsignup extends HttpServlet {
 		int error_2 = 0;
 		if(area.equals("")){
 			error_2 += 1;//作付面積が未入力
-		}else if(!isNumber(area)){
-			error_2 += 2;	//作付面積が数値以外で入力
 		}
 		
 		if(start_month.equals("") || finish_month.equals("")){
-			error_2 += 4;//収穫月が未入力
+			error_2 += 2;//収穫月が未入力
 		}else if(Integer.parseInt(start_month) > Integer.parseInt(finish_month)){
 			if(Integer.parseInt(start_month) - Integer.parseInt(finish_month)+12 > 6)
-				error_2 += 8;	//"収穫期間が長すぎます
+				error_2 += 4;	//"収穫期間が長すぎます
 		}else if(Integer.parseInt(start_month) < Integer.parseInt(finish_month)){
 			if(Integer.parseInt(finish_month) - Integer.parseInt(start_month) > 6)
-				error_2 += 8;	//収穫期間が長すぎます
+				error_2 += 4;	//収穫期間が長すぎます
 		}
 		
-		if(question1.equals("") == false && answer1.equals("") == true){
-			error_2 += 16;	//秘密の質問1が入力されていませ
-		}else if(question1.equals("") == true && answer1.equals("") == false){
-			error_2 += 32;	//秘密の質問1の答えが入力されていません
+		if(question1.equals("")){//秘密の質問1が未入力
+			if(!answer1.equals(""))
+				error_2 += 16;
+		}else{//秘密の質問1の答えが未入力
+			if(answer1.equals(""))
+				error_2 += 32;
 		}
-		if(question2.equals("") == false && answer2.equals("") == true){
-			error_2 += 64;	//秘密の質問2が入力されていません
-		}else if(question2.equals("") == true && answer2.equals("") == false){
-			error_2 += 128;	//秘密の質問2の答えが入力されていません
-		}
+		if(question2.equals("")){//秘密の質問2が未入力
+			if(!answer2.equals(""))
+				error_2 += 64;
+		}else{//秘密の質問2の答えが未入力
+			if(answer2.equals(""))
+				error_2 += 128;
+		}		
 		if(question1.length() > 500 || question2.length() > 500){
 			error_2 += 256;	//秘密の質問が長すぎ
 		}
@@ -112,15 +114,9 @@ public class Newsignup extends HttpServlet {
 		// エラーがあったら登録不可
 		if(allerror != 0){
 			resp.sendRedirect("/signup/signup.jsp?Error=" + String.valueOf(error)
-					+ "&Error_2=" + error_2);
+					+ "&Error_2=" + String.valueOf(error_2));
 		}else{
 			String pass = Encryption.getSaltedPassword(password, mail);
-
-			System.out.println("new mailAddress: " + mail);
-			System.out.println("new Password: " + password);
-			System.out.println("new hashedPassword: " + pass);
-
-
 			LoginDB logindb = new LoginDB(familyname, firstname, mail, pass, area, start_month,
 					finish_month,  question1,  answer1,  question2, answer2,0);
 			//PersistenceManager pm = PMF.get().getPersistenceManager();
