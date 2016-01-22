@@ -75,7 +75,7 @@ int finish = Integer.parseInt(finish_month);
 			
 			if(flag){
 	%>
-	<div>収穫月</div>
+	<div>今月は収穫月です！頑張りましょう！</div>
 
 
 	<%
