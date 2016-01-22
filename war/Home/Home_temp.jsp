@@ -9,6 +9,10 @@
 <%@ page import="java.text.MessageFormat"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.ArrayList"%>
+<%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import="java.util.Calendar"%>
+<%@ page import="java.util.Locale"%>
+<%@ page import="java.util.TimeZone"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -17,7 +21,8 @@
 
 	<%
 		String username = (String)session.getAttribute("familyname") + " " + (String)session.getAttribute("firstname");
-		
+	String start_month = (String) session.getAttribute("start_month");
+	String finish_month = (String) session.getAttribute("finish_month");
 			PersistenceManager pm = null;
 		
 		    pm = PMF.get().getPersistenceManager();
@@ -29,8 +34,49 @@
 		String year = "2015";
 		ArrayList<Double> temp = pre.get(0).getTemp();
 	
+		// 日本時間で日時を取得する
+		Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Tokyo"));
+		// 07月29日(金)の形でフォーマットする
+		SimpleDateFormat format = new SimpleDateFormat("MM", Locale.JAPAN);//"MM月dd日(E) HH:mm:ss"
+		// フォーマット側のTimeZoneも日本にしておく
+		format.setTimeZone(TimeZone.getTimeZone("Asia/Tokyo"));
+		// dateString = "07月29日(金) 時刻"になっている
+		String dateString = format.format(calendar.getTime());
+		
+		int month = Integer.parseInt(dateString);
+		int start = Integer.parseInt(start_month);
+		int finish = Integer.parseInt(finish_month);
 	%>
 	<span style="font-size: 200%">ようこそ<%=username%>さん</span>
+
+<%
+		boolean flag = false;
+		
+		if(start == month || finish == month)
+			flag = true;
+
+		int j = start;
+		
+		while(j != finish){
+			if(j == month){
+		flag = true;
+		break;
+			}
+			j++;
+			if(j > 12)
+		j = 0;
+		}
+		
+		if(flag){
+	%>
+	<div>収穫月</div>
+
+
+	<%
+		}
+	%>
+
+
 
 	<table border="1">
 		<tr>
