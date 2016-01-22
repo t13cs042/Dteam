@@ -1,5 +1,6 @@
 package NewData;
 
+
 import Dataclass.Comment;
 import Dataclass.PMF;
 
@@ -38,19 +39,19 @@ public class NewComment extends HttpServlet {
 		int error = 0;
 		if(sub == ""){
 			out.println("件名が入力されていません<br>");
-			error++;
+			error += 1;
 		}
 		if(content == ""){
 			out.println("本文が入力されていません<br>");
-			error++;
+			error += 2;
 		}
 		if(sub.length() > 50){
 			out.println("件名が長すぎです<br>");
-			error++;
+			error += 4;
 		}
 		if(content.length() > 500){
 			out.println("本文が長すぎです<br>");
-			error++;
+			error += 8;
 		}
 		if(error == 0){
 			Comment comment = new Comment(address, sub, content, dateString);
@@ -66,5 +67,36 @@ public class NewComment extends HttpServlet {
 			//resp.sendRedirect("/Home/Comment.jsp");
 		}else
 			out.println("<a href=\"Home/Comment.jsp\">戻る</a>");
+	}
+	
+	public int checkerror(String sub, String content){
+		int error = 0;
+		if(sub == ""){
+			//out.println("件名が入力されていません<br>");
+			error += 1;
+		}
+		if(content == ""){
+			//out.println("本文が入力されていません<br>");
+			error += 2;
+		}
+		if(sub.length() > 50){
+			//out.println("件名が長すぎです<br>");
+			error += 4;
+		}
+		if(content.length() > 500){
+			//out.println("本文が長すぎです<br>");
+			error += 8;
+		}	
+		return error;
+		
+	}
+	
+	public boolean test(){
+		try{
+
+		return true;
+		}catch(Exception e){
+		return false;
+		}
 	}
 }
