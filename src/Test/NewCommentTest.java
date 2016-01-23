@@ -1,4 +1,4 @@
-package NewData;
+package Test;
 
 
 import static org.junit.Assert.*;
@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import Dataclass.Comment;
 import Dataclass.PMF;
+import NewData.NewComment;
 
 public class NewCommentTest {
 
@@ -42,12 +43,5 @@ public class NewCommentTest {
 		assertEquals(com.checkerror("a", str2), 8);//本文の500文字制限のチェック(501文字の場合)
 			
 	}
-	
-	@Test
-	public void test() {
-		Comment comment = new Comment("", "", "", "");
 
-		PersistenceManager pm = PMF.get().getPersistenceManager();
-		pm.makePersistent(comment);
-	}
 }
