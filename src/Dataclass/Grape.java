@@ -13,7 +13,7 @@ public class Grape {
 	@PrimaryKey
 	private String date;
 
-	//気温
+	//収穫量
 	@Persistent 
 	private double num;
 

@@ -44,13 +44,13 @@ public class Newtemp extends HttpServlet {
 		int error = 0;
 		if(temp == ""){
 			out.println("値が入力されていません<br>");
-			error++;
+			error+=1;
 		}else if(isNumber(temp)){
 			out.println("数値を入力してください<br>");
-			error++;
+			error+=2;
 		}else if(Double.parseDouble(temp) < -30 || Double.parseDouble(temp) > 50){
 			out.println("無効な数値です<br>");
-			error++;
+			error+=4;
 		}
 		if(error == 0){	
 			Tempdata data = new Tempdata(dateString + mail, mail, dateString, Double.parseDouble(temp),year,month,day);
@@ -77,5 +77,19 @@ public class Newtemp extends HttpServlet {
 		} catch (NumberFormatException e) {
 			return true;
 		}
+	}
+	
+	public int checkerror(String temp){
+		int error = 0;
+		
+		if(temp == ""){
+			error+=1;
+		}else if(isNumber(temp)){
+			error+=2;
+		}else if(Double.parseDouble(temp) < -30 || Double.parseDouble(temp) > 50){
+			error+=4;
+		}
+		return error;
+		
 	}
 }

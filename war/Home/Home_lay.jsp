@@ -16,7 +16,7 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<title>home2</title>
+<title>ホーム</title>
 <body>
 
 	<%
@@ -53,8 +53,8 @@ int finish = Integer.parseInt(finish_month);
 
 	<span style="font-size: 200%">ようこそ<%=name%>さん
 	</span>
-	
-	
+
+
 	<%
 		boolean flag = false;
 			
@@ -75,13 +75,14 @@ int finish = Integer.parseInt(finish_month);
 			
 			if(flag){
 	%>
-	<div>今月は収穫月です！頑張りましょう！</div>
-
+	<font color="red" size="150%" >
+		<div>今月は収穫月です！頑張りましょう！</div>
+	</font>
 
 	<%
 		}
 	%>
-	
+
 	<table border="1">
 		<tr>
 			<td><a href="Home_temp.jsp">気温</a></td>
@@ -131,15 +132,15 @@ int finish = Integer.parseInt(finish_month);
 					<table border="3">
 						<tr>
 							<td>予測収穫量</td>
-							<td><%=pre.get(0).getYield() %></td>
+							<td><%=pre.get(0).getYield() %>(kg)</td>
 						</tr>
 						<tr>
 							<td>最大収穫量</td>
-							<td><%=pre.get(0).getMaxYield() %></td>
+							<td><%=pre.get(0).getMaxYield() %>(kg)</td>
 						</tr>
 						<tr>
 							<td>最小収穫量</td>
-							<td><%=pre.get(0).getMinYield() %></td>
+							<td><%=pre.get(0).getMinYield() %>(kg)</td>
 						</tr>
 					</table>
 				</td>

@@ -16,11 +16,11 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<title>home2</title>
+<title>ホーム</title>
 <body>
 
 	<%
-		String username = (String)session.getAttribute("familyname") + " " + (String)session.getAttribute("firstname");
+		String username = (String)session.getAttribute("familyname") +  (String)session.getAttribute("firstname");
 	String start_month = (String) session.getAttribute("start_month");
 	String finish_month = (String) session.getAttribute("finish_month");
 			PersistenceManager pm = null;
@@ -69,9 +69,9 @@
 		
 		if(flag){
 	%>
-	<div>今月は収穫月です！頑張りましょう！</div>
-
-
+<font color="red" size="150%" >
+		<div>今月は収穫月です！頑張りましょう！</div>
+	</font>
 	<%
 		}
 	%>
@@ -127,15 +127,15 @@
 					<table border="3">
 						<tr>
 							<td>予測収穫量</td>
-							<td><%=pre.get(0).getYield() %></td>
+							<td><%=pre.get(0).getYield() %>(kg)</td>
 						</tr>
 						<tr>
 							<td>最大収穫量</td>
-							<td><%=pre.get(0).getMaxYield() %></td>
+							<td><%=pre.get(0).getMaxYield() %>(kg)</td>
 						</tr>
 						<tr>
 							<td>最小収穫量</td>
-							<td><%=pre.get(0).getMinYield() %></td>
+							<td><%=pre.get(0).getMinYield() %>(kg)</td>
 						</tr>
 					</table>
 				</td>

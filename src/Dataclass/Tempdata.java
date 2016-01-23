@@ -16,24 +16,30 @@ public class Tempdata {
 	//@Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
 	//private Long id;
 	
+	//主キー日にち＋アドレス
 	@PrimaryKey
 	private String datestring;
 	
+	//メールアドレス
 	@Persistent
 	private String mail;
 
+	//日付
 	@Persistent
 	private String date;
 	//気温
 	@Persistent
 	private double temp;
 
+	//年
 	@Persistent
 	private int year;
 	
+	//月
 	@Persistent
 	private int month;
 	
+	//日
 	@Persistent
 	private int day;
 
