@@ -114,16 +114,6 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	</servlet-mapping>
 
 
-	<!-- Servlet Mapping administer -->
-
-	<servlet>
-		<servlet-name>C_administer</servlet-name>
-		<servlet-class>administer.C_administerServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>C_administer</servlet-name>
-		<url-pattern>/c_administer</url-pattern>
-	</servlet-mapping>
 
 	<!-- Servlet Mapping passforget -->
 
@@ -261,7 +251,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 
 	<!-- Servlet Mapping welcome-file -->
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>Login/login.jsp</welcome-file>
 	</welcome-file-list>
 
 </web-app>
