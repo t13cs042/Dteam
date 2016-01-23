@@ -97,7 +97,7 @@
 		function drawChart() {
 			var data = new google.visualization.DataTable();
 			data.addColumn('string', '月');
-			data.addColumn('number', '降水量');
+			data.addColumn('number', '降水量(mm)');
 
 			//data.addRows([ [ 1, 37.8 ], [ 2, 30.9 ], [ 3, 25.4 ], [ 4, 11.7 ],
 				//			[ 5, 20.9 ], ]);

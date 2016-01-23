@@ -29,10 +29,10 @@ public class File_up extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		
+
 		ServletFileUpload fileUpload = new ServletFileUpload();
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		
+
 
 
 		try {
@@ -71,9 +71,9 @@ public class File_up extends HttpServlet {
 							// csvから単語の取り出し
 							String date = split[0].trim();
 							String temp = split[1].trim();
-							String laytime = split[2].trim();
-							String prec = split[3].trim();
-							
+							String prec = split[2].trim();
+							String laytime = split[3].trim();
+
 							if (split != null && split.length != 0) {
 
 								// 登録するモデル

@@ -99,7 +99,7 @@ int finish = Integer.parseInt(finish_month);
 		function drawChart() {
 			var data = new google.visualization.DataTable();
 			data.addColumn('string', '月');
-			data.addColumn('number', '日射量');
+			data.addColumn('number', '日射量(時間)');
 
 			//data.addRows([ [ 1, 37.8 ], [ 2, 30.9 ], [ 3, 25.4 ], [ 4, 11.7 ],
 				//			[ 5, 20.9 ], ]);
