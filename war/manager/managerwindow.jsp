@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%@ page import="Dataclass.Predict"%>
+<%@ page import="Dataclass.PMF"%>
+
+<%@ page import="javax.jdo.PersistenceManager"%>
+<%@ page import="javax.jdo.Query"%>
+<%@ page import="java.util.List"%>
+<%@ page import="java.util.ArrayList"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -8,6 +17,16 @@
 <title>管理</title>
 </head>
 <body>
+
+	<%
+		PersistenceManager pm = null;
+		pm = PMF.get().getPersistenceManager();
+		Query query = pm.newQuery(Predict.class);
+
+		List<Predict> pre = (List<Predict>) query.execute();
+		String year = "2015";
+		String date = pre.get(0).getDate();
+	%>
 
 	<div Align="center" />
 	<br>
@@ -36,7 +55,7 @@
 	<br>
 	<br>
 	<br>
-	<span style="font-size: 100%">予測の最終実行日時：X月X日 XX：XX</span>
+	<span style="font-size: 100%">予測の最終実行日：<%=date %></span>
 	</div>
 
 </body>
