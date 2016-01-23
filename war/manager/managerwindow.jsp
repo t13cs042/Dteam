@@ -19,13 +19,18 @@
 <body>
 
 	<%
+	String date = "実行されていません";
+	try{
 		PersistenceManager pm = null;
 		pm = PMF.get().getPersistenceManager();
 		Query query = pm.newQuery(Predict.class);
 
 		List<Predict> pre = (List<Predict>) query.execute();
 		String year = "2015";
-		String date = pre.get(0).getDate();
+		date = pre.get(0).getDate();
+	}catch(Exception e){
+		
+	}
 	%>
 
 	<div Align="center" />
