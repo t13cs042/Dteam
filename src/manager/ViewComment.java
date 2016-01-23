@@ -42,7 +42,7 @@ public class ViewComment extends HttpServlet {
 			//return;
 		}
 		out.print("件名:" + comment.getSub() + "<br>");
-		out.print("From:"+comment.getSub() + "<br><br>");
+		out.print("From:"+comment.getAddress() + "<br><br>");
 		out.print("本文: <br>" + comment.getComment() + "<br>");
 		
 	}

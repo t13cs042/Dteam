@@ -36,7 +36,7 @@
 		<tr>
 			<td>名前:<%=ur.getFamilyname() + ur.getfirstname() %></td>
 			<td>
-				<form action="/accountmanage" method="post" style="display: inline">
+				<form action="/manager/Confirm_Delete.jsp?state=2&mail=<%=ur.getMail()%>" method="post" style="display: inline">
 					<input type="hidden" name="state" value=2> <input
 						type="hidden" name="mail" value="<%=ur.getMail()%>"> <input
 						type="submit" value="停止">
@@ -57,7 +57,7 @@
 		<tr>
 			<td>名前:<%=ur.getFamilyname() + ur.getfirstname() %></td>
 			<td>
-				<form action="/accountmanage" method="post" style="display: inline">
+				<form action="/manager/Confirm_Delete.jsp?state=1&mail=<%=ur.getMail()%>" method="post" style="display: inline">
 					<input type="hidden" name="state" value=1> <input
 						type="hidden" name="mail" value="<%=ur.getMail()%>"> <input
 						type="submit" value="解除">
