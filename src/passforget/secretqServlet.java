@@ -33,71 +33,45 @@ public class secretqServlet extends HttpServlet {
 
 		HttpSession session = req.getSession(true);
 
-		String adr = req.getParameter("address");
-		//String pass = req.getParameter("password");
-		
+		String q1 = req.getParameter("q1");
+		String q2 = req.getParameter("q2");
 		
 		String mailFormat = "^[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+(\\.[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+)*" +                                   
                 "@" +
                 "[a-zA-Z0-9][a-zA-Z0-9\\-]*(\\.[a-zA-Z0-9\\-]+)*$";
 		
+		String address = (String)req.getParameter("address");
 		
 		PrintWriter out = resp.getWriter();
 		int error = 0;
 		
-		if(adr.equals("")){
+		//if(adr.equals("")){
 			//メールアドレスが入力されていない
-			error += 1;
-		}
+			//error += 1;
+		//}
 		//if(pass.equals("")){
 			//パスワードが入力されていない
 			//error += 2;
 		//}
-		if(adr.matches(mailFormat)){
+		//if(adr.matches(mailFormat)){
 			//入力されたメールアドレスが正規表現にあっていないとき
-			error += 64;
-		}
+			//error += 64;
+		//}
 		
 		//String encryptedpass = Encryption.getSaltedPassword(pass, adr);
 		
+		String ans1="",ans2="";
+		
 		for(LoginDB ur : users){
 			//if( adr.equals( ur.getMail() ) && encryptedpass.equals(ur.getPassword()) ){
-			if( adr.equals( ur.getMail()) ){
-				
-				int status = ur.getStatus();//ユーザ状態
-	
-				if(status == 0){
-					//アカウントが未認証の場合
-					error += 4;
-				}
-				
-				else if(status == 1){//ユーザが認証されているなら
-					
-					session.setAttribute("id",             ur.getId() );
-					session.setAttribute("familyname",     ur.getFamilyname());
-					session.setAttribute("firstname",      ur.getfirstname());
-					session.setAttribute("mail",           ur.getMail());
-					session.setAttribute("password",       ur.getPassword());
-					session.setAttribute("area",           ur.getArea());
-					session.setAttribute("start_month",    ur.getStart_month());
-					session.setAttribute("finish_month",   ur.getFinish_month());
-					session.setAttribute("question1",      ur.getQuestion1());
-					session.setAttribute("question2",      ur.getQuestion2());
-					session.setAttribute("answer1",        ur.getAnswer1());
-					session.setAttribute("answer2",        ur.getAnswer2());
-					session.setAttribute("status",         ur.getStatus());
-					
-				}
-				else if(status == 2){
-					//アカウントが停止されている
-					error += 8;
-					
-				}
-				else if(status == 4){
-					//管理者の場合
-					error += 16;
-					
-				}
+			if( address.equals( ur.getMail()) ){
+				ans1=ur.getAnswer1();
+				ans2=ur.getAnswer2();
+				req.setAttribute("address", address);//add
+				//System.out.println("ans1=" + ans1);
+				//System.out.println("ans2=" + ans2);
+				//System.out.println("q1=" + q1);
+				//System.out.println("q2=" + q2);
 				break;
 			}
 			if( ur.equals(users.get( users.size()-1 )) ){
@@ -106,8 +80,18 @@ public class secretqServlet extends HttpServlet {
 				
 			}
 		}
+		
+		if(q1.equals(ans1) && q2.equals(ans2)){
+			resp.sendRedirect("/passforget/passreset.jsp");
+		}
+		
 		if(error == 0){
-			resp.sendRedirect("/passforget/secretq.jsp");	   
+			
+			//resp.sendRedirect("/passforget/secretq.jsp");
+			//add
+			// passreset.jspへ遷移
+			RequestDispatcher dispatcher = req.getRequestDispatcher("/passforget/passreset.jsp");
+            dispatcher.forward(req, resp);
 		}
 		else {
 			resp.sendRedirect("/passforget/passforget.jsp?Error=" + String.valueOf(error));

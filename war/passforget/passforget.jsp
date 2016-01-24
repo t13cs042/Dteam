@@ -11,8 +11,8 @@
  
 <div Align="center"/> <span style="font-size: 100%">パスワードを再設定するために下に登録メールを入力してください。</span><br>
 <br>
-    <form action="/passforget/secretq.jsp" method ="post">
-  <input type="text" id="mailadress" maxlength = "50" /></p>
+    <form action="/passforget" method ="post">
+  <input type="text" name="address" maxlength = "50" /></p>
 
 <br><br> <input type="submit" value="次へ" /><br>
   </form>
