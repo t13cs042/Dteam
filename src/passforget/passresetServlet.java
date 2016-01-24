@@ -1,3 +1,4 @@
+//setchange Change_pass.javaを引用
 package passforget;
 
 import java.io.IOException;
@@ -10,8 +11,7 @@ import javax.servlet.http.*;
 
 import Dataclass.LoginDB;
 import Dataclass.PMF;
-
-//setchange Change_pass.javaを引用
+import signup_.Encryption;
 
 @SuppressWarnings("serial")
 public class passresetServlet extends HttpServlet {
@@ -28,12 +28,15 @@ public class passresetServlet extends HttpServlet {
 		resp.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = resp.getWriter();
 		
-		HttpSession session = req.getSession(false);
-		String mail = (String)session.getAttribute("mail");
+		//HttpSession session = req.getSession(false);
+		//String mail = (String)session.getAttribute("mail");
+		//String mail = req.getParameter("mail");//add
 		
 		// jsp からのデータ
-		String	[] inputData	= new String[3]; // beforepass と afterpass と afterpass2
-
+		String	[] inputData	= new String[2]; // beforepass と afterpass と afterpass2
+		
+		
+		
 		// 登録エラー用のフラグ
 		int error = 0;
 		
@@ -42,11 +45,14 @@ public class passresetServlet extends HttpServlet {
 		//Queryを用意
 		Query query = pm.newQuery(LoginDB.class);
 		
+		
 		try{
-			inputData[0] = req.getParameter("before");
-			inputData[1] = req.getParameter("after1");
-			inputData[2] = req.getParameter("after2");
-
+			//inputData[0] = req.getParameter("before");
+			
+			inputData[0] = req.getParameter("after1");
+			inputData[1] = req.getParameter("after2");
+			String address = req.getParameter("address");//add
+			System.out.println("input[0]=" + inputData[0]);
 			// ID欄が入力されているかチェック
 			if(inputData[0].equals("")){
 				error += 16;
@@ -57,44 +63,50 @@ public class passresetServlet extends HttpServlet {
 			}
 			else{
 				// パスワードが正しいかチェック
-				try{
+				/*try{
 					query.setFilter("mail == '" + mail + "'" );
 					List<LoginDB> db =  (List<LoginDB>)pm.newQuery(query).execute();
-					if( !( db.get(0).getPassword().equals(inputData[0]) ) )
+					//String passBefore = Encryption.getSaltedPassword(db.get(0).getPassword(), db.get(0).getMail() );
+					String passInput = Encryption.getSaltedPassword(inputData[0], db.get(0).getMail() );
+					
+					if( !( db.get(0).getPassword().equals(passInput) ) )
 						error += 4;
 				}catch(Exception e){}
-			
+			*/
 			
 			}
 			
 			// afterMailが入力されているかチェック
-			if(inputData[1].equals("")){
+			if(inputData[0].equals("")){//was1
 				error +=32;
 			}
 			
-			if(inputData[2].equals("")){
+			if(inputData[1].equals("")){//was2
 				error += 64;
 			}
 
-			if( !inputData[1].equals(inputData[2]) ){
+			if( !inputData[0].equals(inputData[1]) ){//was1 2
 				error += 1;
 			}
 			
 			// エラーがあったら登録不可
 			if(error != 0){
-				resp.sendRedirect("/settingchange/change_pass.jsp?Error=" + String.valueOf(error)
+				resp.sendRedirect("/passforget/passreset.jsp?Error=" + String.valueOf(error)
 						+ "&Before=" + inputData[0] + "&After=" + inputData[1]);
 			}else{
 
 				
 
 				// データ変更
-				query.setFilter("mail ==" + "'" + mail + "'");
+				query.setFilter("address ==" + "'" + address + "'");
 				
 				List<LoginDB> db =  (List<LoginDB>)pm.newQuery(query).execute();
 				if(db.size() != 0){
-					db.get(0).setPassword(inputData[1]);
-					session.setAttribute("password", inputData[1]);
+					String pass = Encryption.getSaltedPassword(inputData[0], db.get(0).getMail() );//was[1]
+					db.get(0).setPassword(pass);
+					//session.setAttribute("password", pass);
+					
+					req.setAttribute("address", address);//add
 
 					resp.getWriter().print("パスワードの変更に成功しました。<br><br>");
 						
@@ -102,7 +114,7 @@ public class passresetServlet extends HttpServlet {
 					resp.getWriter().print("パスワードの変更に失敗しました。<br><br>");
 				}
 				
-				out.println("<a href=\"settingchange/setting.jsp\">設定画面へ戻る</a><br><br>");			
+				out.println("<a href=\"passforget/passforget.jsp\">設定画面へ戻る</a><br><br>");			
 				out.println("<a href=\"Home/Home_temp.jsp\">ホーム画面へ戻る</a><br>");	
 				
 				
