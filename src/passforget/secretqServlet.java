@@ -45,14 +45,14 @@ public class secretqServlet extends HttpServlet {
 		PrintWriter out = resp.getWriter();
 		int error = 0;
 		
-		//if(adr.equals("")){
+		if(q1.equals("")){
 			//メールアドレスが入力されていない
-			//error += 1;
-		//}
-		//if(pass.equals("")){
+			error += 1;
+		}
+		if(q2.equals("")){
 			//パスワードが入力されていない
-			//error += 2;
-		//}
+			error += 2;
+		}
 		//if(adr.matches(mailFormat)){
 			//入力されたメールアドレスが正規表現にあっていないとき
 			//error += 64;
@@ -74,11 +74,12 @@ public class secretqServlet extends HttpServlet {
 				//System.out.println("q2=" + q2);
 				break;
 			}
-			if( ur.equals(users.get( users.size()-1 )) ){
+			
+			/*if( ur.equals(users.get( users.size()-1 )) ){
 				//データベースに登録されていない
 				error += 32;
 				
-			}
+			}*/
 		}
 		
 		if(q1.equals(ans1) && q2.equals(ans2)){
@@ -94,7 +95,7 @@ public class secretqServlet extends HttpServlet {
             dispatcher.forward(req, resp);
 		}
 		else {
-			resp.sendRedirect("/passforget/passforget.jsp?Error=" + String.valueOf(error));
+			resp.sendRedirect("/passforget/secretq.jsp?Error=" + String.valueOf(error));
 		}
 
 		if (pm != null && !pm.isClosed())

@@ -53,10 +53,10 @@ public class passforgetServlet extends HttpServlet {
 			//パスワードが入力されていない
 			//error += 2;
 		//}
-		//if(adr.matches(mailFormat)){
+		if(!address.matches(mailFormat)){
 			//入力されたメールアドレスが正規表現にあっていないとき
-		//	error += 64;
-		//}
+			error += 64;
+		}
 		
 		//String encryptedpass = Encryption.getSaltedPassword(pass, adr);
 		
@@ -77,8 +77,7 @@ public class passforgetServlet extends HttpServlet {
 			}
 			if( ur.equals(users.get( users.size()-1 )) ){
 				//データベースに登録されていない
-				error += 32;
-				
+				error += 32;	
 			}
 		}
 		if(error == 0){
