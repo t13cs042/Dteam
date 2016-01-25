@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
 import Dataclass.LoginDB;
@@ -22,7 +24,7 @@ public class passresetServlet extends HttpServlet {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void doPost( HttpServletRequest req, HttpServletResponse resp ) throws IOException
+	public void doPost( HttpServletRequest req, HttpServletResponse resp ) throws IOException, ServletException
 	{
 
 		resp.setContentType("text/html; charset=UTF-8");
@@ -91,14 +93,18 @@ public class passresetServlet extends HttpServlet {
 			
 			// エラーがあったら登録不可
 			if(error != 0){
-				resp.sendRedirect("/passforget/passreset.jsp?Error=" + String.valueOf(error)
+				//resp.sendRedirect("/passforget/passreset.jsp?Error=" + String.valueOf(error)
+					//	+ "&Before=" + inputData[0] + "&After=" + inputData[1]);
+				req.setAttribute("address", address);//add
+				RequestDispatcher dispatcher = req.getRequestDispatcher("/passforget/passreset.jsp?Error=" + String.valueOf(error)
 						+ "&Before=" + inputData[0] + "&After=" + inputData[1]);
+	            dispatcher.forward(req, resp);
 			}else{
 
 				
 
 				// データ変更
-				query.setFilter("address ==" + "'" + address + "'");
+				query.setFilter("mail ==" + "'" + address + "'");
 				
 				List<LoginDB> db =  (List<LoginDB>)pm.newQuery(query).execute();
 				if(db.size() != 0){

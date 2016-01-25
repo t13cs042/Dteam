@@ -41,17 +41,6 @@ String address = (String)request.getAttribute("address");
   
  
   <!--メールアドレスの変更をします--><br>
-  
-  
-  <font color="red">
-  <%			if((error & 16) == 16){ %>   ※現在のパスワードが未入力です。<br> 
-  <%			}if((error & 2) == 2){ %>	※半角小文字,12文字以内で再入力して下さい。<br> 
-  <%			}if((error & 4) == 4){ %> ※パスワードが間違っています。<br> 
-  <%		   }if((error & 32) == 32){ %> ※新しいパスワードが未入力です。<br>
-  <%		   }if((error & 64) == 64){ %> ※新しいパスワード(確認用)が未入力です。<br>
-  <%		   }if((error & 1) == 1){ %> ※新しいパスワードが一致していません。 もう一度入力してください。<br>
-   <%			} %>
-  </font>
 
 <div Align="center"/>
 
@@ -64,6 +53,13 @@ String address = (String)request.getAttribute("address");
   
     <p>パスワードの再入力<br><br>
   <input type="text" name="after2"></p>
+
+  
+  <font color="red">
+  <%			if( ((error & 16) == 16) || ((error & 2) == 2) || ((error & 32) == 32) 
+              || ((error & 64) == 64) || ((error & 1) == 1) )  { %>   ※現在のパスワードが未入力です。<br> 
+   <%			} %>
+  </font>
 
   <input type = "hidden" name = "address" value = <%=address%> ><%--add--%>
 
