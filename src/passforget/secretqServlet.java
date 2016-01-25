@@ -31,10 +31,12 @@ public class secretqServlet extends HttpServlet {
 		// ユーザデータを取得
 		List<LoginDB> users = (List<LoginDB>) pm.newQuery(query).execute();
 
-		HttpSession session = req.getSession(true);
+		HttpSession session = req.getSession(false);
 
 		String q1 = req.getParameter("q1");
 		String q2 = req.getParameter("q2");
+		String question1 = req.getParameter("question1");
+		String question2 = req.getParameter("question2");
 		
 		String mailFormat = "^[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+(\\.[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+)*" +                                   
                 "@" +
@@ -53,6 +55,8 @@ public class secretqServlet extends HttpServlet {
 			//パスワードが入力されていない
 			error += 2;
 		}
+	
+			
 		//if(adr.matches(mailFormat)){
 			//入力されたメールアドレスが正規表現にあっていないとき
 			//error += 64;
@@ -81,11 +85,17 @@ public class secretqServlet extends HttpServlet {
 				
 			}*/
 		}
-		
-		if(q1.equals(ans1) && q2.equals(ans2)){
-			resp.sendRedirect("/passforget/passreset.jsp");
+	if(! (q1.equals(ans1) && q2.equals(ans2)) ){
+			error += 4;
 		}
 		
+		
+		if(q1.equals(ans1) && q2.equals(ans2)){
+			//resp.sendRedirect("/passforget/passreset.jsp");
+			RequestDispatcher dispatcher = req.getRequestDispatcher("/passforget/passreset.jsp");
+			dispatcher.forward(req, resp);
+		}
+		/*
 		if(error == 0){
 			
 			//resp.sendRedirect("/passforget/secretq.jsp");
@@ -93,9 +103,14 @@ public class secretqServlet extends HttpServlet {
 			// passreset.jspへ遷移
 			RequestDispatcher dispatcher = req.getRequestDispatcher("/passforget/passreset.jsp");
             dispatcher.forward(req, resp);
-		}
+		}*/
 		else {
-			resp.sendRedirect("/passforget/secretq.jsp?Error=" + String.valueOf(error));
+			//resp.sendRedirect("/passforget/secretq.jsp?Error=" + String.valueOf(error));
+			req.setAttribute("q1", question1);
+			req.setAttribute("q2", question2);
+			RequestDispatcher dispatcher = req.getRequestDispatcher("/passforget/secretq.jsp?Error=" +
+		    String.valueOf(error) );
+			dispatcher.forward(req, resp);
 		}
 
 		if (pm != null && !pm.isClosed())
