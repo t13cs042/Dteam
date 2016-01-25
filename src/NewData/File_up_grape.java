@@ -33,8 +33,6 @@ public class File_up_grape extends HttpServlet {
 		ServletFileUpload fileUpload = new ServletFileUpload();
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 
-
-
 		try {
 			FileItemIterator itemIterator = fileUpload.getItemIterator(req);
 			while (itemIterator.hasNext()) {
@@ -44,17 +42,9 @@ public class File_up_grape extends HttpServlet {
 				if (contentType == null) {
 					contentType = "";
 				}
-				// 画像ファイルの時はそのまま書き出し処理
-				if (contentType.contains("image")) {
-					resp.setContentType(contentType);
-					BufferedInputStream bi = new BufferedInputStream(
-							inputStream);
-					int len;
-					while ((len = bi.read()) != -1) {
-						resp.getOutputStream().write(len);
-					}
+		
 					// テキストファイルの場合またはファイル名の拡張子が".csv"の場合
-				} else if (contentType.contains("text")
+				if (contentType.contains("text")
 						|| itemStream.getName().endsWith(".csv")) {
 					resp.setContentType("text/html");
 					BufferedReader buffer = new BufferedReader(
@@ -67,20 +57,16 @@ public class File_up_grape extends HttpServlet {
 						String[] split = line.split(",");
 
 						//学生登録
-						if (split != null && split.length != 0) {
+						if (split != null && split.length == 2) {
 							// csvから単語の取り出し
 							String date = split[0].trim();
 							String num = split[1].trim();
 
-							if (split != null && split.length != 0) {
+							// 登録するモデル
+							Grape per = new Grape(date,Double.parseDouble(num));
 
-								// 登録するモデル
-								Grape per = new Grape(date,Double.parseDouble(num));
-
-								pm.makePersistent(per);
-								i++;
-
-							}
+							pm.makePersistent(per);
+							i++;
 						}
 					}
 					resp.setCharacterEncoding("UTF-8");

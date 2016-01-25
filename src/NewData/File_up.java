@@ -1,7 +1,6 @@
 package NewData;
 
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,8 +32,6 @@ public class File_up extends HttpServlet {
 		ServletFileUpload fileUpload = new ServletFileUpload();
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 
-
-
 		try {
 			FileItemIterator itemIterator = fileUpload.getItemIterator(req);
 			while (itemIterator.hasNext()) {
@@ -44,17 +41,9 @@ public class File_up extends HttpServlet {
 				if (contentType == null) {
 					contentType = "";
 				}
-				// 画像ファイルの時はそのまま書き出し処理
-				if (contentType.contains("image")) {
-					resp.setContentType(contentType);
-					BufferedInputStream bi = new BufferedInputStream(
-							inputStream);
-					int len;
-					while ((len = bi.read()) != -1) {
-						resp.getOutputStream().write(len);
-					}
-					// テキストファイルの場合またはファイル名の拡張子が".csv"の場合
-				} else if (contentType.contains("text")
+
+				// テキストファイルの場合またはファイル名の拡張子が".csv"の場合
+				if (contentType.contains("text")
 						|| itemStream.getName().endsWith(".csv")) {
 					resp.setContentType("text/html");
 					BufferedReader buffer = new BufferedReader(
@@ -67,22 +56,20 @@ public class File_up extends HttpServlet {
 						String[] split = line.split(",");
 
 						//学生登録
-						if (split != null && split.length != 0) {
+						if (split != null && split.length == 4) {
 							// csvから単語の取り出し
 							String date = split[0].trim();
 							String temp = split[1].trim();
 							String prec = split[2].trim();
 							String laytime = split[3].trim();
 
-							if (split != null && split.length != 0) {
+							// 登録するモデル
+							Climate per = new Climate(date,Double.parseDouble(temp), Double.parseDouble(laytime), Double.parseDouble(prec));
 
-								// 登録するモデル
-								Climate per = new Climate(date,Double.parseDouble(temp), Double.parseDouble(laytime), Double.parseDouble(prec));
+							pm.makePersistent(per);
+							i++;
 
-								pm.makePersistent(per);
-								i++;
 
-							}
 						}
 					}
 					resp.setCharacterEncoding("UTF-8");
