@@ -83,9 +83,11 @@ public class secretqServlet extends HttpServlet {
 		}
 		
 		if(q1.equals(ans1) && q2.equals(ans2)){
-			resp.sendRedirect("/passforget/passreset.jsp");
+			//resp.sendRedirect("/passforget/passreset.jsp");
+			RequestDispatcher dispatcher = req.getRequestDispatcher("/passforget/passreset.jsp");
+            dispatcher.forward(req, resp);
 		}
-		
+		/*
 		if(error == 0){
 			
 			//resp.sendRedirect("/passforget/secretq.jsp");
@@ -93,7 +95,7 @@ public class secretqServlet extends HttpServlet {
 			// passreset.jspへ遷移
 			RequestDispatcher dispatcher = req.getRequestDispatcher("/passforget/passreset.jsp");
             dispatcher.forward(req, resp);
-		}
+		}*/
 		else {
 			resp.sendRedirect("/passforget/secretq.jsp?Error=" + String.valueOf(error));
 		}
