@@ -30,7 +30,7 @@ public class passresetServlet extends HttpServlet {
 		resp.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = resp.getWriter();
 		
-		//HttpSession session = req.getSession(false);
+		HttpSession session = req.getSession(false);
 		//String mail = (String)session.getAttribute("mail");
 		//String mail = req.getParameter("mail");//add
 		
@@ -97,7 +97,7 @@ public class passresetServlet extends HttpServlet {
 					//	+ "&Before=" + inputData[0] + "&After=" + inputData[1]);
 				req.setAttribute("address", address);//add
 				RequestDispatcher dispatcher = req.getRequestDispatcher("/passforget/passreset.jsp?Error=" +
-				String.valueOf(error) + "&Before=" + inputData[0] + "&After=" + inputData[1]);
+				String.valueOf(error) /*+  "&Before=" + inputData[0] + "&After=" + inputData[1] */);
 	            dispatcher.forward(req, resp);
 			}else{
 
