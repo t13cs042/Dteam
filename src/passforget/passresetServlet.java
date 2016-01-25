@@ -122,8 +122,7 @@ public class passresetServlet extends HttpServlet {
 					resp.getWriter().print("パスワードの変更に失敗しました。<br><br>" + address);
 				}
 				
-				out.println("<a href=\"passforget/passforget.jsp\">設定画面へ戻る</a><br><br>");			
-				out.println("<a href=\"Home/Home_temp.jsp\">ホーム画面へ戻る</a><br>");	
+				out.println("<a href=\"Login/login.jsp\">ログイン画面へ戻る</a><br><br>");			
 				
 				
 				
