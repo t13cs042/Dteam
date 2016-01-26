@@ -31,7 +31,7 @@
   %>
  
   <center>
-    <h1>ぶどう収穫量予測システム</h1>    
+    <h1>ぶどう収穫量予想システム</h1>    
 		<!-- ブドウ収穫量予測システムの管理者アカウント作成 -->
 		<form action="/register_administer" method="post">
 		
@@ -44,9 +44,9 @@
   		<%			} %> 
     	</font>
 		
-					名前<br>姓
+					名前<br>姓：
 			<input type = "text" name="familyname" size="30" maxlength="27" >
-					名
+					名：
 			<input type = "text" name="firstname" size="30" maxlength="27" ><br>
 		
 			<font size="3">メールアドレス(半角英数字のみ)

@@ -18,7 +18,7 @@ public class Register_Administer extends HttpServlet {
 		
 		//エラー登録用フラグ
 		int error = 0;
-		
+		//Signup_Admini.jspからのデータ
 		String familyname = req.getParameter("familyname");
 		String firstname = req.getParameter("firstname");
 		String mail = req.getParameter("mail");
@@ -44,8 +44,6 @@ public class Register_Administer extends HttpServlet {
 
 		resp.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = resp.getWriter();
-		//out.println("aa<br>");
-
 
 		if(mail.equals("")){
 			//メールアドレスが入力されていない
@@ -65,21 +63,20 @@ public class Register_Administer extends HttpServlet {
 		}
 		
 		if(error == 0){//エラーがなかったとき
-
+			//暗号化されたパスワード
 			String encrypedpass = Encryption.getSaltedPassword(password, mail);
 			
 			LoginDB logindb = new LoginDB(familyname, firstname, mail, encrypedpass, "", "",
 					"",  "",  "",  "", "", 4);
 			try {
-				pm.makePersistent(logindb);//管理者を登録
+				pm.makePersistent(logindb);//管理者をデータベースへ登録
 			
 			} finally {
 				pm.close();
 			}
 			out.println("登録されました<br>");
 			out.println("<a href=\"/Login/admin_login.jsp\">管理者ログイン画面へ戻る</a>");
-			//resp.sendRedirect("/Login/admin_login.jsp");
-		}else
+		}else//エラーが合ったときの遷移先
 			resp.sendRedirect("signup/Signup_Admini.jsp?Error=" + String.valueOf(error));
 	}
 }

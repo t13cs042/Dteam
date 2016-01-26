@@ -3,7 +3,6 @@ package clogin;
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
-import java.sql.*;
 
 @SuppressWarnings("serial")
 public class Logout_Servlet extends HttpServlet {
@@ -14,8 +13,9 @@ public class Logout_Servlet extends HttpServlet {
         res.setContentType("text/html; charset=Shift_JIS");
 
         HttpSession session = req.getSession(true);
-        session.invalidate();
+        session.invalidate();//セッションの破棄
 
+        //ログイン画面へ遷移
         res.sendRedirect("/Login/login.jsp");
     }
 }
