@@ -80,6 +80,9 @@ public class Newsignup extends HttpServlet {
 		if(area.equals("")){
 			error_2 += 1;//作付面積が未入力
 		}
+		if(Integer.parseInt(area) > 10000){
+			error_2 += 8;//作付面積が5桁以上のエラー
+		}
 		
 		if(start_month.equals("") || finish_month.equals("")){
 			error_2 += 2;//収穫月が未入力

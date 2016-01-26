@@ -1,5 +1,6 @@
 package manager;
 
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -15,6 +16,8 @@ import Dataclass.PMF;
 public class DeleteAccount extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
+		resp.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = resp.getWriter();
 		// pm を用意
 		PersistenceManager	pm	= PMF.get().getPersistenceManager();
 		String mail = req.getParameter("mail");
@@ -29,6 +32,7 @@ public class DeleteAccount extends HttpServlet {
 					// 削除
 					pm.deletePersistent(db.get(0));
 				}catch( Exception e ){}
+				out.println("<a href=\"manager/managerwindow.jsp\">戻る</a><br><br>");		
 		}finally{
 			pm.close();
 		}
