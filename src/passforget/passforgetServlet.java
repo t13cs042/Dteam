@@ -31,7 +31,7 @@ public class passforgetServlet extends HttpServlet {
 		// ユーザデータを取得
 		List<LoginDB> users = (List<LoginDB>) pm.newQuery(query).execute();
 
-		HttpSession session = req.getSession(true);
+		HttpSession session = req.getSession(false);
 
 		String address = req.getParameter("address");
 		//String pass = req.getParameter("password");

@@ -57,7 +57,8 @@ String address = (String)request.getAttribute("address");
   
   <font color="red">
   <%			if( ((error & 16) == 16) || ((error & 2) == 2) || ((error & 32) == 32) 
-              || ((error & 64) == 64) || ((error & 1) == 1) )  { %>   ※現在のパスワードが未入力です。<br> 
+              || ((error & 64) == 64) || ((error & 1) == 1) )  { %>   ※パスワードが一致していないか、<br> 
+              無駄な文字を使用しています。<br>
    <%			} %>
   </font>
 

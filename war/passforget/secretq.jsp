@@ -34,19 +34,24 @@ String address = (String)request.getAttribute("address");
 
 <center>
 <form method="POST" action="/secretq">
+<% String Q1 = (String)request.getAttribute("q1"); 
+	String Q2 = (String)request.getAttribute("q2"); 
+%>
 
-  <p><%=(String)request.getAttribute("q1")%><br>
+  <p><%=Q1%><br>
+  <input type = "hidden" name = "question1" value = <%=Q1%> >
+    <input type = "hidden" name = "question2" value = <%=Q2%> >
   <input type="text" name="q1"></p>
   
-    <p><%=(String)request.getAttribute("q2")%><br>
+    <p><%=Q2%><br>
   <input type="text" name="q2"></p>
   
   
       <font color = "red">
   		<%			if( ((error & 1) == 1) || ((error & 2) == 2) ){ %>   ※登録された内容が一致しません。<br>もう一度入力してください。<br> 
-  <%-- 		<%			}if((error & 4) == 4){ %> ※アカウントが未認証です<br> 
+  		<%			}if((error & 4) == 4){ %> ※秘密の質問と答えが一致していません。<br> 
   		<%		   }if((error & 8) == 8){ %> ※このアカウントは停止されています<br>
-  		<%		   }if((error & 16) == 16){ %> ※管理者はこちらからログインできません<br> --%>
+  		<%		   }if((error & 16) == 16){ %> ※管理者はこちらからログインできません<br> 
     		<%		   }if((error & 32) == 32){ %> ※登録されていません<br>
   		<%			} %> 
     	</font>

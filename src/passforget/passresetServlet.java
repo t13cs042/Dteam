@@ -30,7 +30,7 @@ public class passresetServlet extends HttpServlet {
 		resp.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = resp.getWriter();
 		
-		//HttpSession session = req.getSession(false);
+		HttpSession session = req.getSession(false);
 		//String mail = (String)session.getAttribute("mail");
 		//String mail = req.getParameter("mail");//add
 		
@@ -96,8 +96,8 @@ public class passresetServlet extends HttpServlet {
 				//resp.sendRedirect("/passforget/passreset.jsp?Error=" + String.valueOf(error)
 					//	+ "&Before=" + inputData[0] + "&After=" + inputData[1]);
 				req.setAttribute("address", address);//add
-				RequestDispatcher dispatcher = req.getRequestDispatcher("/passforget/passreset.jsp?Error=" + String.valueOf(error)
-						+ "&Before=" + inputData[0] + "&After=" + inputData[1]);
+				RequestDispatcher dispatcher = req.getRequestDispatcher("/passforget/passreset.jsp?Error=" +
+				String.valueOf(error) /*+  "&Before=" + inputData[0] + "&After=" + inputData[1] */);
 	            dispatcher.forward(req, resp);
 			}else{
 
@@ -117,11 +117,12 @@ public class passresetServlet extends HttpServlet {
 					resp.getWriter().print("パスワードの変更に成功しました。<br><br>");
 						
 				}else{
+					
 					resp.getWriter().print("パスワードの変更に失敗しました。<br><br>");
+					resp.getWriter().print("パスワードの変更に失敗しました。<br><br>" + address);
 				}
 				
-				out.println("<a href=\"passforget/passforget.jsp\">設定画面へ戻る</a><br><br>");			
-				out.println("<a href=\"Home/Home_temp.jsp\">ホーム画面へ戻る</a><br>");	
+				out.println("<a href=\"Login/login.jsp\">ログイン画面へ戻る</a><br><br>");			
 				
 				
 				
