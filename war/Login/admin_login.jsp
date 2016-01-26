@@ -27,7 +27,7 @@
   %>
  
   <center>
-    <h1>ぶどう収穫量予測システム</h1>    
+    <h1>ぶどう収穫量予想システム</h1>    
     <form action="/admn_login" method ="post">
     <font color = "red">
   <%			if((error & 1) == 1){ %>   ※メールアドレスが未入力です。<br> 

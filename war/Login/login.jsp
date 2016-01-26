@@ -48,7 +48,7 @@
 		<br>
 		<a href = "/passforget/passforget.jsp">パスワードを忘れた方<br>
 		<a href="/signup/signup.jsp">初めて利用する方</a><br> 
-       <a href="/Login/User_list.jsp">登録者リスト(仮)</a><br>
+     <!--  <a href="/Login/User_list.jsp">登録者リスト(仮)</a><br> -->
        <a href="/Login/admin_login.jsp">管理者用ログイン</a><br>
   </center>
   </body>
