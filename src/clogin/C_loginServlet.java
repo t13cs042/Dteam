@@ -4,12 +4,8 @@ import javax.jdo.PersistenceManager;
 import Dataclass.LoginDB;
 import Dataclass.PMF;
 import signup_.Encryption;
-
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.*;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
@@ -28,20 +24,16 @@ public class C_loginServlet extends HttpServlet {
 		String query = "select from " + LoginDB.class.getName();
 
 		// ユーザデータを取得
+		@SuppressWarnings("unchecked")
 		List<LoginDB> users = (List<LoginDB>) pm.newQuery(query).execute();
-
 		HttpSession session = req.getSession(true);
-
+		//login.jspからのデータ
 		String adr = req.getParameter("address");
 		String pass = req.getParameter("password");
+		//メールアドレスの正規表現
+		String mailFormat = "^[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+(\\.[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+)*+(.*)@[a-zA-Z0-9][a-zA-Z0-9\\-]*(\\.[a-zA-Z0-9\\-]+)+$";
 		
-		/*
-		String mailFormat = "^[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+(\\.[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+)*" +                                   
-                "@" +
-                "[a-zA-Z0-9][a-zA-Z0-9\\-]*(\\.[a-zA-Z0-9\\-]+)*$";
-		*/
-		
-		PrintWriter out = resp.getWriter();
+		//エラー登録用フラグ
 		int error = 0;
 		
 		if(adr.equals("")){
@@ -52,36 +44,21 @@ public class C_loginServlet extends HttpServlet {
 			//パスワードが入力されていない
 			error += 2;
 		}
-		/*
 		if(adr.matches(mailFormat)){
 			//入力されたメールアドレスが正規表現にあっていないとき
 			error += 64;
 		}
-		*/
+		//暗号化されたパスワード
 		String encryptedpass = Encryption.getSaltedPassword(pass, adr);
-		
-		System.out.println("mailAddress: " + adr);
-		System.out.println("Password: " + pass);
-		System.out.println("hashedPassword: " + encryptedpass);
-
-		
-		
-		
-		for(LoginDB ur : users){
-			System.out.println(ur.getMail());
-			System.out.println(ur.getPassword());
-			
+		for(LoginDB ur : users){			
 			if( adr.equals(ur.getMail()) && encryptedpass.equals(ur.getPassword()) ){
-				
 				int status = ur.getStatus();//ユーザ状態
-	
 				if(status == 0){
 					//アカウントが未認証の場合
 					error += 4;
 				}
-				
 				else if(status == 1){//ユーザが認証されているなら
-					
+					//ログインしたユーザの内容をセッションに登録
 					session.setAttribute("id",             ur.getId() );
 					session.setAttribute("familyname",     ur.getFamilyname());
 					session.setAttribute("firstname",      ur.getfirstname());
@@ -100,25 +77,22 @@ public class C_loginServlet extends HttpServlet {
 				else if(status == 2){
 					//アカウントが停止されている
 					error += 8;
-					
 				}
 				else if(status == 4){
 					//管理者の場合
 					error += 16;
-					
 				}
 				break;
 			}
-			if( ur.equals(users.get( users.size()-1 )) ){
+			if( ur.equals(users.get( users.size()-1 )) ){//usersリストの終わり
 				//データベースに登録されていない
 				error += 32;
-				
 			}
 		}
-		if(error == 0){
-			resp.sendRedirect("/Home/Home_temp.jsp");	   
+		if(error == 0){//エラーなしの遷移先
+			resp.sendRedirect("/Home/Home_temp.jsp");	
 		}
-		else {
+		else {//エラーがあったときの遷移先
 			resp.sendRedirect("/Login/login.jsp?Error=" + String.valueOf(error));
 		}
 
