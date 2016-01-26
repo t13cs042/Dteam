@@ -44,7 +44,7 @@ public class C_loginServlet extends HttpServlet {
 			//パスワードが入力されていない
 			error += 2;
 		}
-		if(adr.matches(mailFormat)){
+		if(!adr.matches(mailFormat)){
 			//入力されたメールアドレスが正規表現にあっていないとき
 			error += 64;
 		}
