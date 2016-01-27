@@ -97,7 +97,7 @@ public class Change_pass extends HttpServlet {
 				
 				List<LoginDB> db =  (List<LoginDB>)pm.newQuery(query).execute();
 				if(db.size() != 0){
-					String pass = Encryption.getSaltedPassword(inputData[1], db.get(0).getMail() );
+					String pass = Encryption.getSaltedPassword(inputData[1], db.get(0).getFamilyname() );
 					db.get(0).setPassword(pass);
 					session.setAttribute("password", pass);
 

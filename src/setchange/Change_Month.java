@@ -50,35 +50,15 @@ public class Change_Month extends HttpServlet {
 				error += 8;
 			}
 			
-			/*
-			//else if(!inputData[0].matches("[a-zA-Z0-9@.]+")){
-			else if(!inputData[0].matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$")){
-				error += 2;
+			
+			if(Integer.parseInt(start) > Integer.parseInt(finish)){
+				if(Integer.parseInt(finish) - Integer.parseInt(start) +12 > 6)
+					error += 4;	//"収穫期間が長すぎます
+			}else if(Integer.parseInt(start) < Integer.parseInt(finish)){
+				if(Integer.parseInt(finish) - Integer.parseInt(start) > 6)
+					error += 4;	//収穫期間が長すぎます
 			}
-			else{
-
-					// 検索、見付からなかったら例外を吐く
-					//pm.getObjectById(LoginDB.class, inputData[0]);
-					query.setFilter("mail == " + inputData[0]);
-					List<LoginDB> db =  (List<LoginDB>)pm.newQuery(query).execute();
-					if( db.isEmpty() )
-						error += 4;
-
-			}
-
-			// afterMailが入力されているかチェック
-			if(inputData[1].equals("")){
-				error +=32;
-			}
-
-			if(inputData[2].equals("")){
-				error += 64;
-			}
-
-			if( !inputData[1].equals(inputData[2]) ){
-				error += 1;
-			}
-*/
+			
 			// IDが使用済なら登録不可
 			if(error != 0){
 				resp.sendRedirect("/settingchange/change_month.jsp?Error=" + String.valueOf(error)

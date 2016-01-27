@@ -87,7 +87,7 @@ public class Newsignup extends HttpServlet {
 		if(start_month.equals("") || finish_month.equals("")){
 			error_2 += 2;//収穫月が未入力
 		}else if(Integer.parseInt(start_month) > Integer.parseInt(finish_month)){
-			if(Integer.parseInt(start_month) - Integer.parseInt(finish_month)+12 > 6)
+			if(Integer.parseInt(finish_month) - Integer.parseInt(start_month)+12 > 6)
 				error_2 += 4;	//"収穫期間が長すぎます
 		}else if(Integer.parseInt(start_month) < Integer.parseInt(finish_month)){
 			if(Integer.parseInt(finish_month) - Integer.parseInt(start_month) > 6)
@@ -119,7 +119,7 @@ public class Newsignup extends HttpServlet {
 			resp.sendRedirect("/signup/signup.jsp?Error=" + String.valueOf(error)
 					+ "&Error_2=" + String.valueOf(error_2));
 		}else{
-			String pass = Encryption.getSaltedPassword(password, mail);
+			String pass = Encryption.getSaltedPassword(password, familyname);
 			LoginDB logindb = new LoginDB(familyname, firstname, mail, pass, area, start_month,
 					finish_month,  question1,  answer1,  question2, answer2,0);
 			//PersistenceManager pm = PMF.get().getPersistenceManager();
