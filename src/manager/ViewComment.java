@@ -3,10 +3,8 @@ package manager;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.jdo.PersistenceManager;
-import javax.jdo.Query;
 import javax.servlet.http.*;
 
 import Dataclass.Comment;

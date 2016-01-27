@@ -1,12 +1,9 @@
 package Calc;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -18,9 +15,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import com.google.appengine.api.datastore.Query.FilterOperator;
 
 import Dataclass.Candidate;
 import Dataclass.Climate;
@@ -28,6 +22,7 @@ import Dataclass.LoginDB;
 import Dataclass.PMF;
 import Dataclass.Tempdata;
 
+@SuppressWarnings("serial")
 public class Candi_get  extends HttpServlet{
 
 
@@ -37,10 +32,7 @@ public class Candi_get  extends HttpServlet{
 	public void doPost( HttpServletRequest req, HttpServletResponse resp ) throws IOException, ServletException
 	{
 		resp.setContentType("text/html; charset=UTF-8");
-		PrintWriter out = resp.getWriter();
 
-		//Session作成
-		HttpSession session = req.getSession(true);
 		// calendarを作成
 		Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Tokyo"));
 		// pm を用意
@@ -59,7 +51,7 @@ public class Candi_get  extends HttpServlet{
 			PersistenceManager pm = PMF.get().getPersistenceManager();
 			
 			//Queryを用意
-			Query queryX = pm.newQuery(Climate.class); /*Tempdata*/
+			Query queryX = pm.newQuery(Climate.class); 
 			Query queryY = pm.newQuery(Climate.class);
 			Query queryT = pm.newQuery(Tempdata.class);
 
@@ -74,7 +66,6 @@ public class Candi_get  extends HttpServlet{
 			//角距離をソートしたもの
 			double dissort[] = new double[12];
 
-			//List<Distances> distances;
 
 			//比較する年のfor文
 			for( int i = 0; i < 12; i++ ){
@@ -97,11 +88,6 @@ public class Candi_get  extends HttpServlet{
 					//現在から過去jヶ月とcompYear年の気候データを取得
 					if( useYearY < 2003 )than2003 = true;
 					else{
-/*
-						if( useMon < 1 ){
-							queryX.setFilter("date =='" + String.valueOf(useYearX) +"/" + String.valueOf(useMon+12) +"'" );
-							queryY.setFilter("date =='" + String.valueOf(useYearY) +"/" + String.valueOf(useMon+12) +"'");
-						}else{*/
 							uyx = String.valueOf(useYearX);
 							uyy = String.valueOf(useYearY);
 							um = String.valueOf((useMon + 11) % 12 + 2);
@@ -115,8 +101,6 @@ public class Candi_get  extends HttpServlet{
 		
 								queryT.setFilter( "mail == '" + ur.getMail() +"'  &&  year == " + useYearX + " &&  month == " + (((useMon + 11) % 12) + 2) );
 								
-							
-						//}
 
 						List<Climate> cliXs = (List<Climate>) queryX.execute();
 						List<Climate> cliYs = (List<Climate>) queryY.execute();
@@ -133,7 +117,6 @@ public class Candi_get  extends HttpServlet{
 						}
 						*/
 
-
 						Climate cliX = cliXs.get(0);
 						Climate cliY = cliYs.get(0);
 						
@@ -149,7 +132,6 @@ public class Candi_get  extends HttpServlet{
 						double t = 0.0;
 						
 						//(compMon-j)月の各気候の差
-						//double t = ( cliX.gettemp()    - cliY.gettemp()    );  
 						if( !noTemp )	t = ( temp              - cliY.gettemp()    ); 
 						else 	       t = ( cliX.gettemp()    - cliY.gettemp()    );						
 						double l = ( cliX.getlaytime() - cliY.getlaytime() );
@@ -162,7 +144,6 @@ public class Candi_get  extends HttpServlet{
 						sumt += t;                     //各総和を計算
 						suml += l;
 						sump += p;			
-						//out.println( uyx + "/" + um + ":" + noTemp + " " );
 					}
 				}
 
@@ -223,8 +204,6 @@ public class Candi_get  extends HttpServlet{
 		RequestDispatcher dis = req.getRequestDispatcher("/new_predict");
 		dis.forward(req, resp);
 
-
-		//resp.sendRedirect("/index.html");
 
 	}
 
