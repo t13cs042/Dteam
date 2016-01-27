@@ -49,8 +49,15 @@ public class Admini_Login_Servlet extends HttpServlet {
 				//メールアドレスの正規表現にマッチしているかチェック
 				error += 2;
 			}
-			//暗号化されたパスワード
-			String encryptedpass = Encryption.getSaltedPassword(pass, adr);
+			String fn = ""; 
+			for(LoginDB getkey: users){
+				if(adr.equals( getkey.getMail() ) ){
+					fn = getkey.getFamilyname();
+				}
+			}
+			
+			//暗号化されたパスワードの取得
+			String encryptedpass = Encryption.getSaltedPassword(pass, fn);
 			
 			if(pass.equals("")){
 				//パスワードが入力されているかチェック

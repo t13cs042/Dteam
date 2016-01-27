@@ -48,8 +48,17 @@ public class C_loginServlet extends HttpServlet {
 			//入力されたメールアドレスが正規表現にあっていないとき
 			error += 64;
 		}
+		
+		String fn = ""; 
+		for(LoginDB getkey: users){
+			if(adr.equals( getkey.getMail() ) ){
+				fn = getkey.getFamilyname();//パスワードの暗号化に用いるキーの取得
+			}
+		}
+		
+		
 		//暗号化されたパスワード
-		String encryptedpass = Encryption.getSaltedPassword(pass, adr);
+		String encryptedpass = Encryption.getSaltedPassword(pass, fn);
 		for(LoginDB ur : users){			
 			if( adr.equals(ur.getMail()) && encryptedpass.equals(ur.getPassword()) ){
 				int status = ur.getStatus();//ユーザ状態
