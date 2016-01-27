@@ -52,7 +52,8 @@ public class Register_Administer extends HttpServlet {
 		if(password.equals("")){
 			//パスワードが入力されていない
 			error += 4;
-		}else if(password == repassword){
+		}
+		if(!password.equals(repassword)){
 			//パスワードが異なっている
 			error += 8;
 		}
