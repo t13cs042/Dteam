@@ -13,7 +13,35 @@
 </head>
 <body>
 
+<%
+		if (session.getAttribute("status") == null) {
+	%>
+	管理者以外はこの画面にアクセスできません
+	<br>
+	<br>
+	<a href="../Login/login.jsp">ログイン画面へ戻る</a>
+	<br>
+	<br>
 	<%
+		}
+
+		else {
+			int status2 = (Integer) session.getAttribute("status");
+			if ( status2 != 4 ) {
+	%>
+
+	管理者以外はこの画面にアクセスできません
+	<br>
+	<br>
+	<a href="../Home/Home_temp.jsp">ホーム画面へ戻る</a>
+	<br>
+	<br>
+
+
+
+	<%
+			}else{
+	
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 			Query query = pm.newQuery(LoginDB.class);
 			query.setOrdering("firstname asc");
@@ -89,6 +117,8 @@
 	</table>
 
 	<a href=/manager/managerwindow.jsp>戻る</a>
+
+<%}} %>
 
 </body>
 </html>

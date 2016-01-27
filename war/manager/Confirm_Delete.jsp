@@ -13,7 +13,35 @@
 </head>
 <body>
 
+<%
+		if (session.getAttribute("status") == null) {
+	%>
+	管理者以外はこの画面にアクセスできません
+	<br>
+	<br>
+	<a href="../Login/login.jsp">ログイン画面へ戻る</a>
+	<br>
+	<br>
 	<%
+		}
+
+		else {
+			int status = (Integer) session.getAttribute("status");
+			if ( status != 4 ) {
+	%>
+
+	管理者以外はこの画面にアクセスできません
+	<br>
+	<br>
+	<a href="../Home/Home_temp.jsp">ホーム画面へ戻る</a>
+	<br>
+	<br>
+
+
+	<%
+	
+			}else{
+	
 		String state = request.getParameter("state");
 		String address = request.getParameter("mail");
 
@@ -48,6 +76,7 @@
 			</form>
 		</div>
 	</center>
+<%}} %>
 
 </body>
 </html>
