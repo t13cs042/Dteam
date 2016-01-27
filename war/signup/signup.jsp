@@ -59,7 +59,7 @@
 			<input type = "text" name="firstname" size="30" maxlength="27" ><br>
 		
 			<font size="3">メールアドレス(半角英数字のみ)
-			<input type ="text" name="mail" size="30" maxlength="27" ><br>
+			<input type ="email" name="mail" size="30" maxlength="27" ><br>
 			<br>パスワード(半角英数字のみ)<br>
 			<input type = "password" name="password" size="10" maxlength="10" ></input>
 			<br>パスワードの再入力<br>
