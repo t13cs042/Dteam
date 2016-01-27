@@ -54,9 +54,6 @@ public class C_loginServlet extends HttpServlet {
 			if(adr.equals( getkey.getMail() ) ){
 				fn = getkey.getFamilyname();//パスワードの暗号化に用いるキーの取得
 			}
-			else{
-				fn = "";
-			}
 		}
 		
 		
