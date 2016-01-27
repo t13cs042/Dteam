@@ -22,7 +22,7 @@
 
 		else {
 			int status = (Integer) session.getAttribute("status");
-			if ( status != 1 ) {
+			if ( status != 4 ) {
 	%>
 
 	この画面にアクセスできるは承認されたユーザのみです
