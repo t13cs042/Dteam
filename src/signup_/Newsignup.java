@@ -116,7 +116,7 @@ public class Newsignup extends HttpServlet {
 			resp.sendRedirect("/signup/signup.jsp?Error=" + String.valueOf(error)
 					+ "&Error_2=" + String.valueOf(error_2));
 		}else{
-			String pass = Encryption.getSaltedPassword(password, mail);
+			String pass = Encryption.getSaltedPassword(password, familyname);
 			LoginDB logindb = new LoginDB(familyname, firstname, mail, pass, area, start_month,
 					finish_month,  question1,  answer1,  question2, answer2,0);
 			//PersistenceManager pm = PMF.get().getPersistenceManager();

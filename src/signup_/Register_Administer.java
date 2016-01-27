@@ -64,7 +64,7 @@ public class Register_Administer extends HttpServlet {
 		
 		if(error == 0){//エラーがなかったとき
 			//暗号化されたパスワード
-			String encrypedpass = Encryption.getSaltedPassword(password, mail);
+			String encrypedpass = Encryption.getSaltedPassword(password, familyname);
 			
 			LoginDB logindb = new LoginDB(familyname, firstname, mail, encrypedpass, "", "",
 					"",  "",  "",  "", "", 4);
