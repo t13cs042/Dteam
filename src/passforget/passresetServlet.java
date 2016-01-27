@@ -108,7 +108,7 @@ public class passresetServlet extends HttpServlet {
 				
 				List<LoginDB> db =  (List<LoginDB>)pm.newQuery(query).execute();
 				if(db.size() != 0){
-					String pass = Encryption.getSaltedPassword(inputData[0], db.get(0).getMail() );//was[1]
+					String pass = Encryption.getSaltedPassword(inputData[0], db.get(0).getFamilyname() );//was[1]
 					db.get(0).setPassword(pass);
 					//session.setAttribute("password", pass);
 					
