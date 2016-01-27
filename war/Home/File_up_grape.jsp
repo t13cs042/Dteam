@@ -11,7 +11,7 @@
 <%
 		if (session.getAttribute("status") == null) {
 	%>
-	この画面にアクセスできるは承認されたユーザのみです
+	管理者以外はこの画面にアクセスできません
 	<br>
 	<br>
 	<a href="../Login/login.jsp">ログイン画面へ戻る</a>
@@ -21,16 +21,19 @@
 		}
 
 		else {
-			int status = (Integer) session.getAttribute("status");
-			if ( status != 4 ) {
+
+			int status2 = (Integer) session.getAttribute("status");
+			if ( status2 != 1 ) {
 	%>
 
-	この画面にアクセスできるは承認されたユーザのみです
+	管理者以外はこの画面にアクセスできません
 	<br>
 	<br>
-	<a href="../Login/login.jsp">ログイン画面へ戻る</a>
+	<a href="../Home/Home_temp.jsp">ホーム画面へ戻る</a>
 	<br>
 	<br>
+
+
 <% }else{%>
 			<form action="/File_up_grape" method="post" enctype="multipart/form-data">
 
