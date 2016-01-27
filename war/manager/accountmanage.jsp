@@ -40,6 +40,8 @@
 
 
 	<%
+			}else{
+	
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 			Query query = pm.newQuery(LoginDB.class);
 			query.setOrdering("firstname asc");

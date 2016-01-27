@@ -39,7 +39,7 @@
 	<br>
 
 
-
+<%		}else{ %>
 
 	<center>
 		<div style="font-size: 200%">要望確認</div>

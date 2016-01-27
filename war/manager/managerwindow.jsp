@@ -45,6 +45,8 @@
 
 
 	<%
+			}else{
+	
 	String date = "実行されていません";
 	try{
 		PersistenceManager pm = null;

@@ -39,6 +39,9 @@
 
 
 	<%
+	
+			}else{
+	
 		String state = request.getParameter("state");
 		String address = request.getParameter("mail");
 

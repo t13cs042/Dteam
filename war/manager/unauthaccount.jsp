@@ -38,9 +38,10 @@
 	<br>
 
 
-
-
 	<%
+	
+			}else{
+	
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		Query query = pm.newQuery(LoginDB.class);
 		List<LoginDB> users = (List<LoginDB>) pm.newQuery(query).execute();
