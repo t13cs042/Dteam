@@ -29,9 +29,10 @@
 	<br>
 	<%
 		}
-		//int status = (int) session.getAttribute("status");
+
 		else {
-			if ( (int) session.getAttribute("status") != 4 ) {
+			int status = (Integer) session.getAttribute("status");
+			if ( status != 4 ) {
 	%>
 
 	管理者以外はこの画面にアクセスできません

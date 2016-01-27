@@ -77,6 +77,7 @@ public class Admini_Login_Servlet extends HttpServlet {
 						session.setAttribute("firstname",      ur.getfirstname());
 						session.setAttribute("mail",           ur.getMail());
 						session.setAttribute("password",       ur.getPassword());
+						session.setAttribute("status",       ur.getStatus());
 					}
 					else{
 						//管理者ではありません．
