@@ -35,86 +35,81 @@ public class Newsignup extends HttpServlet {
 		PrintWriter out = resp.getWriter();
 		
 		int error = 0;
-		// pm を用意
 		PersistenceManager	pm	= PMF.get().getPersistenceManager();
 		
-		// クエリを作成
 		String query = "select from " + LoginDB.class.getName();
 
-		// ユーザデータを取得
 		List<LoginDB> users = (List<LoginDB>) pm.newQuery(query).execute();
 		
 		for(LoginDB user: users){
 			if(mail.equals( user.getMail() ) ){
-				//メールアドレスが既に登録されている
 				error += 16;
 			}
-				
 		}
 
 		if(familyname.equals("")){
-			error += 1;	//未入力
+			error += 1;
 		}
 		if(firstname.equals("")){
-			error += 2;	//未入力
+			error += 2;
 		}
 		
 		if(mail.equals("")){
-			error += 4;	//メールアドレスが未入力
+			error += 4;
 		}else if(!mail.matches("^[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+(\\.[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+)*+(.*)@[a-zA-Z0-9][a-zA-Z0-9\\-]*(\\.[a-zA-Z0-9\\-]+)+$")){
-			error += 8;	//メールアドレスの形でない
+			error += 8;
 		}
-		if(password.equals("")){	//パスワードが未入力
+		if(password.equals("")){
 			error += 32;
 		}else if(!password.matches("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]{0,12}$")){
-			error += 64;	//パスワードの型が違う
+			error += 64;
 		}
 		if(pppassword.equals("")){
-			error += 128;	//パスワード(再入力)が未入力
+			error += 128;
 		}
 		if(!password.equals(pppassword)){
-			error += 256;	//パスワードが異なる
+			error += 256;
 		}
 		
 		int error_2 = 0;
 		if(area.equals("")){
-			error_2 += 1;//作付面積が未入力
+			error_2 += 1;
 		}
-		if(Integer.parseInt(area) > 10000){
-			error_2 += 8;//作付面積が5桁以上のエラー
+		if(Integer.parseInt(area) > 10000 && Integer.parseInt(area) > 0){
+			error_2 += 8;
 		}
 		
 		if(start_month.equals("") || finish_month.equals("")){
-			error_2 += 2;//収穫月が未入力
+			error_2 += 2;
 		}else if(Integer.parseInt(start_month) > Integer.parseInt(finish_month)){
 			if(Integer.parseInt(finish_month) - Integer.parseInt(start_month)+12 > 6)
-				error_2 += 4;	//"収穫期間が長すぎます
+				error_2 += 4;
 		}else if(Integer.parseInt(start_month) < Integer.parseInt(finish_month)){
 			if(Integer.parseInt(finish_month) - Integer.parseInt(start_month) > 6)
-				error_2 += 4;	//収穫期間が長すぎます
+				error_2 += 4;	
 		}
 		
-		if(question1.equals("")){//秘密の質問1が未入力
+		if(question1.equals("")){
 			if(!answer1.equals(""))
 				error_2 += 16;
-		}else{//秘密の質問1の答えが未入力
+		}else{
 			if(answer1.equals(""))
 				error_2 += 32;
 		}
-		if(question2.equals("")){//秘密の質問2が未入力
+		if(question2.equals("")){
 			if(!answer2.equals(""))
 				error_2 += 64;
-		}else{//秘密の質問2の答えが未入力
+		}else{
 			if(answer2.equals(""))
 				error_2 += 128;
 		}		
 		if(question1.length() > 500 || question2.length() > 500){
-			error_2 += 256;	//秘密の質問が長すぎ
+			error_2 += 256;
 		}
-		
+		if(answer1.length() > 500 || answer2.length() > 500){
+			error_2 += 256;
+		}
 		int allerror = error + error_2;
-
-		// エラーがあったら登録不可
 		if(allerror != 0){
 			resp.sendRedirect("/signup/signup.jsp?Error=" + String.valueOf(error)
 					+ "&Error_2=" + String.valueOf(error_2));
@@ -122,7 +117,6 @@ public class Newsignup extends HttpServlet {
 			String pass = Encryption.getSaltedPassword(password, familyname);
 			LoginDB logindb = new LoginDB(familyname, firstname, mail, pass, area, start_month,
 					finish_month,  question1,  answer1,  question2, answer2,0);
-			//PersistenceManager pm = PMF.get().getPersistenceManager();
 			try {
 				pm.makePersistent(logindb);
 			
@@ -130,9 +124,7 @@ public class Newsignup extends HttpServlet {
 				pm.close();
 			}
 			resp.getWriter().print("アカウント作成しました。<br><br>");
-			//out.println("<a href=\"/signup/signup.jsp\">戻る</a>");
 			out.println("<a href=\"/Login/login.jsp\">戻る</a>");
-			//resp.sendRedirect("/Home/Comment.jsp");
 		}
 	}
 	
