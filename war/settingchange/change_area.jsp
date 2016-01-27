@@ -46,7 +46,7 @@
   </font>
   
   <p>新しい作付面積<br>
-  <input type="text" name="area">a</p>
+  <input type="number" name="area">a</p>
    
    <br><br>
    
