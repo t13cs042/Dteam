@@ -21,8 +21,10 @@
 		}
 
 		else {
+
 			int status2 = (Integer) session.getAttribute("status");
 			if ( status2 != 4 ) {
+
 	%>
 
 	管理者以外はこの画面にアクセスできません

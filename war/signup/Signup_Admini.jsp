@@ -12,6 +12,34 @@
 	<title>管理者登録画面</title>
 	</head>
 	<body>
+	
+	<%
+	
+	PersistenceManager pm = PMF.get().getPersistenceManager();
+	// クエリを作成
+	String query = "select from " + LoginDB.class.getName();
+	// ユーザデータを取得
+	@SuppressWarnings("unchecked")
+	List<LoginDB> users = (List<LoginDB>) pm.newQuery(query).execute();
+	int flag = 0;
+	//既に管理者が登録済みかどうかの確認
+	for(LoginDB ur: users){
+		if(ur.getStatus() == 4){
+			flag = 1;
+			break;
+		}
+	}
+	
+	if(flag == 1){//既に管理者が登録されていたら
+		%>
+		この画面へのアクセスは制限されています．
+		<br>
+		<br>
+		<a href="../Login/admin_login.jsp">管理者ログイン画面へ戻る</a>
+		<br>
+		<br>
+<% 	}else{	//管理者がまだ登録されていない　%>
+	
 	<% 
   // エラーの種類
 	// 0 : エラーなし
@@ -59,4 +87,5 @@
 			<center><input type="submit" value="登録" ></center>
 		</form>
 	</body>
+	<%} %>
 </html>
