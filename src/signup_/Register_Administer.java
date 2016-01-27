@@ -31,6 +31,7 @@ public class Register_Administer extends HttpServlet {
 		String query = "select from " + LoginDB.class.getName();
 
 		// ユーザデータを取得
+		@SuppressWarnings("unchecked")
 		List<LoginDB> users = (List<LoginDB>) pm.newQuery(query).execute();
 		
 		for(LoginDB user: users){
