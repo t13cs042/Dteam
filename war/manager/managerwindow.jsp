@@ -19,6 +19,31 @@
 <body>
 
 	<%
+		if (session.getAttribute("status") == null) {
+	%>
+	管理者以外はこの画面にアクセスできません
+	<br>
+	<br>
+	<a href="../Login/login.jsp">ログイン画面へ戻る</a>
+	<br>
+	<br>
+	<%
+		}
+		//int status = (int) session.getAttribute("status");
+		else {
+			if ( (int) session.getAttribute("status") != 4 ) {
+	%>
+
+	管理者以外はこの画面にアクセスできません
+	<br>
+	<br>
+	<a href="../Home/Home_temp.jsp">ホーム画面へ戻る</a>
+	<br>
+	<br>
+
+
+
+	<%
 	String date = "実行されていません";
 	try{
 		PersistenceManager pm = null;
@@ -62,6 +87,11 @@
 	<br>
 	<span style="font-size: 100%">予測の最終実行日：<%=date %></span>
 	</div>
+
+<%
+			}
+		}	
+%>
 
 </body>
 </html>
