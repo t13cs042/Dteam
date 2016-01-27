@@ -61,7 +61,7 @@ public class passforgetServlet extends HttpServlet {
 		for(LoginDB ur : users){
 			
 			//if( adr.equals( ur.getMail() ) && encryptedpass.equals(ur.getPassword()) ){
-			if( address.equals( ur.getMail()) ){
+			if( address.equals( ur.getMail()) && ur.getStatus() == 1 ){
 				
 				question1=ur.getQuestion1();
 				question2=ur.getQuestion2();

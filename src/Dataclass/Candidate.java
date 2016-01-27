@@ -1,7 +1,5 @@
 package Dataclass; //必要に応じて変える
 
-import java.util.Date;
-import javax.jdo.annotations.IdGeneratorStrategy;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;

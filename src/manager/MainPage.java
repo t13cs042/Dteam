@@ -3,9 +3,7 @@ package manager;
 import NewData.PMF;
 
 import javax.jdo.PersistenceManager;
-import javax.jdo.Query;
 
-import java.text.MessageFormat;
 import java.io.IOException;
 import java.util.*;
 
@@ -35,7 +33,8 @@ public class MainPage extends HttpServlet {
       +	"</div>\n";
       
     // メモのテンプレート
-    private static final String memoTmpl = 
+    @SuppressWarnings("unused")
+	private static final String memoTmpl = 
           "  <div>\n"
         + "    <span class=\"date\"> {0,time} {0,date} </span> \n"
         + "    <pre>{1}</pre> \n"

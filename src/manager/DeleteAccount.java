@@ -14,6 +14,7 @@ import Dataclass.PMF;
 
 @SuppressWarnings("serial")
 public class DeleteAccount extends HttpServlet {
+	@SuppressWarnings("unchecked")
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		resp.setContentType("text/html; charset=UTF-8");

@@ -5,8 +5,6 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -16,8 +14,6 @@ import javax.jdo.Query;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 
 import Dataclass.Candidate;
 import Dataclass.Climate;
@@ -25,20 +21,18 @@ import Dataclass.Grape;
 import Dataclass.LoginDB;
 import Dataclass.PMF;
 import Dataclass.Predict;
-import Dataclass.Tempdata;
 import Dataclass.Yielddata;
 
+@SuppressWarnings("serial")
 public class NewPredict  extends HttpServlet{
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void doPost( HttpServletRequest req, HttpServletResponse resp ) throws IOException
 	{
 		resp.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = resp.getWriter();
 
-		
-		//session用意
-		HttpSession session = req.getSession(true);
 		// calendarを作成
 		Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Tokyo"));
 		// pm を用意
@@ -49,7 +43,7 @@ public class NewPredict  extends HttpServlet{
 
 		user.setFilter( "status == 1" );
 		// ユーザデータを取得
-		List<LoginDB> users = (List<LoginDB> )user.execute();
+		List<LoginDB> users = ( List<LoginDB> )user.execute();
 
 		for(LoginDB ur : users){
 
@@ -61,12 +55,10 @@ public class NewPredict  extends HttpServlet{
 			Query queryGr = pm.newQuery(Grape.class);
 			Query queryYi = pm.newQuery(Yielddata.class);
 
-//			String id = (String) session.getAttribute("mail");
 
 			queryCa.setFilter("id == " + ur.getId() + "" );
 
 			List<Candidate> candidates = (List<Candidate>) queryCa.execute();
-
 
 
 			//候補年取得
@@ -74,9 +66,6 @@ public class NewPredict  extends HttpServlet{
 			candies[0] = candidates.get(0).getCandi1();
 			candies[1] = candidates.get(0).getCandi2();
 			candies[2] = candidates.get(0).getCandi3();
-			//candies[0] = (String) session.getAttribute("candi1");
-			//candies[1] = (String) session.getAttribute("candi2");
-			//candies[2] = (String) session.getAttribute("candi3");
 			
 			//予測気候データ
 			ArrayList<Double> temps = new ArrayList<Double>();
@@ -108,7 +97,7 @@ public class NewPredict  extends HttpServlet{
 
 			//予測収穫量
 			double yields[] = new double[3];
-			double yield,maxyield = 0.0,minyield = 100000000000.0,sumyield = 0.0,avyield = 0.0;
+			double maxyield = 0.0,minyield = 100000000000.0,sumyield = 0.0,avyield = 0.0;
 			String areastr = ur.getArea();
 			double areanum = Double.valueOf( areastr );
 			
@@ -118,6 +107,7 @@ public class NewPredict  extends HttpServlet{
 			for( int i = 0; i < 3; i++ ){
 				queryGr.setFilter("date == '" + candies[i]  +"'");
 				queryYi.setFilter( "mail == '" + ur.getMail() +"'  &&  year == " + Integer.valueOf( candies[i] )  );
+				
 				
 				List<Grape> grapes = (List<Grape>) queryGr.execute(); 
 				List<Yielddata> yielddatas = (List<Yielddata>) queryYi.execute(); 

@@ -50,7 +50,7 @@ public class passresetServlet extends HttpServlet {
 			inputData[0] = req.getParameter("after1");
 			inputData[1] = req.getParameter("after2");
 			String address = req.getParameter("address");//add
-			System.out.println("input[0]=" + inputData[0]);
+			//System.out.println("input[0]=" + inputData[0]);
 			// ID欄が入力されているかチェック
 			if(inputData[0].equals("")){
 				error += 16;
