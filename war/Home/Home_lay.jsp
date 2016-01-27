@@ -150,7 +150,7 @@ int finish = Integer.parseInt(finish_month);
 					<form action="/newtemp" method="post" style="display: inline">
 						<p>本日の農場の気温入力</p>
 						気温
-						<textarea name="temp" rows="1" cols="10"></textarea>
+						<input type="number" name="temp" rows="1" cols="10">
 						<input type="submit" value="Submit" />
 					</form>
 				</td>

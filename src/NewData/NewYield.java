@@ -67,20 +67,7 @@ public class NewYield extends HttpServlet {
 		if(year.equals("")){
 			error += 4;
 		}
-		/*if(temp == ""){
-			out.println("値が入力されていません<br>");
-			error++;
-		}else if(isNumber(temp)){
-			out.println("数値を入力してください<br>");
-			error++;
 
-	  	}else if(Double.parseDouble(temp) < -30 || Double.parseDouble(temp) > 50){
-			out.println("無効な数値です<br>");
-			error++;
-
-		}
-		if(error == 0){	
-		 */
 		if(error != 0){
 			resp.sendRedirect("/settingchange/set_yield.jsp?Error=" + String.valueOf(error)
 					+ "&Before=" + yield );
@@ -112,32 +99,4 @@ public class NewYield extends HttpServlet {
 
 	}
 
-
-
-
-	/*	Yielddata data = new Yielddata(year, yield);
-			PersistenceManager pm = PMF.get().getPersistenceManager();
-
-			try {
-				pm.makePersistent(data);
-			} finally {
-				pm.close();
-			}
-			//resp.sendRedirect("/Home/Home_temp.jsp");
-			out.println("入力成功<br>");
-			out.println("<a href=\"index.html\">戻る</a>");
-	}
-			/*
-		}else
-			out.println("<a href=\"Home/Home_temp.jsp\">戻る</a>");
-	}
-	 */
-	public boolean isNumber(String num) {
-		try {
-			Double.parseDouble(num);
-			return false;
-		} catch (NumberFormatException e) {
-			return true;
-		}
-	}
 }
