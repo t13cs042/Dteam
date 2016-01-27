@@ -30,10 +30,6 @@ public class passresetServlet extends HttpServlet {
 		resp.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = resp.getWriter();
 		
-		HttpSession session = req.getSession(false);
-		//String mail = (String)session.getAttribute("mail");
-		//String mail = req.getParameter("mail");//add
-		
 		// jsp からのデータ
 		String	[] inputData	= new String[2]; // beforepass と afterpass と afterpass2
 		

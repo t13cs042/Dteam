@@ -8,7 +8,6 @@ import java.io.PrintWriter;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
-import javax.jdo.Query;
 import javax.servlet.http.*;
 
 
@@ -39,6 +38,7 @@ public class Newsignup extends HttpServlet {
 		
 		String query = "select from " + LoginDB.class.getName();
 
+		@SuppressWarnings("unchecked")
 		List<LoginDB> users = (List<LoginDB>) pm.newQuery(query).execute();
 		
 		for(LoginDB user: users){

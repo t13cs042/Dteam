@@ -3,10 +3,7 @@ package passforget;
 import javax.jdo.PersistenceManager;
 import Dataclass.LoginDB;
 import Dataclass.PMF;
-import signup_.Encryption;
-
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.*;
 
 import javax.servlet.RequestDispatcher;
@@ -29,22 +26,16 @@ public class secretqServlet extends HttpServlet {
 		String query = "select from " + LoginDB.class.getName();
 
 		// ユーザデータを取得
+		@SuppressWarnings("unchecked")
 		List<LoginDB> users = (List<LoginDB>) pm.newQuery(query).execute();
-
-		HttpSession session = req.getSession(false);
 
 		String q1 = req.getParameter("q1");
 		String q2 = req.getParameter("q2");
 		String question1 = req.getParameter("question1");
 		String question2 = req.getParameter("question2");
 		
-		String mailFormat = "^[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+(\\.[a-zA-Z0-9!#$%&'_`/=~\\*\\+\\-\\?\\^\\{\\|\\}]+)*" +                                   
-                "@" +
-                "[a-zA-Z0-9][a-zA-Z0-9\\-]*(\\.[a-zA-Z0-9\\-]+)*$";
-		
 		String address = (String)req.getParameter("address");
 		
-		PrintWriter out = resp.getWriter();
 		int error = 0;
 		
 		if(q1.equals("")){

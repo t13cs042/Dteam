@@ -3,12 +3,8 @@ package Test;
 
 import static org.junit.Assert.*;
 
-import javax.jdo.PersistenceManager;
-
 import org.junit.Test;
 
-import Dataclass.Comment;
-import Dataclass.PMF;
 import NewData.NewComment;
 
 public class NewCommentTest {

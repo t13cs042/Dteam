@@ -42,6 +42,7 @@
 		<input type="submit" value="ログイン">
 		</form>
 		<br>
+		<!-- 管理者登録の時は下のコメントアウトを外す -->
 		<a href ="/signup/Signup_Admini.jsp">管理者登録</a><br>
 		<a href="/Login/login.jsp">戻る</a><br>
   </center>
