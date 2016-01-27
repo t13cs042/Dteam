@@ -15,11 +15,9 @@
 
 	<%
 		PersistenceManager pm = PMF.get().getPersistenceManager();
-		Query query = pm.newQuery(LoginDB.class);
-		query.setOrdering("firstname asc");
-		List<LoginDB> users = (List<LoginDB>) pm.newQuery(query).execute();
-		int count = 0;
-		boolean ss = true;
+			Query query = pm.newQuery(LoginDB.class);
+			query.setOrdering("firstname asc");
+			List<LoginDB> users = (List<LoginDB>) pm.newQuery(query).execute();
 	%>
 
 	<div style="font-size: 200%">アカウント管理</div>
@@ -28,20 +26,21 @@
 	<table>
 
 		<%
-			for (LoginDB ur : users ) {
+			for (LoginDB ur : users) {
 				int status = ur.getStatus();//ユーザ状態
-				if (status == 1 && ss == true) {
-					
-					count++;
+				if (status == 1) {
+
 		%>
 		<tr>
 			<td><%=ur.getMail()%></td>
 
 		</tr>
 		<tr>
-			<td>名前:<%=ur.getFamilyname() + ur.getfirstname() %></td>
+			<td>名前:<%=ur.getFamilyname() + ur.getfirstname()%></td>
 			<td>
-				<form action="/manager/Confirm_Delete.jsp?state=2&mail=<%=ur.getMail()%>" method="post" style="display: inline">
+				<form
+					action="/manager/Confirm_Delete.jsp?state=2&mail=<%=ur.getMail()%>"
+					method="post" style="display: inline">
 					<input type="hidden" name="state" value=2> <input
 						type="hidden" name="mail" value="<%=ur.getMail()%>"> <input
 						type="submit" value="停止">
@@ -53,14 +52,11 @@
 		</tr>
 		<%
 			}
-			if(count >19){
-				ss = false;
+
 			}
-			}
-		for (LoginDB ur : users) {
-			int status = ur.getStatus();//ユーザ状態
-			if (status == 2 && ss == true) {
-				count++;
+			for (LoginDB ur : users) {
+				int status = ur.getStatus();//ユーザ状態
+				if (status == 2 ) {
 		%>
 
 		<tr>
@@ -68,9 +64,11 @@
 
 		</tr>
 		<tr>
-			<td>名前:<%=ur.getFamilyname() + ur.getfirstname() %></td>
+			<td>名前:<%=ur.getFamilyname() + ur.getfirstname()%></td>
 			<td>
-				<form action="/manager/Confirm_Delete.jsp?state=1&mail=<%=ur.getMail()%>" method="post" style="display: inline">
+				<form
+					action="/manager/Confirm_Delete.jsp?state=1&mail=<%=ur.getMail()%>"
+					method="post" style="display: inline">
 					<input type="hidden" name="state" value=1> <input
 						type="hidden" name="mail" value="<%=ur.getMail()%>"> <input
 						type="submit" value="解除">
@@ -82,9 +80,7 @@
 		</tr>
 		<%
 			}
-			if(count >19){
-				ss = false;
-			}
+
 		%>
 
 		<%
