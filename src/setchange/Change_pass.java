@@ -62,7 +62,7 @@ public class Change_pass extends HttpServlet {
 					query.setFilter("mail == '" + mail + "'" );
 					List<LoginDB> db =  (List<LoginDB>)pm.newQuery(query).execute();
 					//String passBefore = Encryption.getSaltedPassword(db.get(0).getPassword(), db.get(0).getMail() );
-					String passInput = Encryption.getSaltedPassword(inputData[0], db.get(0).getMail() );
+					String passInput = Encryption.getSaltedPassword(inputData[0], db.get(0).getFamilyname() );
 					
 					if( !( db.get(0).getPassword().equals(passInput) ) )
 						error += 4;
