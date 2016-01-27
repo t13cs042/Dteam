@@ -14,6 +14,7 @@ import java.util.TimeZone;
 import javax.jdo.PersistenceManager;
 import javax.servlet.http.*;
 
+@SuppressWarnings("serial")
 public class NewComment extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {

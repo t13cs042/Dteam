@@ -3,10 +3,7 @@ package passforget;
 import javax.jdo.PersistenceManager;
 import Dataclass.LoginDB;
 import Dataclass.PMF;
-import signup_.Encryption;
-
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.*;
 
 import javax.servlet.RequestDispatcher;
@@ -29,9 +26,8 @@ public class passforgetServlet extends HttpServlet {
 		String query = "select from " + LoginDB.class.getName();
 
 		// ユーザデータを取得
+		@SuppressWarnings("unchecked")
 		List<LoginDB> users = (List<LoginDB>) pm.newQuery(query).execute();
-
-		HttpSession session = req.getSession(false);
 
 		String address = req.getParameter("address");
 		//String pass = req.getParameter("password");
@@ -42,7 +38,6 @@ public class passforgetServlet extends HttpServlet {
                 "[a-zA-Z0-9][a-zA-Z0-9\\-]*(\\.[a-zA-Z0-9\\-]+)*$";
 		
 		
-		PrintWriter out = resp.getWriter();
 		int error = 0;
 		
 		if(address.equals("")){

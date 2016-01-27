@@ -1,6 +1,5 @@
 package NewData;
 
-import Dataclass.LoginDB;
 import Dataclass.PMF;
 import Dataclass.Yielddata;
 
@@ -8,15 +7,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
 import javax.jdo.PersistenceManager;
-import javax.jdo.Query;
 import javax.servlet.http.*;
 
+@SuppressWarnings("serial")
 public class NewYield extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -36,12 +33,6 @@ public class NewYield extends HttpServlet {
 		// dateString = "07月29日(金) 時刻"になっている
 		String dateString = format.format(calendar.getTime());
 
-		String Year = dateString.substring(0, 4);
-		String month = dateString.substring(5, 7);
-		String day = dateString.substring(8, 10);
-
-		String temp = req.getParameter("temp");
-
 		HttpSession session = req.getSession(false);
 		String mail = (String)session.getAttribute("mail");
 
@@ -50,10 +41,6 @@ public class NewYield extends HttpServlet {
 
 		// pm を用意
 		PersistenceManager	pm	= PMF.get().getPersistenceManager();
-		//Queryを用意
-		Query query = pm.newQuery(LoginDB.class);
-
-
 		String yield = req.getParameter("yield");
 		String year = req.getParameter("year");
 		
