@@ -58,7 +58,7 @@ public class Admini_Login_Servlet extends HttpServlet {
 			
 			//暗号化されたパスワードの取得
 			String encryptedpass = Encryption.getSaltedPassword(pass, fn);
-			System.out.println("fn：" + fn);
+			
 			if(pass.equals("")){
 				//パスワードが入力されているかチェック
 				error += 4;

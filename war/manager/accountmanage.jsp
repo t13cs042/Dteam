@@ -16,7 +16,10 @@
 	<%
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		Query query = pm.newQuery(LoginDB.class);
+		query.setOrdering("firstname asc");
 		List<LoginDB> users = (List<LoginDB>) pm.newQuery(query).execute();
+		int count = 0;
+		boolean ss = true;
 	%>
 
 	<div style="font-size: 200%">アカウント管理</div>
@@ -25,9 +28,11 @@
 	<table>
 
 		<%
-			for (LoginDB ur : users) {
+			for (LoginDB ur : users ) {
 				int status = ur.getStatus();//ユーザ状態
-				if (status == 1) {
+				if (status == 1 && ss == true) {
+					
+					count++;
 		%>
 		<tr>
 			<td><%=ur.getMail()%></td>
@@ -47,7 +52,15 @@
 			<td>状態:通常</td>
 		</tr>
 		<%
-			} else if (status == 2) {
+			}
+			if(count >19){
+				ss = false;
+			}
+			}
+		for (LoginDB ur : users) {
+			int status = ur.getStatus();//ユーザ状態
+			if (status == 2 && ss == true) {
+				count++;
 		%>
 
 		<tr>
@@ -68,6 +81,9 @@
 			<td>状態:停止</td>
 		</tr>
 		<%
+			}
+			if(count >19){
+				ss = false;
 			}
 		%>
 
