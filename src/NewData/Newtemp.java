@@ -62,9 +62,9 @@ public class Newtemp extends HttpServlet {
 				pm.close();
 			}
 			
-			out.println(year+month+day);
+			//out.println(year+month+day);
 			//resp.sendRedirect("/Home/Home_temp.jsp");
-			out.println("入力成功<br>");
+			out.println("入力完了<br>");
 			out.println("<a href=\"Home/Home_temp.jsp\">戻る</a>");
 		}else
 			out.println("<a href=\"Home/Home_temp.jsp\">戻る</a>");
