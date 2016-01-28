@@ -42,9 +42,9 @@ public class Change_address extends HttpServlet {
 		Query query = pm.newQuery(LoginDB.class);
 
 		try{
-			inputData[0] = req.getParameter("before");
-			inputData[1] = req.getParameter("after1");
-			inputData[2] = req.getParameter("after2");
+			inputData[0] = (String)req.getParameter("before");
+			inputData[1] = (String)req.getParameter("after1");
+			inputData[2] = (String)req.getParameter("after2");
 
 			// ID欄が入力されているかチェック
 			if(inputData[0].equals("")){
@@ -55,13 +55,19 @@ public class Change_address extends HttpServlet {
 			
 			else {
 
+				query.setFilter("mail == " + "'" + mail + "'");
 				List<LoginDB> users = (List<LoginDB>) pm.newQuery(query).execute();
 
 				for(LoginDB user: users){
-					if(mail.equals( user.getMail() ) ){
+					if(inputData[1].equals( user.getMail() ) ){
 						error += 4;
+						break;
 					}
 				}	
+				
+				if(!inputData[0].equals(mail)){
+					error += 8;
+				}
 				
 				
 //				// 検索、見付からなかったら例外を吐く
@@ -126,7 +132,6 @@ public class Change_address extends HttpServlet {
 			pm.close();
 		}
 
-		out.println("IOexception");	
 		
 	}
 
