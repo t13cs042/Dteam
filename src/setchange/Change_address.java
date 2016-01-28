@@ -55,13 +55,21 @@ public class Change_address extends HttpServlet {
 			
 			else {
 
+				List<LoginDB> users = (List<LoginDB>) pm.newQuery(query).execute();
+
+				for(LoginDB user: users){
+					if(mail.equals( user.getMail() ) ){
+						error += 4;
+					}
+				}	
 				
-				// 検索、見付からなかったら例外を吐く
-				//pm.getObjectById(LoginDB.class, inputData[0]);
-				query.setFilter("mail == " + "'" + mail + "'");
-				List<LoginDB> db =  (List<LoginDB>)pm.newQuery(query).execute();
-				if( !( db.get(0).getMail().equals(inputData[0]) ) )
-					error += 4;
+				
+//				// 検索、見付からなかったら例外を吐く
+//				//pm.getObjectById(LoginDB.class, inputData[0]);
+//				query.setFilter("mail == " + "'" + mail + "'");
+//				List<LoginDB> db =  (List<LoginDB>)pm.newQuery(query).execute();
+//				if( !( db.get(0).getMail().equals(inputData[0]) ) )
+//					error += 4;
 
 			}
 
