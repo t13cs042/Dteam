@@ -6,7 +6,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title>管理者ログイン</title>
   </head>
-
+<link rel="stylesheet" href="/css/login.css" type="text/css">
   <body>
   <% 
   // エラーの種類
@@ -25,6 +25,12 @@
 		error = 0;
 	}
   %>
+  <div id = "container">
+  	<div id = "contents">
+  	
+  	<div class="layerImage">
+	<div class="layerTransparent">
+	<div class="frontContents">
  
   <center>
     <h1>ぶどう収穫量予想システム</h1>    
@@ -37,16 +43,29 @@
   <%		   }if((error & 16) == 16){ %> ※登録されていません．<br>
   <%			} %> 
     </font>
-			メールアドレス：<input type="text" name="address" maxlength = "50" ><br>
-　　		パスワード：<input type="password" name="password" maxlength = "12"><br>
+    <table>
+    	<tr>
+			<td><b>メールアドレス：</b></td>
+			<td><input type="email" name="address" maxlength = "50" placeholder = "Your Email" ></td>
+		</tr>
+		<tr>
+　　		<td><b>パスワード：</b></td>
+			<td><input type="password" name="password" maxlength = "12" placeholder = "Your Password"></td>
+		</tr>
+	</table>
 		<input type="submit" value="ログイン">
 		</form>
 		<br>
 		<!-- 管理者登録の時は下のコメントアウトを外す -->
 		<a href ="/signup/Signup_Admini.jsp">管理者登録</a><br>
 		<a href="/Login/login.jsp">戻る</a><br>
+		<div id = "footer">&#169; TeamC All Rights Reserved.</div>
   </center>
+  	</div>
+	</div>
+	</div>
+	</div>
+	</div>
   </body>
 
-</body>
 </html>
