@@ -90,7 +90,7 @@ public class Candi_get  extends HttpServlet{
 					else{
 							uyx = String.valueOf(useYearX);
 							uyy = String.valueOf(useYearY);
-							um = String.valueOf((useMon + 11) % 12 + 2);
+							um = String.valueOf((useMon + 11) % 12 + 1);
 
 
 							queryX.setFilter("date == '" + uyx + "/" + um + "'" );
