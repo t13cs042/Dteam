@@ -65,7 +65,7 @@
 			<br>パスワードの再入力<br>
 			<input type = "password" name="pppassword" size="10" maxlength="10" ></input>
 			<br><br>作付面積(a)<br>
-		 	<input type="number" name="area">a
+		 	<input type="number" name="area" max = "10000">a
 			<br>収穫期間(月)<br>
 			<select name="start_month">
 				<option value=""></option>

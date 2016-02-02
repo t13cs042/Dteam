@@ -1,0 +1,49 @@
+@CHARSET "UTF-8";
+
+html,body{
+	height:	100%;	
+}
+
+/*ログイン画面の画像*/
+#login_images {
+color: #000000;
+background-color: #f8dce0;
+background-image: url("/images/grape.jpg")
+}
+
+.layerImage{
+	width:					100%;
+	height:					650px;
+	background-image: 		url(/images/grape.jpg);
+	background-repeat: 		no-repeat;
+	background-position: 	top center;
+	-moz-background-size:	cover;
+	background-size:		cover;
+}
+.layerTransparent{
+	background-color:		rgba(255,255,255,0.7);
+	height:					100%;
+}
+.frontContents{
+	color:					#000;
+}
+
+#container { 
+    position: relative;
+    width: 100%;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+}
+
+#contents { 
+    padding-bottom: 50px;
+}
+#footer {
+    position: absolute;
+    width: 100%;
+    height: 50px;
+    bottom: 0;
+}
+
+

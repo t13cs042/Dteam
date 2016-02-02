@@ -34,15 +34,12 @@
            <font color = "red">
   		<%			if((error & 1) == 1){ %>   ※メールアドレスが入力されていません。<br> 
   		<%			}if((error & 64) == 64){ %> ※入力されたメールアドレスは間違っています<br> 
-  	<%-- 	<%			}if((error & 4) == 4){ %> ※アカウントが未認証です<br> 
-  		<%		   }if((error & 8) == 8){ %> ※このアカウントは停止されています<br>
-  		<%		   }if((error & 16) == 16){ %> ※管理者はこちらからログインできません<br> --%>
     		<%		   }if((error & 32) == 32){ %> ※登録されていません<br> 
   		<%			} %>
     	</font>
     
 
-  <input type="text" name="address" maxlength = "50" /></p>
+  <input type="email" name="address" maxlength = "50" /></p>
 
 <br><br> <input type="submit" value="次へ" /><br>
   </form>

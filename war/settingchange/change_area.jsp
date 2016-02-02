@@ -73,7 +73,7 @@
   </font>
   
   <p>新しい作付面積<br>
-  <input type="number" name="area">a</p>
+  <input type="number" name="area" size = "10" max = "10000">a</p>
    
    <br><br>
    

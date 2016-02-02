@@ -49,7 +49,7 @@ public class Change_area extends HttpServlet {
 		else if(!inputData.matches("[0-9]+")){
 			error += 2;
 		}
-		if( Integer.parseInt(inputData) > 10000 )
+		if( !inputData.equals("") && Integer.parseInt(inputData) > 10000 )
 			error += 4;
 		
 		/*

@@ -71,19 +71,28 @@
   		<%		   }if((error & 16) == 16){ %> ※パスワードが長すぎます<br>
   		<%			} %> 
     	</font>
-		
-					名前<br>姓：
-			<input type = "text" name="familyname" size="30" maxlength="27" >
-					名：
-			<input type = "text" name="firstname" size="30" maxlength="27" ><br>
-		
-			<font size="3">メールアドレス(半角英数字のみ)
-			<input type ="email" name="mail" size="30" maxlength="27" ><br>
-			<br>パスワード(半角英数字のみ)<br>
-			<input type = "password" name="password" size="10" maxlength="10" ></input>
-			<br>パスワードの再入力<br>
-			<input type = "password" name="repassword" size="10" maxlength="10" ></input>
-			
+		<table>
+			<tr>
+				<td>姓：</td>
+				<td><input type = "text" name="familyname" size="20" maxlength="15" placeholder = "Your Family Name"></td>
+			</tr>
+			<tr>
+				<td>名：</td>
+				<td><input type = "text" name="firstname" size="20" maxlength="15" placeholder = "Your First Name"></td>
+			</tr>
+			<tr>
+				<td>メールアドレス(半角英数字のみ):</td>
+				<td><input type ="email" name="mail" size="30" maxlength="27" placeholder = "Your Email Address"></td>
+			</tr>
+			<tr>
+				<td>パスワード(半角英数字のみ)</td>
+				<td><input type = "password" name="password" size="20" maxlength="12" placeholder = "Your Password"></td>
+			</tr>
+			<tr>
+				<td>パスワードの再入力</td>
+				<td><input type = "password" name="repassword" size="20" maxlength="12" placeholder = "Confirm Your Password"></td>
+			</tr>
+		</table>
 			<center><input type="submit" value="登録" ></center>
 		</form>
 	</body>

@@ -61,7 +61,7 @@ String address = (String)request.getAttribute("address");
 <br><br> <input type="submit" value="送信" />
   </form>
   
-<br><a href="http://sample-115509.appspot.com/">ホーム画面へ戻る</a><br><br>
+<br><a href="/Login/login.jsp">ログイン画面へ戻る</a><br><br>
 </center>
 
   </body> 
