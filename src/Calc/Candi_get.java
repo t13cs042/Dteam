@@ -99,7 +99,7 @@ public class Candi_get  extends HttpServlet{
 							
 							//tempdata関連の処理
 		
-								queryT.setFilter( "mail == '" + ur.getMail() +"'  &&  year == " + useYearX + " &&  month == " + (((useMon + 11) % 12) + 2) );
+								queryT.setFilter( "mail == '" + ur.getMail() +"'  &&  year == " + useYearX + " &&  month == " + (((useMon + 11) % 12) + 1) );
 								
 
 						List<Climate> cliXs = (List<Climate>) queryX.execute();
